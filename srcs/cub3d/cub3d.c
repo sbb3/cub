@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:43 by adouib            #+#    #+#             */
-/*   Updated: 2022/09/22 08:10:55 by adouib           ###   ########.fr       */
+/*   Updated: 2022/09/22 09:36:01 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,43 +20,43 @@ int keyPressed(int keycode, t_game *game)
 		quit(game, NULL);
 	if (keycode == W_KEY)
 	{
-		tmpY = (game->posY + game->dirY * 5) / IMG_HEIGHT;
-		tmpX = (game->posX + game->dirX * 5) / IMG_WIDTH;
+		tmpY = (game->posY + game->dirY * game->movementSpeed) / IMG_HEIGHT;
+		tmpX = (game->posX + game->dirX * game->movementSpeed) / IMG_WIDTH;
 
 		if (game->map[tmpY][tmpX] == '0')
 		{
-			game->posX += game->dirX * 5;
-			game->posY += game->dirY * 5;
+			game->posX += game->dirX * game->movementSpeed;
+			game->posY += game->dirY * game->movementSpeed;
 		}
 	}
 	if (keycode == S_KEY)
 	{
-		tmpY = (game->posY - game->dirY * 5) / IMG_HEIGHT;
-		tmpX = (game->posX - game->dirX * 5) / IMG_WIDTH;
+		tmpY = (game->posY - game->dirY * game->movementSpeed) / IMG_HEIGHT;
+		tmpX = (game->posX - game->dirX * game->movementSpeed) / IMG_WIDTH;
 
 		if (game->map[tmpY][tmpX] == '0')
 		{
-			game->posX -= game->dirX * 5;
-			game->posY -= game->dirY * 5;
+			game->posX -= game->dirX * game->movementSpeed;
+			game->posY -= game->dirY * game->movementSpeed;
 		}
 	}
 	if (keycode == A_KEY)
 	{
-		game->posX = game->posX - 5;
+		game->posX = game->posX - game->rotation;
 	}
 	if (keycode == D_KEY)
 	{
-		game->posX = game->posX + 5;
+		game->posX = game->posX + game->rotation;
 	}
 	if (keycode == LEFT_KEY)
 	{
-		game->angle += 5;
+		game->angle += game->rotation;
 		game->dirX = cos(degreeToRadian(game->angle));
 		game->dirY = -sin(degreeToRadian(game->angle));
 	}
 	if (keycode == RIGHT_KEY)
 	{
-		game->angle -= 5;
+		game->angle -= game->rotation;
 		game->dirX = cos(degreeToRadian(game->angle));
 		game->dirY = -sin(degreeToRadian(game->angle));
 	}
