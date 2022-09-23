@@ -32,8 +32,8 @@
 
 #define COLOR 0x0000FF
 
-#define WINDOW_WIDTH 864
-#define WINDOW_HEIGHT 720
+// #define WINDOW_WIDTH 864
+// #define WINDOW_HEIGHT 720
 
 #define IMG_WIDTH 48
 #define IMG_HEIGHT 48
@@ -79,6 +79,9 @@ typedef struct s_game
 	int halfWidth;
 	int halfHeight;
 	void *frame_img;
+
+	int WINDOW_WIDTH;
+	int WINDOW_HEIGHT;
 } t_game;
 
 // typedef struct s_player {
@@ -121,6 +124,7 @@ void edit_pixel(char *frame_addr, int size_line, int bits_per_pixel, int x, int 
 int distance(int startY, int startX, int endY, int endX);
 void *ft_calloc(size_t count, size_t size);
 void exit_if_null(void *p, char *message);
-t_game *init();
+t_game * init(const char *av[]);
+
 
 #endif

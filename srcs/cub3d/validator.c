@@ -14,8 +14,6 @@ void check_walls(char *map[], t_game *game)
 {
 	int i;
 
-	game->map_width = map_width(map[0]);
-	game->map_height = map_height(map);
 	if (!ft_strchr(map[0], '1') || !ft_strchr(map[game->map_height - 1], '1'))
 		quit(NULL, "Map is not surrendered by upper or lower walls");
 	i = -1;

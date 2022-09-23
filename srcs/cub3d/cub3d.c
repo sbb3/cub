@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:43 by adouib            #+#    #+#             */
-/*   Updated: 2022/09/22 09:36:01 by adouib           ###   ########.fr       */
+/*   Updated: 2022/09/23 09:14:09 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,13 @@ int main(int ac, const char *av[])
 	if (ac != 2)
 		quit(NULL, "Format: ./cub3d <map name>.cub");
 
-	game = init();
+	game = init(av);
 	parser(av, game);
 
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		quit(game, "Connection to the X-Window Server failed");
-	game->win = mlx_new_window(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "CUB3D");
+	game->win = mlx_new_window(game->mlx, game->WINDOW_WIDTH, game->WINDOW_HEIGHT, "CUB3D");
 	if (!game->win)
 		quit(game, "New window initialization failed");
 	mlx_loop_hook(game->mlx, render, game); // infinite loop -> drawing

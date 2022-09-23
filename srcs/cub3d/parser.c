@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:08:05 by adouib            #+#    #+#             */
-/*   Updated: 2022/09/22 08:10:55 by adouib           ###   ########.fr       */
+/*   Updated: 2022/09/23 09:12:24 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,6 @@ char **map_read(const char *av[], t_game *game)
 void parser(const char *av[], t_game *game)
 {
 	check_map_extension(av);
-	game->map = map_read(av, game);
-	if (!game->map)
-		quit(NULL, "map is empty");
 	check_rectangle(game->map);
 	check_walls(game->map, game);
 	// check_characters(game->map, game);
