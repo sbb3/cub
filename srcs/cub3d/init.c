@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:56 by adouib            #+#    #+#             */
-/*   Updated: 2022/09/23 09:14:41 by adouib           ###   ########.fr       */
+/*   Updated: 2022/09/23 18:49:50 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ t_game * init(const char *av[])
 	game->posY = game->WINDOW_HEIGHT / 2;
 	game->angle = 90;
 	game->fov = 60; // field of view
-	game->dirX = 0;
-	game->dirY = -1;
+	game->dirX = 0; // player starting direction
+	game->dirY = -1; // player starting direction
 
 	game->halfWidth = game->WINDOW_WIDTH / 2;
 	game->halfHeight = game->WINDOW_HEIGHT / 2;
