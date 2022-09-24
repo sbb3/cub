@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:43 by adouib            #+#    #+#             */
-/*   Updated: 2022/09/23 09:14:09 by adouib           ###   ########.fr       */
+/*   Updated: 2022/09/24 13:37:04 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int keyPressed(int keycode, t_game *game)
 		quit(game, NULL);
 	if (keycode == W_KEY)
 	{
-		tmpY = (game->posY + game->dirY * game->movementSpeed) / IMG_HEIGHT;
-		tmpX = (game->posX + game->dirX * game->movementSpeed) / IMG_WIDTH;
+		tmpY = (game->posY + game->dirY * game->movementSpeed) / SQUARE_HEIGHT;
+		tmpX = (game->posX + game->dirX * game->movementSpeed) / SQUARE_WIDTH;
 
 		if (game->map[tmpY][tmpX] == '0')
 		{
@@ -31,8 +31,8 @@ int keyPressed(int keycode, t_game *game)
 	}
 	if (keycode == S_KEY)
 	{
-		tmpY = (game->posY - game->dirY * game->movementSpeed) / IMG_HEIGHT;
-		tmpX = (game->posX - game->dirX * game->movementSpeed) / IMG_WIDTH;
+		tmpY = (game->posY - game->dirY * game->movementSpeed) / SQUARE_HEIGHT;
+		tmpX = (game->posX - game->dirX * game->movementSpeed) / SQUARE_WIDTH;
 
 		if (game->map[tmpY][tmpX] == '0')
 		{
@@ -50,17 +50,21 @@ int keyPressed(int keycode, t_game *game)
 	}
 	if (keycode == LEFT_KEY)
 	{
-		game->angle += game->rotation;
-		game->dirX = cos(degreeToRadian(game->angle));
-		game->dirY = -sin(degreeToRadian(game->angle));
+		game->rotationAngle += game->rotation;
+		game->dirX = cos(degreeToRadian(game->rotationAngle));
+		game->dirY = -sin(degreeToRadian(game->rotationAngle));
 	}
 	if (keycode == RIGHT_KEY)
 	{
-		game->angle -= game->rotation;
-		game->dirX = cos(degreeToRadian(game->angle));
-		game->dirY = -sin(degreeToRadian(game->angle));
+		game->rotationAngle -= game->rotation;
+		game->dirX = cos(degreeToRadian(game->rotationAngle));
+		game->dirY = -sin(degreeToRadian(game->rotationAngle));
 	}
+	drawWall(game);
+	drawRect(game, game->posY, game->posX, 10, 10, 0xcfc08);
+	rayCasting(game);
 
+	// printf("----------------\n");
 	return (0);
 }
 
@@ -80,6 +84,12 @@ int main(int ac, const char *av[])
 	game->win = mlx_new_window(game->mlx, game->WINDOW_WIDTH, game->WINDOW_HEIGHT, "CUB3D");
 	if (!game->win)
 		quit(game, "New window initialization failed");
+
+	// drawWall(game);
+	drawWall(game);
+	drawRect(game, game->posY, game->posX, 10, 10, 0xcfc08);
+	rayCasting(game);
+
 	mlx_loop_hook(game->mlx, render, game); // infinite loop -> drawing
 	mlx_hook(game->win, 2, 0L, keyPressed, game);
 	mlx_hook(game->win, 17, 0L, red_cross_quit, game);

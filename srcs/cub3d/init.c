@@ -6,13 +6,13 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:56 by adouib            #+#    #+#             */
-/*   Updated: 2022/09/23 18:49:50 by adouib           ###   ########.fr       */
+/*   Updated: 2022/09/24 11:27:27 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/cub3d.h"
 
-t_game * init(const char *av[])
+t_game *init(const char *av[])
 {
 	t_game *game;
 
@@ -30,21 +30,31 @@ t_game * init(const char *av[])
 	game->map_width = map_width(game->map[0]);
 	game->map_height = map_height(game->map);
 
-	game->WINDOW_WIDTH = IMG_WIDTH * game->map_width;
-	game->WINDOW_HEIGHT = IMG_HEIGHT * game->map_height;
+	game->WINDOW_WIDTH = SQUARE_WIDTH * game->map_width;
+	game->WINDOW_HEIGHT = SQUARE_HEIGHT * game->map_height;
 
 	game->movementSpeed = 0.3;
 	game->rotation = 2;
 
 	game->posX = game->WINDOW_WIDTH / 2;
 	game->posY = game->WINDOW_HEIGHT / 2;
-	game->angle = 90;
+	game->rotationAngle = 90;
 	game->fov = 60; // field of view
-	game->dirX = 0; // player starting direction
-	game->dirY = -1; // player starting direction
+	game->halfFov = game->fov / 2;
+	game->dirX = 0;	 // player starting rotation angle
+	game->dirY = -1; // player starting rotattion angle
 
 	game->halfWidth = game->WINDOW_WIDTH / 2;
 	game->halfHeight = game->WINDOW_HEIGHT / 2;
 
+	game->rayUp = 0;
+	game->rayDown = 0;
+	game->rayLeft = 0;
+	game->rayRight = 0;
+
+
+	// game->rayAngle = 0;
+	// game->rayAngleY = 0;
+	// game->rayAngleX = 0;
 	return game;
 }
