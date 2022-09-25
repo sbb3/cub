@@ -41,9 +41,9 @@ t_img_data *createImage(t_game *game)
 {
 	t_img_data *imgData;
 
-	imgData = ft_calloc(1, sizeof(game->imgData));
-	if (!game->imgData)
-		exit_if_null(game->imgData, "Could not create an image");
+	imgData = ft_calloc(1, sizeof(t_img_data));
+	if (!imgData)
+		exit_if_null(imgData, "Could not create an image");
 	imgData->frame = mlx_new_image(game->mlx, game->WINDOW_WIDTH, game->WINDOW_HEIGHT);
 	imgData->frame_addr = mlx_get_data_addr(imgData->frame, &imgData->bpp, &imgData->sLine, &imgData->endn);
 
@@ -54,13 +54,6 @@ t_img_data *createImage(t_game *game)
 
 void drawWall(t_game *game)
 {
-	int bpp;
-	int sLine;
-	int endn;
-	char *frame_addr;
-
-	game->frame_img = mlx_new_image(game->mlx, SQUARE_WIDTH, SQUARE_HEIGHT);
-
 	int y = 0;
 	int x;
 	while (game->map[y])
@@ -70,33 +63,18 @@ void drawWall(t_game *game)
 		{
 			if (game->map[y][x] == '1')
 			{
-				frame_addr = mlx_get_data_addr(game->frame_img, &bpp, &sLine, &endn);
 
-				for (int yy = 0; yy < SQUARE_HEIGHT; yy++)
-				{
-					for (int xx = 0; xx < SQUARE_WIDTH; xx++)
-						if (yy == 00 || yy == SQUARE_HEIGHT - 1 || xx == 0 || xx == SQUARE_WIDTH)
-							edit_pixel(frame_addr, sLine, bpp, xx, yy, 0x44bcd8);
-						else
-							edit_pixel(frame_addr, sLine, bpp, xx, yy, 0x01804d);
-				}
+
+							drawRect(game, y * SQUARE_SIZE, x * SQUARE_SIZE, SQUARE_SIZE - 1, SQUARE_SIZE - 1, 0x2da9d2);
+
+
 			}
 			else
 			{
-				frame_addr = mlx_get_data_addr(game->frame_img, &bpp, &sLine, &endn);
 
-				for (int yy = 0; yy < SQUARE_HEIGHT; yy++)
-				{
-					for (int xx = 0; xx < SQUARE_WIDTH; xx++)
-					{
-						if (yy == 00 || yy == SQUARE_HEIGHT - 1 || xx == 0 || xx == SQUARE_WIDTH)
-							edit_pixel(frame_addr, sLine, bpp, xx, yy, 0x44bcd8);
-						else
-							edit_pixel(frame_addr, sLine, bpp, xx, yy, 0x1f2e2e);
-					}
-				}
+				drawRect(game, y * SQUARE_SIZE, x * SQUARE_SIZE, SQUARE_SIZE - 1, SQUARE_SIZE - 1, 0x1f2e2e);
+
 			}
-			mlx_put_image_to_window(game->mlx, game->win, game->frame_img, x * SQUARE_WIDTH, y * SQUARE_HEIGHT);
 			x++;
 		}
 		y++;
@@ -121,10 +99,6 @@ void drawLinePlayer(t_game *game, int startY, int startX, int color)
 
 void drawRect(t_game *game, int startY, int startX, int sizeY, int sizeX, int color)
 {
-
-	game->imgData->frame = mlx_new_image(game->mlx, sizeX, sizeY);
-	game->imgData->frame_addr = mlx_get_data_addr(game->imgData->frame, &game->imgData->bpp, &game->imgData->sLine, &game->imgData->endn);
-
 	int y = 0;
 	int x;
 	while (y < sizeY)
@@ -132,12 +106,11 @@ void drawRect(t_game *game, int startY, int startX, int sizeY, int sizeX, int co
 		x = 0;
 		while (x < sizeX)
 		{
-			edit_pixel(game->imgData->frame_addr, game->imgData->sLine, game->imgData->bpp, x, y, color);
+			edit_pixel(game->imgData->frame_addr, game->imgData->sLine, game->imgData->bpp, x + startX, y + startY, color);
 			x++;
 		}
 		y++;
 	}
-	mlx_put_image_to_window(game->mlx, game->win, game->imgData->frame, startX, startY);
 }
 
 void drawLine(t_game *game, int startY, int startX, int endY, int endX, int color)

@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:43 by adouib            #+#    #+#             */
-/*   Updated: 2022/09/25 18:14:44 by adouib           ###   ########.fr       */
+/*   Updated: 2022/09/25 23:14:14 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,12 @@ int keyPressed(int keycode, t_game *game)
 		if (game->rotationAngle < 0)
 			game->rotationAngle = 360 + game->rotationAngle;
 	}
-	mlx_clear_window(game->mlx, game->win);
-	drawWall(game);
-	// drawRect(game, game->posY, game->posX, 10, 10, 0xcfc08);
-	drawLinePlayer(game, game->posY, game->posX, 0xffffff);
+	// mlx_clear_window(game->mlx, game->win);
+	// drawWall(game);
+	// // drawRect(game, game->posY, game->posX, 10, 10, 0xcfc08);
+	// drawLinePlayer(game, game->posY, game->posX, 0xffffff);
 
-	rayCasting(game);
+	// rayCasting(game);
 
 	// printf("----------------\n");
 	return (0);
@@ -96,11 +96,16 @@ int main(int ac, const char *av[])
 	if (!game->win)
 		quit(game, "New window initialization failed");
 
-	// drawWall(game);
+	printf("w : %d\n",  game->WINDOW_WIDTH);
+	printf("h : %d\n",  game->WINDOW_HEIGHT);
+	game->imgData = createImage(game); //!!!!
+
 	drawWall(game);
-	drawLinePlayer(game, game->posY, game->posX, 0xffffff);
-	// drawRect(game, game->posY, game->posX, 10, 10, 0xcfc08);
-	rayCasting(game);
+	// drawLinePlayer(game, game->posY, game->posX, 0xffffff);
+	drawRect(game, game->posY, game->posX, 10, 10, 0xcfc08);
+	// rayCasting(game);
+
+	mlx_put_image_to_window(game->mlx, game->win, game->imgData->frame, 0, 0); //!!!!
 
 	mlx_loop_hook(game->mlx, render, game); // infinite loop -> drawing
 	mlx_hook(game->win, 2, 0L, keyPressed, game);

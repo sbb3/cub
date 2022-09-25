@@ -153,5 +153,6 @@ void	fix_angle(t_game *game, char c);
 
 void	checkHorizontalCollision(t_game *game);
 void	checkVerticalCollision(t_game *game);
+t_img_data *createImage(t_game *game);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:56 by adouib            #+#    #+#             */
-/*   Updated: 2022/09/25 22:28:00 by adouib           ###   ########.fr       */
+/*   Updated: 2022/09/25 22:47:58 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ t_game *init(const char *av[])
 	if (!game)
 		exit_if_null(game, "Allocation failed");
 
-	game->imgData = ft_calloc(1, sizeof(game->imgData));
-	if (!game->imgData)
-		exit_if_null(game->imgData, "Allocation failed");
+	// game->imgData = ft_calloc(1, sizeof(game->imgData));
+	// if (!game->imgData)
+	// 	exit_if_null(game->imgData, "Allocation failed");
 
 	game->map = map_read(av, game);
 	if (!game->map)
