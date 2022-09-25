@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:56 by adouib            #+#    #+#             */
-/*   Updated: 2022/09/24 11:27:27 by adouib           ###   ########.fr       */
+/*   Updated: 2022/09/25 22:28:00 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ t_game *init(const char *av[])
 	if (!game)
 		exit_if_null(game, "Allocation failed");
 
-	game->img_data = ft_calloc(1, sizeof(img_data));
-	if (!game->img_data)
-		exit_if_null(game->img_data, "Allocation failed");
+	game->imgData = ft_calloc(1, sizeof(game->imgData));
+	if (!game->imgData)
+		exit_if_null(game->imgData, "Allocation failed");
 
 	game->map = map_read(av, game);
 	if (!game->map)
@@ -33,7 +33,7 @@ t_game *init(const char *av[])
 	game->WINDOW_WIDTH = SQUARE_WIDTH * game->map_width;
 	game->WINDOW_HEIGHT = SQUARE_HEIGHT * game->map_height;
 
-	game->movementSpeed = 0.3;
+	game->movementSpeed = 5;
 	game->rotation = 2;
 
 	game->posX = game->WINDOW_WIDTH / 2;
@@ -51,9 +51,9 @@ t_game *init(const char *av[])
 	game->rayDown = 0;
 	game->rayLeft = 0;
 	game->rayRight = 0;
+	game->rayAngleIncrem = (double) game->fov / (double) game->WINDOW_WIDTH;
 
-
-	// game->rayAngle = 0;
+	// game->rayAngle = 0.00;
 	// game->rayAngleY = 0;
 	// game->rayAngleX = 0;
 	return game;

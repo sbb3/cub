@@ -40,18 +40,18 @@
 #define BUFFER_SIZE 1
 #define degreeToRadian(angleInDegree) ((angleInDegree) * (M_PI / 180))
 
-typedef struct s_img
+typedef struct s_img_data
 {
-	int bits_per_pixel;
-	int size_line;
-	int endian;
+	int bpp;
+	int sLine;
+	int endn;
 	char *frame_addr;
 	void *frame;
-} img_data;
+} t_img_data;
 
 typedef struct s_game
 {
-	img_data *img_data;
+	t_img_data *imgData;
 
 	void *mlx;
 	void *win;
@@ -73,7 +73,6 @@ typedef struct s_game
 	int rotationAngle; // player angle
 	int fov;		   // 60 // filed of view
 	int halfFov;
-
 	double movementSpeed;
 	double rotation;
 	int halfWidth;
@@ -89,9 +88,18 @@ typedef struct s_game
 	int rayLeft;
 	int rayRight;
 
-	int rayAngle;
+	double rayAngle;
+	double rayAngleIncrem;
+
 	double rayAngleY;
 	double rayAngleX;
+
+
+	double yinterHH;
+	double xinterHH;
+	double yinterVV;
+	double xinterVV;
+
 } t_game;
 
 // typedef struct s_player {
@@ -135,9 +143,15 @@ int distance(int startY, int startX, int endY, int endX);
 void *ft_calloc(size_t count, size_t size);
 void exit_if_null(void *p, char *message);
 t_game *init(const char *av[]);
-void drawLinePlayer(t_game *game, int startY, int startX, int endY, int endX, int color);
+void drawLinePlayer(t_game *game, int startY, int startX, int color);
 void drawLine(t_game *game, int startY, int startX, int endY, int endX, int color);
 
 void drawRect(t_game *game, int startY, int startX, int sizeY, int sizeX, int color);
 void rayCasting(t_game *game);
+void	checkRayDirection(t_game *game);
+void	fix_angle(t_game *game, char c);
+
+void	checkHorizontalCollision(t_game *game);
+void	checkVerticalCollision(t_game *game);
+
 #endif

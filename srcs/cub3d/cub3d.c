@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:43 by adouib            #+#    #+#             */
-/*   Updated: 2022/09/24 13:37:04 by adouib           ###   ########.fr       */
+/*   Updated: 2022/09/25 18:14:44 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,22 @@ int keyPressed(int keycode, t_game *game)
 		tmpY = (game->posY + game->dirY * game->movementSpeed) / SQUARE_HEIGHT;
 		tmpX = (game->posX + game->dirX * game->movementSpeed) / SQUARE_WIDTH;
 
-		if (game->map[tmpY][tmpX] == '0')
-		{
+		// if (game->map[tmpY][tmpX] == '0')
+		// {
 			game->posX += game->dirX * game->movementSpeed;
 			game->posY += game->dirY * game->movementSpeed;
-		}
+		// }
 	}
 	if (keycode == S_KEY)
 	{
 		tmpY = (game->posY - game->dirY * game->movementSpeed) / SQUARE_HEIGHT;
 		tmpX = (game->posX - game->dirX * game->movementSpeed) / SQUARE_WIDTH;
 
-		if (game->map[tmpY][tmpX] == '0')
-		{
+		// if (game->map[tmpY][tmpX] == '0')
+		// {
 			game->posX -= game->dirX * game->movementSpeed;
 			game->posY -= game->dirY * game->movementSpeed;
-		}
+		// }
 	}
 	if (keycode == A_KEY)
 	{
@@ -53,15 +53,26 @@ int keyPressed(int keycode, t_game *game)
 		game->rotationAngle += game->rotation;
 		game->dirX = cos(degreeToRadian(game->rotationAngle));
 		game->dirY = -sin(degreeToRadian(game->rotationAngle));
+
+		game->rotationAngle = game->rotationAngle % 360;
+		if (game->rotationAngle < 0)
+			game->rotationAngle = 360 + game->rotationAngle;
 	}
 	if (keycode == RIGHT_KEY)
 	{
 		game->rotationAngle -= game->rotation;
 		game->dirX = cos(degreeToRadian(game->rotationAngle));
 		game->dirY = -sin(degreeToRadian(game->rotationAngle));
+
+		game->rotationAngle = game->rotationAngle % 360;
+		if (game->rotationAngle < 0)
+			game->rotationAngle = 360 + game->rotationAngle;
 	}
+	mlx_clear_window(game->mlx, game->win);
 	drawWall(game);
-	drawRect(game, game->posY, game->posX, 10, 10, 0xcfc08);
+	// drawRect(game, game->posY, game->posX, 10, 10, 0xcfc08);
+	drawLinePlayer(game, game->posY, game->posX, 0xffffff);
+
 	rayCasting(game);
 
 	// printf("----------------\n");
@@ -87,7 +98,8 @@ int main(int ac, const char *av[])
 
 	// drawWall(game);
 	drawWall(game);
-	drawRect(game, game->posY, game->posX, 10, 10, 0xcfc08);
+	drawLinePlayer(game, game->posY, game->posX, 0xffffff);
+	// drawRect(game, game->posY, game->posX, 10, 10, 0xcfc08);
 	rayCasting(game);
 
 	mlx_loop_hook(game->mlx, render, game); // infinite loop -> drawing
