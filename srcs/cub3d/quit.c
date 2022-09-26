@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:08:14 by adouib            #+#    #+#             */
-/*   Updated: 2022/09/22 08:08:15 by adouib           ###   ########.fr       */
+/*   Updated: 2022/09/26 18:16:37 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ char **free_map(char **token)
 
 void free_image(t_game *game)
 {
-	if (game->img)
+	if (game->imgData->frame)
 	{
-		mlx_destroy_image(game->mlx, game->img);
-		game->img = NULL;
+		mlx_destroy_image(game->mlx, game->imgData->frame);
+		game->imgData->frame = NULL;
 	}
 }
 
@@ -46,8 +46,8 @@ void quit(t_game *game, char *s)
 	}
 	if (game->map)
 		free_map(game->map);
-	if (game->img)
-		mlx_destroy_image(game->mlx, game->img);
+	if (game->imgData->frame)
+		mlx_destroy_image(game->mlx, game->imgData->frame);
 	if (game->win)
 		mlx_destroy_window(game->mlx, game->win);
 	if (game->mlx)
@@ -60,8 +60,8 @@ int red_cross_quit(t_game *game)
 {
 	if (game->map)
 		free_map(game->map);
-	if (game->img)
-		mlx_destroy_image(game->mlx, game->img);
+	if (game->imgData->frame)
+		mlx_destroy_image(game->mlx, game->imgData->frame);
 	if (game->win)
 		mlx_destroy_window(game->mlx, game->win);
 	if (game->mlx)

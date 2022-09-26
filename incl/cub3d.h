@@ -55,7 +55,6 @@ typedef struct s_game
 
 	void *mlx;
 	void *win;
-	void *img;
 	int img_width;
 	int img_height;
 
@@ -95,10 +94,10 @@ typedef struct s_game
 	double rayAngleX;
 
 
-	double yinterHH;
-	double xinterHH;
-	double yinterVV;
-	double xinterVV;
+	double horizontalWallHitX;
+	double horizontalWallHitY;
+	double verticalWallHitX;
+	double verticalWallHitY;
 
 } t_game;
 
@@ -139,12 +138,14 @@ char **free_map(char **token);
 int intersection(t_game *game, double x1, double y1, double x2, double y2);
 void drawWall(t_game *game);
 void edit_pixel(char *frame_addr, int size_line, int bits_per_pixel, int x, int y, int color);
-int distance(int startY, int startX, int endY, int endX);
+int distance(int startX, int startY, int endX, int endY);
+
 void *ft_calloc(size_t count, size_t size);
 void exit_if_null(void *p, char *message);
 t_game *init(const char *av[]);
 void drawLinePlayer(t_game *game, int startY, int startX, int color);
-void drawLine(t_game *game, int startY, int startX, int endY, int endX, int color);
+void drawLine(t_game *game, int startX, int startY, int endX, int endY, int color);
+
 
 void drawRect(t_game *game, int startY, int startX, int sizeY, int sizeX, int color);
 void rayCasting(t_game *game);

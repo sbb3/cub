@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:56 by adouib            #+#    #+#             */
-/*   Updated: 2022/09/25 22:47:58 by adouib           ###   ########.fr       */
+/*   Updated: 2022/09/26 22:13:43 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_game *init(const char *av[])
 	game->WINDOW_WIDTH = SQUARE_WIDTH * game->map_width;
 	game->WINDOW_HEIGHT = SQUARE_HEIGHT * game->map_height;
 
-	game->movementSpeed = 5;
+	game->movementSpeed = 10;
 	game->rotation = 2;
 
 	game->posX = game->WINDOW_WIDTH / 2;
@@ -51,7 +51,7 @@ t_game *init(const char *av[])
 	game->rayDown = 0;
 	game->rayLeft = 0;
 	game->rayRight = 0;
-	game->rayAngleIncrem = (double) game->fov / (double) game->WINDOW_WIDTH;
+	game->rayAngleIncrem = ((double) game->fov /  game->WINDOW_WIDTH) ;
 
 	// game->rayAngle = 0.00;
 	// game->rayAngleY = 0;

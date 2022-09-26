@@ -26,9 +26,9 @@ void checkRayDirection(t_game *game)
 	}
 }
 
-int distance(int startY, int startX, int endY, int endX)
+int distance(int startX, int startY, int endX, int endY)
 {
-	return sqrt(pow((abs(endX - startX)), 2) + pow((abs(endY - startY)), 2));
+	return (sqrt(pow((abs(endX - startX)), 2) + pow((abs(endY - startY)), 2)));
 }
 
 void edit_pixel(char *frame_addr, int sLine, int bpp, int x, int y, int color)
@@ -52,82 +52,22 @@ t_img_data *createImage(t_game *game)
 
 // void	deleteImage(t_game *game) {}
 
-void drawWall(t_game *game)
-{
-	int y = 0;
-	int x;
-	while (game->map[y])
-	{
-		x = 0;
-		while (game->map[y][x])
-		{
-			if (game->map[y][x] == '1')
-			{
-
-
-							drawRect(game, y * SQUARE_SIZE, x * SQUARE_SIZE, SQUARE_SIZE - 1, SQUARE_SIZE - 1, 0x2da9d2);
-
-
-			}
-			else
-			{
-
-				drawRect(game, y * SQUARE_SIZE, x * SQUARE_SIZE, SQUARE_SIZE - 1, SQUARE_SIZE - 1, 0x1f2e2e);
-
-			}
-			x++;
-		}
-		y++;
-	}
-}
-
-void drawLinePlayer(t_game *game, int startY, int startX, int color)
+void drawLine(t_game *game, int startX, int startY, int endX, int endY, int color)
 {
 	// pythaghors equation
-	int pixelsCount = 400;
+	int pixelsCount = distance(startX,startY, endX, endY); // number of pixels will be in the line or the distance ! https://www.mathsisfun.com/algebra/distance-2-points.html
 	double pixelX = startX;
 	double pixelY = startY;
 
 	while (pixelsCount)
 	{
-		mlx_pixel_put(game->mlx, game->win, pixelX, pixelY, color);
-		pixelX += game->dirX; // dirX = direction, default to 0, range  [ -1 < 0 < 1 ]
-		pixelY += game->dirY; // dirY = direction, default to -1, range [ -1 < 0 < 1 ]
-		pixelsCount--;
-	}
-}
-
-void drawRect(t_game *game, int startY, int startX, int sizeY, int sizeX, int color)
-{
-	int y = 0;
-	int x;
-	while (y < sizeY)
-	{
-		x = 0;
-		while (x < sizeX)
-		{
-			edit_pixel(game->imgData->frame_addr, game->imgData->sLine, game->imgData->bpp, x + startX, y + startY, color);
-			x++;
-		}
-		y++;
-	}
-}
-
-void drawLine(t_game *game, int startY, int startX, int endY, int endX, int color)
-{
-	// pythaghors equation
-	int pixelsCount = distance(startY, startX, endY, endX); // number of pixels will be in the line or the distance ! https://www.mathsisfun.com/algebra/distance-2-points.html
-	double pixelX = startX;
-	double pixelY = startY;
-
-	while (pixelsCount)
-	{
-		mlx_pixel_put(game->mlx, game->win, pixelX, pixelY, color);
+		edit_pixel(game->imgData->frame_addr, game->imgData->sLine, game->imgData->bpp, pixelX, pixelY, color);
 		pixelX += game->rayAngleX; // dirX = direction, default to 0, range  [ -1 < 0 < 1 ]
 		pixelY += game->rayAngleY; // dirY = direction, default to -1, range [ -1 < 0 < 1 ]
 		pixelsCount--;
 	}
 }
+
 void fix_angle(t_game *game, char c)
 {
 	if (c == 'h')
@@ -135,7 +75,7 @@ void fix_angle(t_game *game, char c)
 		if (game->rayAngle < 0)
 			game->rayAngle = 360 + game->rayAngle;
 		if (game->rayAngle == 0)
-			game->rayAngle = -359;
+			game->rayAngle = 359;
 		if (game->rayAngle == 180)
 			game->rayAngle = 181;
 	}
@@ -155,7 +95,7 @@ void checkHorizontalCollision(t_game *game)
 	int wallHit = 0;
 	double yintersec = 0, xintersec = 0, ystep = 0, xstep = 0; // deltaY  // deltaX | // first check if these coordinates are at wall, else increment them with ystep and xstep till u find a wall
 
-	fix_angle(game, 'h');
+	// fix_angle(game, 'h');
 	game->rayAngleX = cos(degreeToRadian(game->rayAngle));
 	game->rayAngleY = -sin(degreeToRadian(game->rayAngle));
 
@@ -167,8 +107,8 @@ void checkHorizontalCollision(t_game *game)
 		yintersec += SQUARE_SIZE;
 	// !! xintersec
 	xintersec = (game->posX + ((game->posY - yintersec) / tan(degreeToRadian(game->rayAngle)))); // absolute (yinter - posY)
-	if (isinf(xintersec))
-		xintersec = 0;
+	// if (isinf(xintersec))
+	// 	xintersec = 0;
 
 	// !! ystep
 	ystep = SQUARE_SIZE;
@@ -196,8 +136,8 @@ void checkHorizontalCollision(t_game *game)
 		yintersec += ystep;
 		xintersec += xstep;
 	}
-	game->yinterHH = yintersec;
-	game->xinterHH = xintersec;
+	game->horizontalWallHitY = yintersec;
+	game->horizontalWallHitX = xintersec;
 	// drawLine(game, game->posY, game->posX, (int)yintersec, (int)xintersec, 0xcfc08);
 }
 
@@ -207,7 +147,7 @@ void checkVerticalCollision(t_game *game)
 	double yintersec = 0, xintersec = 0, ystep = 0, xstep = 0; // deltaY  // deltaX | // first check if these coordinates are at wall, else increment them with ystep and xstep till u find a wall
 
 	// game->rayAngle += ((game->rotationAngle - game->halfFov) % 360) + game->rayAngleIncrem; // needed for drawing next ray // if it goes over 360, will reset to 0
-	fix_angle(game, 'v');
+	// fix_angle(game, 'v');
 	game->rayAngleX = cos(degreeToRadian(game->rayAngle));
 	game->rayAngleY = -sin(degreeToRadian(game->rayAngle));
 
@@ -251,19 +191,23 @@ void checkVerticalCollision(t_game *game)
 		xintersec += xstep;
 		yintersec += ystep;
 	}
-	game->yinterVV = yintersec;
-	game->xinterVV = xintersec;
+	game->verticalWallHitY = yintersec;
+	game->verticalWallHitX = xintersec;
 	// drawLine(game, game->posY, game->posX, (int)yintersec, (int)xintersec, 0xFFFF00);
 }
 
 void rayCasting(t_game *game)
 {
-	double yintersec = 0, xintersec = 0; // deltaY  // deltaX | // first check if these coordinates are at wall, else increment them with ystep and xstep till u find a wall
-
-	// system("clear");
-	game->rayAngle = ((game->rotationAngle - game->halfFov) % 360); // needed for drawing next ray // if it goes over 360, will reset to 0
-	// printf("%lf\n", game->rayAngle);
+	system("clear");
+	double wallHitY = 0, wallHitX = 0; // deltaY  // deltaX | // first check if these coordinates are at wall, else increment them with ystep and xstep till u find a wall
+	int horizontalDistance = 0, verticalDistance = 0;
+	game->rayAngle = (game->rotationAngle - game->halfFov) % 360; // needed for drawing next ray // if it goes over 360, will reset to 0
+	if (game->rayAngle < 0)
+			game->rayAngle = 360 + game->rayAngle;
+	printf("first : %lf\n", game->rayAngle); // 90 - 30
+	// printf("%d\n", game->rotationAngle); // 90 - 30
 	// printf("%lf\n", game->rayAngleIncrem);
+	// fix_angle(game, 'h');
 
 	int i = -1;
 	while (++i < game->WINDOW_WIDTH)
@@ -273,20 +217,39 @@ void rayCasting(t_game *game)
 		checkVerticalCollision(game);
 
 		// f() return to xinter and yinter
-		if (fabs(game->posX - game->xinterHH) < fabs(game->posX - game->xinterVV))
-			xintersec = game->xinterHH;
-		else
-			xintersec = game->xinterVV;
 
-		if (fabs(game->posY - game->yinterHH) < fabs(game->posY - game->yinterVV))
-			yintersec = game->yinterHH;
-		else
-			yintersec = game->yinterVV;
 
-		drawLine(game, game->posY, game->posX, (int)yintersec, (int)xintersec, 0xcfc08);
+		verticalDistance = distance(game->posX, game->posY, game->verticalWallHitX, game->verticalWallHitY);
+		horizontalDistance = distance(game->posX, game->posY, game->horizontalWallHitX, game->horizontalWallHitY);
+
+
+		if (horizontalDistance < verticalDistance)
+		{
+			wallHitX = game->horizontalWallHitX;
+			wallHitY = game->horizontalWallHitY;
+		} else
+		{
+			wallHitX = game->verticalWallHitX;
+			wallHitY = game->verticalWallHitY;
+		}
+
+		if (i >= (game->WINDOW_WIDTH/2 - 10) && i <= (game->WINDOW_WIDTH/2 + 10))
+			printf("middle : %lf\n", game->rayAngle); // 90 - 30
+
+
+
+
+		drawLine(game, game->posX, game->posY, (int)wallHitX, (int)wallHitY, 0xcfc08);
 		game->rayAngle += game->rayAngleIncrem; // needed for drawing next ray // if it goes over 360, will reset to 0
 												// printf("%lf\n", game->rayAngle);
+		if (game->rayAngle > 360)
+			game->rayAngle = 360 - game->rayAngle;
+		printf("%lf\n", game->rayAngle); // 90 - 30
+
 	}
+	printf("Llast : %lf\n", game->rayAngle); // 90 - 30
+
+
 }
 
 int render(t_game *game)
