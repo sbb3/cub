@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:56 by adouib            #+#    #+#             */
-/*   Updated: 2022/09/26 22:13:43 by adouib           ###   ########.fr       */
+/*   Updated: 2022/09/26 23:27:12 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,42 +19,25 @@ t_game *init(const char *av[])
 	game = ft_calloc(1, sizeof(t_game));
 	if (!game)
 		exit_if_null(game, "Allocation failed");
-
-	// game->imgData = ft_calloc(1, sizeof(game->imgData));
-	// if (!game->imgData)
-	// 	exit_if_null(game->imgData, "Allocation failed");
-
 	game->map = map_read(av, game);
 	if (!game->map)
 		quit(NULL, "map is empty");
-	game->map_width = map_width(game->map[0]);
-	game->map_height = map_height(game->map);
-
-	game->WINDOW_WIDTH = SQUARE_WIDTH * game->map_width;
-	game->WINDOW_HEIGHT = SQUARE_HEIGHT * game->map_height;
-
+	game->mapWidthPx = mapWidth(game->map[0]); // map width length
+	game->mapHeightPx = mapHeight(game->map); // map height length
+	game->windowWidth = SQUARE_WIDTH * game->mapWidthPx;
+	game->windowHeight = SQUARE_HEIGHT * game->mapHeightPx;
+	game->halfWidth = game->windowWidth / 2;
+	game->halfHeight = game->windowHeight / 2;
 	game->movementSpeed = 10;
 	game->rotation = 2;
+	game->posX = game->windowWidth / 2; // init to the starting location on the map
+	game->posY = game->windowHeight / 2;
+	game->playerAngle = 90;
+	game->fov = 60;													   // field of view of the player
+	game->halfFov = game->fov / 2;									   // half of view of the player
+	game->dirX = 0;													   // player starting rotation angle
+	game->dirY = -1;												   // player starting rotattion angle
+	game->rayAngleIncrement = ((double)game->fov / game->windowWidth); // fov / windowWidth
 
-	game->posX = game->WINDOW_WIDTH / 2;
-	game->posY = game->WINDOW_HEIGHT / 2;
-	game->rotationAngle = 90;
-	game->fov = 60; // field of view
-	game->halfFov = game->fov / 2;
-	game->dirX = 0;	 // player starting rotation angle
-	game->dirY = -1; // player starting rotattion angle
-
-	game->halfWidth = game->WINDOW_WIDTH / 2;
-	game->halfHeight = game->WINDOW_HEIGHT / 2;
-
-	game->rayUp = 0;
-	game->rayDown = 0;
-	game->rayLeft = 0;
-	game->rayRight = 0;
-	game->rayAngleIncrem = ((double) game->fov /  game->WINDOW_WIDTH) ;
-
-	// game->rayAngle = 0.00;
-	// game->rayAngleY = 0;
-	// game->rayAngleX = 0;
 	return game;
 }

@@ -1,26 +1,26 @@
 #include "../../incl/cub3d.h"
 
-static void	ft_bzero(void *s, size_t n)
+static void ft_bzero(void *s, size_t n)
 {
-	unsigned char	*str;
+	unsigned char *str;
 
 	str = (unsigned char *)s;
 	while (n--)
 		*str++ = 0;
 }
 
-void	*ft_calloc(size_t count, size_t size)
+void *ft_calloc(size_t count, size_t size)
 {
-	void	*ptr;
+	void *ptr;
 
 	ptr = malloc(count * size);
-	if (! ptr)
+	if (!ptr)
 		return (NULL);
 	ft_bzero(ptr, count * size);
 	return (ptr);
 }
 
-int map_width(char *s)
+int mapWidth(char *s)
 {
 	int i;
 
@@ -30,7 +30,7 @@ int map_width(char *s)
 	return (i);
 }
 
-int map_height(char *s[])
+int mapHeight(char *s[])
 {
 	int i;
 
@@ -56,8 +56,7 @@ int search_map(char *s, char c)
 	return (count);
 }
 
-
-void	exit_if_null(void *p, char *message)
+void exit_if_null(void *p, char *message)
 {
 	if (!p)
 	{

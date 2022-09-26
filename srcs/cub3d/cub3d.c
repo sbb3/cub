@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:43 by adouib            #+#    #+#             */
-/*   Updated: 2022/09/26 22:00:07 by adouib           ###   ########.fr       */
+/*   Updated: 2022/09/26 23:43:45 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,12 @@
 
 int keyPressed(int keycode, t_game *game)
 {
-	int tmpY = 0;
-	int tmpX = 0;
 	if (keycode == ESC_KEY)
 		quit(game, NULL);
 	if (keycode == W_KEY)
 	{
-		tmpY = (game->posY + game->dirY * game->movementSpeed) / SQUARE_HEIGHT;
-		tmpX = (game->posX + game->dirX * game->movementSpeed) / SQUARE_WIDTH;
-
-		if (game->map[tmpY][tmpX] == '0')
+		if (game->map[(int)((game->posY + game->dirY * game->movementSpeed) / SQUARE_HEIGHT)]
+			[(int)((game->posX + game->dirX * game->movementSpeed) / SQUARE_WIDTH)] == '0')
 		{
 			game->posX += game->dirX * game->movementSpeed;
 			game->posY += game->dirY * game->movementSpeed;
@@ -31,10 +27,8 @@ int keyPressed(int keycode, t_game *game)
 	}
 	if (keycode == S_KEY)
 	{
-		tmpY = (game->posY - game->dirY * game->movementSpeed) / SQUARE_HEIGHT;
-		tmpX = (game->posX - game->dirX * game->movementSpeed) / SQUARE_WIDTH;
-
-		if (game->map[tmpY][tmpX] == '0')
+		if (game->map[(int)((game->posY - game->dirY * game->movementSpeed) / SQUARE_HEIGHT)]
+			[(int)((game->posX - game->dirX * game->movementSpeed) / SQUARE_WIDTH)] == '0')
 		{
 			game->posX -= game->dirX * game->movementSpeed;
 			game->posY -= game->dirY * game->movementSpeed;
@@ -50,31 +44,29 @@ int keyPressed(int keycode, t_game *game)
 	}
 	if (keycode == LEFT_KEY)
 	{
-		game->rotationAngle += game->rotation;
-		game->dirX = cos(degreeToRadian(game->rotationAngle));
-		game->dirY = -sin(degreeToRadian(game->rotationAngle));
+		game->playerAngle += game->rotation;
+		game->dirX = cos(degreeToRadian(game->playerAngle));
+		game->dirY = -sin(degreeToRadian(game->playerAngle));
 
-		game->rotationAngle = game->rotationAngle % 360;
-		if (game->rotationAngle < 0)
-			game->rotationAngle = 360 + game->rotationAngle;
+		game->playerAngle = game->playerAngle % 360;
+		if (game->playerAngle < 0)
+			game->playerAngle = 360 + game->playerAngle;
 	}
 	if (keycode == RIGHT_KEY)
 	{
-		game->rotationAngle -= game->rotation;
-		game->dirX = cos(degreeToRadian(game->rotationAngle));
-		game->dirY = -sin(degreeToRadian(game->rotationAngle));
+		game->playerAngle -= game->rotation;
+		game->dirX = cos(degreeToRadian(game->playerAngle));
+		game->dirY = -sin(degreeToRadian(game->playerAngle));
 
-		game->rotationAngle = game->rotationAngle % 360;
-		if (game->rotationAngle < 0)
-			game->rotationAngle = 360 + game->rotationAngle;
+		game->playerAngle = game->playerAngle % 360;
+		if (game->playerAngle < 0)
+			game->playerAngle = 360 + game->playerAngle;
 	}
-	free_image(game);
+	// fix the above part
+	deleteImage(game);
 	mlx_clear_window(game->mlx, game->win);
 	game->imgData = createImage(game); //!!!!
-	drawWall(game);
-	// drawLinePlayer(game, game->posY, game->posX, 0xffffff); //!!! remove this
-	rayCasting(game);
-	mlx_put_image_to_window(game->mlx, game->win, game->imgData->frame, 0, 0); //!!!!
+	draw(game); // !! will get removed and used the render function
 	return (0);
 }
 
@@ -94,7 +86,7 @@ void drawRect(t_game *game, int startY, int startX, int sizeY, int sizeX, int co
 	}
 }
 
-void drawWall(t_game *game)
+void drawWalls(t_game *game)
 {
 	int y = 0;
 	int x;
@@ -114,23 +106,23 @@ void drawWall(t_game *game)
 	}
 }
 
-void drawLinePlayer(t_game *game, int startY, int startX, int color)
+void mlxInit(t_game *game)
 {
-	// pythaghors equation
-	int pixelsCount = 350;
-	double pixelX = startX;
-	double pixelY = startY;
-
-	while (pixelsCount)
-	{
-		edit_pixel(game->imgData->frame_addr, game->imgData->sLine, game->imgData->bpp, pixelX, pixelY, color);
-
-		pixelX += game->dirX; // dirX = direction, default to 0, range  [ -1 < 0 < 1 ]
-		pixelY += game->dirY; // dirY = direction, default to -1, range [ -1 < 0 < 1 ]
-		pixelsCount--;
-	}
+	game->mlx = mlx_init();
+	if (!game->mlx)
+		quit(game, "Connection to the X-Window Server failed");
+	game->win = mlx_new_window(game->mlx, game->windowWidth, game->windowHeight, "CUB3D");
+	if (!game->win)
+		quit(game, "New window initialization failed");
+	game->imgData = createImage(game);
 }
 
+void draw(t_game *game)
+{
+	drawWalls(game);
+	rayCasting(game);
+	mlx_put_image_to_window(game->mlx, game->win, game->imgData->frame, 0, 0);
+}
 
 int main(int ac, const char *av[])
 {
@@ -138,28 +130,12 @@ int main(int ac, const char *av[])
 
 	if (ac != 2)
 		quit(NULL, "Format: ./cub3d <map name>.cub");
-
 	game = init(av);
-	parser(av, game);
-
-	game->mlx = mlx_init();
-	if (!game->mlx)
-		quit(game, "Connection to the X-Window Server failed");
-	game->win = mlx_new_window(game->mlx, game->WINDOW_WIDTH, game->WINDOW_HEIGHT, "CUB3D");
-	if (!game->win)
-		quit(game, "New window initialization failed");
-
-	// printf("%d\n", game->WINDOW_WIDTH);
-
-	game->imgData = createImage(game); //!!!!
-	drawWall(game);
-	// drawLinePlayer(game, game->posY, game->posX, 0xffffff); //!!! remove this
-	rayCasting(game);
-	mlx_put_image_to_window(game->mlx, game->win, game->imgData->frame, 0, 0); //!!!!
-
+	// parser(av, game);
+	mlxInit(game);
+	draw(game); // !! will get removed and used the render function
 	// mlx_loop_hook(game->mlx, render, game); // infinite loop -> drawing
 	mlx_hook(game->win, 2, 0L, keyPressed, game);
 	mlx_hook(game->win, 17, 0L, red_cross_quit, game);
-
 	mlx_loop(game->mlx);
 }

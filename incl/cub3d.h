@@ -62,25 +62,24 @@ typedef struct s_game
 	char **map;
 	char *line;
 	char *backup;
-	int map_width;
-	int map_height;
+	int mapWidthPx;
+	int mapHeightPx;
+	int windowWidth;
+	int windowHeight;
+	int halfWidth;
+	int halfHeight;
 
 	int posX;
 	int posY;
-	double dirX;	   // 1
-	double dirY;	   // 0
-	int rotationAngle; // player angle
-	int fov;		   // 60 // filed of view
+	double dirX;	 // 1
+	double dirY;	 // 0
+	int playerAngle; // player angle
+	int fov;		 // 60 // filed of view
 	int halfFov;
 	double movementSpeed;
 	double rotation;
-	int halfWidth;
-	int halfHeight;
+
 	void *frame_img;
-
-	int WINDOW_WIDTH;
-	int WINDOW_HEIGHT;
-
 
 	int rayUp;
 	int rayDown;
@@ -88,11 +87,10 @@ typedef struct s_game
 	int rayRight;
 
 	double rayAngle;
-	double rayAngleIncrem;
+	double rayAngleIncrement;
 
 	double rayAngleY;
 	double rayAngleX;
-
 
 	double horizontalWallHitX;
 	double horizontalWallHitY;
@@ -114,12 +112,8 @@ int ft_slen(char *s);
 void parser(const char *av[], t_game *game);
 char **map_read(const char *av[], t_game *game);
 void check_map_extension(const char *av[]);
-void check_rectangle(char *map[]);
-void check_walls(char *map[], t_game *game);
-void check_characters(char *map[], t_game *game);
-int map_width(char *s);
-int map_height(char *s[]);
-int search_map(char *s, char c);
+int mapWidth(char *s);
+int mapHeight(char *s[]);
 char **ft_split(char *s, char c);
 int ft_strrstr(const char *haystack, const char *needle, int n);
 int ft_strchr(char *s, char c);
@@ -132,10 +126,9 @@ void draw_exit(t_game *game);
 int keyPressed(int keycode, t_game *game);
 
 void quit(t_game *game, char *s);
-void free_image(t_game *game);
+void deleteImage(t_game *game);
 int red_cross_quit(t_game *game);
 char **free_map(char **token);
-int intersection(t_game *game, double x1, double y1, double x2, double y2);
 void drawWall(t_game *game);
 void edit_pixel(char *frame_addr, int size_line, int bits_per_pixel, int x, int y, int color);
 int distance(int startX, int startY, int endX, int endY);
@@ -146,14 +139,15 @@ t_game *init(const char *av[]);
 void drawLinePlayer(t_game *game, int startY, int startX, int color);
 void drawLine(t_game *game, int startX, int startY, int endX, int endY, int color);
 
-
 void drawRect(t_game *game, int startY, int startX, int sizeY, int sizeX, int color);
 void rayCasting(t_game *game);
-void	checkRayDirection(t_game *game);
-void	fix_angle(t_game *game, char c);
+void checkRayDirection(t_game *game);
+void fix_angle(t_game *game, char c);
 
-void	checkHorizontalCollision(t_game *game);
-void	checkVerticalCollision(t_game *game);
+void checkHorizontalCollision(t_game *game);
+void checkVerticalCollision(t_game *game);
 t_img_data *createImage(t_game *game);
+void mlxInit(t_game *game);
+void draw(t_game *game);
 
 #endif

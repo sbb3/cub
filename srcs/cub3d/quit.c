@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:08:14 by adouib            #+#    #+#             */
-/*   Updated: 2022/09/26 18:16:37 by adouib           ###   ########.fr       */
+/*   Updated: 2022/09/26 23:33:25 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char **free_map(char **token)
 	return (NULL);
 }
 
-void free_image(t_game *game)
+void deleteImage(t_game *game)
 {
 	if (game->imgData->frame)
 	{

@@ -6,11 +6,17 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:08:05 by adouib            #+#    #+#             */
-/*   Updated: 2022/09/23 09:12:24 by adouib           ###   ########.fr       */
+/*   Updated: 2022/09/26 22:58:10 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/cub3d.h"
+
+void check_map_extension(const char *av[])
+{
+	if (!ft_strrstr(av[1], ".cub", 4))
+		quit(NULL, "Map not .cub extension file");
+}
 
 char **map_read(const char *av[], t_game *game)
 {
@@ -34,7 +40,4 @@ char **map_read(const char *av[], t_game *game)
 void parser(const char *av[], t_game *game)
 {
 	check_map_extension(av);
-	check_rectangle(game->map);
-	check_walls(game->map, game);
-	// check_characters(game->map, game);
 }
