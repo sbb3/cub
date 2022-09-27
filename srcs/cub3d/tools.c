@@ -56,11 +56,25 @@ int search_map(char *s, char c)
 	return (count);
 }
 
-void exit_if_null(void *p, char *message)
+
+t_img_data *createImage(t_game *game)
 {
-	if (!p)
+	t_img_data *imgData;
+
+	imgData = ft_calloc(1, sizeof(t_img_data));
+	if (!imgData)
+		exit_if_null(imgData, "Could not create an image");
+	imgData->frame = mlx_new_image(game->mlx, game->windowWidth, game->windowHeight);
+	imgData->frame_addr = mlx_get_data_addr(imgData->frame, &imgData->bpp, &imgData->sLine, &imgData->endn);
+
+	return imgData;
+}
+
+void deleteImage(t_game *game)
+{
+	if (game->imgData->frame)
 	{
-		perror(message);
-		exit(EXIT_FAILURE);
+		mlx_destroy_image(game->mlx, game->imgData->frame);
+		game->imgData->frame = NULL;
 	}
 }

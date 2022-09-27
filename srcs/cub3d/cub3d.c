@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:43 by adouib            #+#    #+#             */
-/*   Updated: 2022/09/26 23:43:45 by adouib           ###   ########.fr       */
+/*   Updated: 2022/09/27 16:11:48 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int keyPressed(int keycode, t_game *game)
 	deleteImage(game);
 	mlx_clear_window(game->mlx, game->win);
 	game->imgData = createImage(game); //!!!!
-	draw(game); // !! will get removed and used the render function
+	draw(game); // !! will remove and use the render function
 	return (0);
 }
 

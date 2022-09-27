@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:08:14 by adouib            #+#    #+#             */
-/*   Updated: 2022/09/26 23:33:25 by adouib           ###   ########.fr       */
+/*   Updated: 2022/09/27 16:16:28 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,6 @@ char **free_map(char **token)
 	}
 	free(token);
 	return (NULL);
-}
-
-void deleteImage(t_game *game)
-{
-	if (game->imgData->frame)
-	{
-		mlx_destroy_image(game->mlx, game->imgData->frame);
-		game->imgData->frame = NULL;
-	}
 }
 
 void quit(t_game *game, char *s)
@@ -68,4 +59,13 @@ int red_cross_quit(t_game *game)
 		free(game->mlx);
 	exit(0);
 	return (0);
+}
+
+void exit_if_null(void *p, char *message)
+{
+	if (!p)
+	{
+		perror(message);
+		exit(EXIT_FAILURE);
+	}
 }

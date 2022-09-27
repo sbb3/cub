@@ -1,32 +1,32 @@
 #include "../../incl/cub3d.h"
 
+int distance(int startX, int startY, int endX, int endY)
+{
+	return (sqrt(pow((abs(endX - startX)), 2) + pow((abs(endY - startY)), 2)));
+}
+
 void checkRayDirection(t_game *game)
 {
-	if (game->rayAngle >= 0 && game->rayAngle < 180)
+	if (game->rayAngle >= 0 && game->rayAngle <= 180)
 	{
 		game->rayUp = 1;
 		game->rayDown = 0;
 	}
-	else if (game->rayAngle >= 180 && game->rayAngle < 360)
+	else if (game->rayAngle > 180 && game->rayAngle <= 360)
 	{
 		game->rayDown = 1;
 		game->rayUp = 0;
 	}
-	if (game->rayAngle > 90 && game->rayAngle < 270)
+	if (game->rayAngle >= 90 && game->rayAngle <= 270)
 	{
 		game->rayLeft = 1;
 		game->rayRight = 0;
 	}
-	else if ((game->rayAngle > 0 && game->rayAngle < 90) || (game->rayAngle > 270 && game->rayAngle < 360))
+	else if ((game->rayAngle >= 0 && game->rayAngle < 90) || (game->rayAngle > 270 && game->rayAngle <= 360))
 	{
 		game->rayRight = 1;
 		game->rayLeft = 0;
 	}
-}
-
-int distance(int startX, int startY, int endX, int endY)
-{
-	return (sqrt(pow((abs(endX - startX)), 2) + pow((abs(endY - startY)), 2)));
 }
 
 void edit_pixel(char *frame_addr, int sLine, int bpp, int x, int y, int color)
@@ -35,20 +35,6 @@ void edit_pixel(char *frame_addr, int sLine, int bpp, int x, int y, int color)
 	*(int *)color_pixel = color;
 }
 
-t_img_data *createImage(t_game *game)
-{
-	t_img_data *imgData;
-
-	imgData = ft_calloc(1, sizeof(t_img_data));
-	if (!imgData)
-		exit_if_null(imgData, "Could not create an image");
-	imgData->frame = mlx_new_image(game->mlx, game->windowWidth, game->windowHeight);
-	imgData->frame_addr = mlx_get_data_addr(imgData->frame, &imgData->bpp, &imgData->sLine, &imgData->endn);
-
-	return imgData;
-}
-
-// void	deleteImage(t_game *game) {}
 
 void drawLine(t_game *game, int startX, int startY, int endX, int endY, int color)
 {
@@ -68,78 +54,95 @@ void drawLine(t_game *game, int startX, int startY, int endX, int endY, int colo
 
 void checkHorizontalCollision(t_game *game)
 {
-	int wallHit = 0;
-	double yintersec = 0, xintersec = 0, ystep = 0, xstep = 0; // deltaY  // deltaX | // first check if these coordinates are at wall, else increment them with ystep and xstep till u find a wall
+	init_vars_to_zero(game);
 	game->rayAngleX = cos(degreeToRadian(game->rayAngle));
 	game->rayAngleY = -sin(degreeToRadian(game->rayAngle));
 	checkRayDirection(game);
-	yintersec = (game->posY / SQUARE_SIZE) * SQUARE_SIZE; // floor it
+	game->yinter = (game->posY / SQUARE_SIZE) * SQUARE_SIZE; // floor it
 	if (game->rayDown)
-		yintersec += SQUARE_SIZE;
-	xintersec = (game->posX + ((game->posY - yintersec) / tan(degreeToRadian(game->rayAngle)))); // absolute (yinter - posY)
-	ystep = SQUARE_SIZE;
+		game->yinter += SQUARE_SIZE;
+	if (tan(degreeToRadian(game->rayAngle) == 0)) // !!!!1 inf or nan
+		game->rayAngle -= degreeToRadian(1);
+	game->xinter = (game->posX + ((game->posY - game->yinter) / tan(degreeToRadian(game->rayAngle)))); // absolute (yinter - posY)
+	game->ystep = SQUARE_SIZE;
 	if (game->rayUp)
-		ystep *= -1;
-	xstep = SQUARE_SIZE / tan(degreeToRadian(game->rayAngle));
-	if (game->rayLeft && xstep > 0)
-		xstep *= -1; // xstep on left down side will be positive so we turn it to negative same as the left up side, is already negative
-	if (game->rayRight && xstep < 0)
-		xstep *= -1; // xstep on right down side will be negative so we turn it to positive same as the right up side, is already positive
+		game->ystep *= -1;
+	game->xstep = SQUARE_SIZE / tan(degreeToRadian(game->rayAngle));
+	if (game->rayLeft && game->xstep > 0)
+		game->xstep *= -1; // xstep on left down side will be positive so we turn it to negative same as the left up side, is already negative
+	if (game->rayRight && game->xstep < 0)
+		game->xstep *= -1; // xstep on right down side will be negative so we turn it to positive same as the right up side, is already positive
 	if (game->rayUp)
-		yintersec--; // substract a pixel to check if nextY is in the wall
-	while (!wallHit) // checking Horizontal intersection – the y-axis
+		game->yinter--; // substract a pixel to check if nextY is in the wall
+	game->wallHit = 0;
+	while (!game->wallHit) // checking Horizontal intersection – the y-axis
 	{
-		if (yintersec < 0 || yintersec >= game->windowHeight)
+		if(out_of_container_borders(game))
 			break;
-		if (xintersec < 0 || xintersec > game->windowWidth)
+		// drawRect(game, (int) yinter, (int) xinter, 5, 5, 0xcfc08);
+		if (game->map[(int)floor(game->yinter / SQUARE_SIZE)][(int)floor(game->xinter / SQUARE_SIZE)] == '1')
 			break;
-		// drawRect(game, (int) yintersec, (int) xintersec, 5, 5, 0xcfc08);
-		if (game->map[(int)floor(yintersec / SQUARE_SIZE)][(int)floor(xintersec / SQUARE_SIZE)] == '1')
-			break;
-		yintersec += ystep;
-		xintersec += xstep;
+		game->yinter += game->ystep;
+		game->xinter += game->xstep;
 	}
-	game->horizontalWallHitY = yintersec;
-	game->horizontalWallHitX = xintersec;
+	game->horizontalWallHitY = game->yinter;
+	game->horizontalWallHitX = game->xinter;
 }
 
 void checkVerticalCollision(t_game *game)
 {
-	int wallHit = 0;
-	double yintersec = 0, xintersec = 0, ystep = 0, xstep = 0; // deltaY  // deltaX | // first check if these coordinates are at wall, else increment them with ystep and xstep till u find a wall
+	init_vars_to_zero(game);
 
 	game->rayAngleX = cos(degreeToRadian(game->rayAngle));
 	game->rayAngleY = -sin(degreeToRadian(game->rayAngle));
 	checkRayDirection(game);
-	xintersec = (game->posX / SQUARE_SIZE) * SQUARE_SIZE; // floor it
+	game->xinter = (game->posX / SQUARE_SIZE) * SQUARE_SIZE; // floor it
 	if (game->rayRight)
-		xintersec += SQUARE_SIZE;
-	yintersec = (game->posY + ((game->posX - xintersec) * tan(degreeToRadian(game->rayAngle))));
-	xstep = SQUARE_SIZE;
+		game->xinter += SQUARE_SIZE;
+	game->yinter = (game->posY + ((game->posX - game->xinter) * tan(degreeToRadian(game->rayAngle))));
+	game->xstep = SQUARE_SIZE;
 	if (game->rayLeft)
-		xstep *= -1;
-	ystep = SQUARE_SIZE * tan(degreeToRadian(game->rayAngle));
-	if (game->rayUp && ystep > 0)
-		ystep *= -1;
-	if (game->rayDown && ystep < 0)
-		ystep *= -1;
+		game->xstep *= -1;
+	game->ystep = SQUARE_SIZE * tan(degreeToRadian(game->rayAngle));
+	if (game->rayUp && game->ystep > 0)
+		game->ystep *= -1;
+	if (game->rayDown && game->ystep < 0)
+		game->ystep *= -1;
 	if (game->rayLeft)
-		xintersec--;
-	while (!wallHit) // checking Horizontal intersection – the y-axis
+		game->xinter--;
+	game->wallHit = 0;
+	while (!game->wallHit) // checking Horizontal intersection – the y-axis
 	{
-		if (yintersec < 0 || yintersec >= game->windowHeight)
+		if(out_of_container_borders(game))
 			break;
-		if (xintersec < 0 || xintersec > game->windowWidth)
+		// drawRect(game, (int) yinter, (int) xinter, 5, 5, 0xff3399);
+		if (game->map[(int)floor(game->yinter / SQUARE_SIZE)][(int)floor(game->xinter / SQUARE_SIZE)] == '1')
 			break;
-		// drawRect(game, (int) yintersec, (int) xintersec, 5, 5, 0xff3399);
-		if (game->map[(int)floor(yintersec / SQUARE_SIZE)][(int)floor(xintersec / SQUARE_SIZE)] == '1')
-			break;
-		xintersec += xstep;
-		yintersec += ystep;
+		game->xinter += game->xstep;
+		game->yinter += game->ystep;
 	}
-	game->verticalWallHitY = yintersec;
-	game->verticalWallHitX = xintersec;
+	game->verticalWallHitY = game->yinter;
+	game->verticalWallHitX = game->xinter;
 }
+
+void	init_vars_to_zero(t_game *game)
+{
+	// deltaY  // deltaX | // first check if these coordinates are at wall, else increment them with ystep and xstep till u find a wall
+	game->yinter = 0;
+	game->xinter = 0;
+	game->ystep = 0;
+	game->xstep = 0;
+}
+
+int	out_of_container_borders(t_game *game)
+{
+	if (game->yinter < 0 || game->yinter >= game->windowHeight)
+		return 1;
+	if (game->xinter < 0 || game->xinter > game->windowWidth)
+		return 1;
+	return 0;
+}
+
 
 void rayCasting(t_game *game)
 {
@@ -171,7 +174,7 @@ void rayCasting(t_game *game)
 		}
 
 		drawLine(game, game->posX, game->posY, (int)wallHitX, (int)wallHitY, 0xcfc08);
-		game->rayAngle += game->rayAngleIncrement; // needed for drawing next ray // if it goes over 360, will reset to 0
+		game->rayAngle += game->rayAngleIncrement; // needed for drawing next ray // if it goes over 360, will reset to 0 + rayAngle
 		if (game->rayAngle > 360)
 			game->rayAngle = 360 - game->rayAngle;
 		// correct_angle(); make this

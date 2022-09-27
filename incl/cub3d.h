@@ -79,23 +79,26 @@ typedef struct s_game
 	double movementSpeed;
 	double rotation;
 
-	void *frame_img;
 
+	double rayAngle;
+	double rayAngleY;
+	double rayAngleX;
+	double rayAngleIncrement;
 	int rayUp;
 	int rayDown;
 	int rayLeft;
 	int rayRight;
 
-	double rayAngle;
-	double rayAngleIncrement;
-
-	double rayAngleY;
-	double rayAngleX;
-
+	int wallHit;
 	double horizontalWallHitX;
 	double horizontalWallHitY;
 	double verticalWallHitX;
 	double verticalWallHitY;
+
+	double xinter;
+	double yinter;
+	double xstep;
+	double ystep;
 
 } t_game;
 
@@ -149,5 +152,7 @@ void checkVerticalCollision(t_game *game);
 t_img_data *createImage(t_game *game);
 void mlxInit(t_game *game);
 void draw(t_game *game);
+int	out_of_container_borders(t_game *game);
+void	init_vars_to_zero(t_game *game);
 
 #endif
