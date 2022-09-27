@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:43 by adouib            #+#    #+#             */
-/*   Updated: 2022/09/27 16:11:48 by adouib           ###   ########.fr       */
+/*   Updated: 2022/09/28 00:02:04 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int keyPressed(int keycode, t_game *game)
 	return (0);
 }
 
-void drawRect(t_game *game, int startY, int startX, int sizeY, int sizeX, int color)
+void drawRect(t_game *game, int startX, int startY , int sizeX, int sizeY, int color)
 {
 	int y = 0;
 	int x;
@@ -85,7 +85,11 @@ void drawRect(t_game *game, int startY, int startX, int sizeY, int sizeX, int co
 		y++;
 	}
 }
-
+void	minimap(t_game *game)
+{
+	drawWalls(game);
+	drawRect(game, (game->posX * game->minimapWidth) / game->windowWidth, (game->posY * game->minimapHeight) / game->windowHeight, 5, 5, 0xE4D00A);
+}
 void drawWalls(t_game *game)
 {
 	int y = 0;
@@ -96,10 +100,10 @@ void drawWalls(t_game *game)
 		while (game->map[y][x])
 		{
 			if (game->map[y][x] == '1')
-				drawRect(game, y * SQUARE_SIZE, x * SQUARE_SIZE, SQUARE_SIZE - 1, SQUARE_SIZE - 1, 0x2da9d2);
+				drawRect(game, x * MINIMAP_SIZE, y * MINIMAP_SIZE, MINIMAP_SIZE - 1, MINIMAP_SIZE - 1, 0x2da9d2);
 			else
 
-				drawRect(game, y * SQUARE_SIZE, x * SQUARE_SIZE, SQUARE_SIZE - 1, SQUARE_SIZE - 1, 0x1f2e2e);
+				drawRect(game, x * MINIMAP_SIZE, y * MINIMAP_SIZE, MINIMAP_SIZE - 1, MINIMAP_SIZE - 1, 0x1f2e2e);
 			x++;
 		}
 		y++;
@@ -117,9 +121,11 @@ void mlxInit(t_game *game)
 	game->imgData = createImage(game);
 }
 
+
+
 void draw(t_game *game)
 {
-	drawWalls(game);
+	minimap(game);
 	rayCasting(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->imgData->frame, 0, 0);
 }

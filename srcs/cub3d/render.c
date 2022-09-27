@@ -146,7 +146,8 @@ int	out_of_container_borders(t_game *game)
 
 void rayCasting(t_game *game)
 {
-	system("clear");
+	int actualDistanceToWall;
+	// system("clear");
 	double wallHitY = 0, wallHitX = 0; // deltaY  // deltaX | // first check if these coordinates are at wall, else increment them with ystep and xstep till u find a wall
 	int horizontalDistance = 0, verticalDistance = 0;
 	game->rayAngle = (game->playerAngle - game->halfFov) % 360; // needed for drawing next ray // if it goes over 360, will reset to 0
@@ -166,14 +167,23 @@ void rayCasting(t_game *game)
 		{
 			wallHitX = game->horizontalWallHitX;
 			wallHitY = game->horizontalWallHitY;
+			actualDistanceToWall = horizontalDistance;
 		}
 		else
 		{
 			wallHitX = game->verticalWallHitX;
 			wallHitY = game->verticalWallHitY;
+			actualDistanceToWall = verticalDistance;
+
 		}
 
-		drawLine(game, game->posX, game->posY, (int)wallHitX, (int)wallHitY, 0xcfc08);
+		game->distance_to_plane_wall = (game->windowWidth / 2) / tan(degreeToRadian(game->halfFov));
+		game->plane_wall_height = (SQUARE_HEIGHT * game->distance_to_plane_wall) / actualDistanceToWall;
+
+		// drawLine(game, game->posX, game->posY, (int)wallHitX, (int)wallHitY, 0xcfc08);
+		drawRect(game, i, (game->windowHeight/2) - (game->plane_wall_height/2), 1, game->plane_wall_height, 0xffffff);
+
+
 		game->rayAngle += game->rayAngleIncrement; // needed for drawing next ray // if it goes over 360, will reset to 0 + rayAngle
 		if (game->rayAngle > 360)
 			game->rayAngle = 360 - game->rayAngle;

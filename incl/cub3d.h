@@ -33,6 +33,7 @@
 #define COLOR 0x0000FF
 
 #define SQUARE_SIZE 48
+#define MINIMAP_SIZE 10
 
 #define SQUARE_WIDTH 48
 #define SQUARE_HEIGHT 48
@@ -62,8 +63,8 @@ typedef struct s_game
 	char **map;
 	char *line;
 	char *backup;
-	int mapWidthPx;
-	int mapHeightPx;
+	int mapWidth;
+	int mapHeight;
 	int windowWidth;
 	int windowHeight;
 	int halfWidth;
@@ -100,6 +101,16 @@ typedef struct s_game
 	double xstep;
 	double ystep;
 
+
+	double plane_wall_height;
+	double distance_to_plane_wall;
+	int rays_count;
+
+
+	int minimapWidth;
+	int minimapHeight;
+
+	// int 
 } t_game;
 
 // typedef struct s_player {
@@ -132,7 +143,7 @@ void quit(t_game *game, char *s);
 void deleteImage(t_game *game);
 int red_cross_quit(t_game *game);
 char **free_map(char **token);
-void drawWall(t_game *game);
+void drawWalls(t_game *game);
 void edit_pixel(char *frame_addr, int size_line, int bits_per_pixel, int x, int y, int color);
 int distance(int startX, int startY, int endX, int endY);
 
@@ -142,7 +153,7 @@ t_game *init(const char *av[]);
 void drawLinePlayer(t_game *game, int startY, int startX, int color);
 void drawLine(t_game *game, int startX, int startY, int endX, int endY, int color);
 
-void drawRect(t_game *game, int startY, int startX, int sizeY, int sizeX, int color);
+void drawRect(t_game *game, int startX, int startY , int sizeX, int sizeY, int color);
 void rayCasting(t_game *game);
 void checkRayDirection(t_game *game);
 void fix_angle(t_game *game, char c);
@@ -154,5 +165,6 @@ void mlxInit(t_game *game);
 void draw(t_game *game);
 int	out_of_container_borders(t_game *game);
 void	init_vars_to_zero(t_game *game);
+void	minimap(t_game *game);
 
 #endif
