@@ -25,10 +25,10 @@
 #define ESC_KEY 53
 #define W_KEY 13
 #define S_KEY 1
-#define A_KEY 0
-#define D_KEY 2
-#define LEFT_KEY 123
-#define RIGHT_KEY 124
+#define A_KEY 2
+#define D_KEY 0
+#define LEFT_KEY 124
+#define RIGHT_KEY 123
 
 #define COLOR 0x0000FF
 
@@ -110,7 +110,12 @@ typedef struct s_game
 	int minimapWidth;
 	int minimapHeight;
 
-	// int 
+
+	double scale_factor_width;
+	double scale_factor_height;
+
+
+	// int
 } t_game;
 
 // typedef struct s_player {
@@ -166,5 +171,15 @@ void draw(t_game *game);
 int	out_of_container_borders(t_game *game);
 void	init_vars_to_zero(t_game *game);
 void	minimap(t_game *game);
+int	scaleDownWidth(t_game *game, int coordinateX);
+int	scaleDownHeight(t_game *game, int coordinateY);
+
+
+
+
+void	draw_test_minimap(t_game *game);
+void	test_minimap(t_game *game);
+void drawRectMinimap(char *frame_addr,int bpp, int sLine, int startX, int startY , int sizeX, int sizeY, int color);
+
 
 #endif
