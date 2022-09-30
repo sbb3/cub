@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:56 by adouib            #+#    #+#             */
-/*   Updated: 2022/09/27 23:56:25 by adouib           ###   ########.fr       */
+/*   Updated: 2022/09/30 21:46:23 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,12 @@ t_game *init(const char *av[])
 	game->windowHeight = SQUARE_HEIGHT * game->mapHeight;
 	game->halfWidth = game->windowWidth / 2;
 	game->halfHeight = game->windowHeight / 2;
-	game->movementSpeed = 10;
+	game->movementSpeed = 5;
 	game->rotation = 2;
 	game->posX = game->windowWidth / 2; // init to the starting location on the map
 	game->posY = game->windowHeight / 2;
+
+
 	// game->miniX = game->minimapWidth;
 	// game->miniY = game->minimapHeight;
 	game->playerAngle = 90;

@@ -29,13 +29,6 @@ void checkRayDirection(t_game *game)
 	}
 }
 
-void edit_pixel(char *frame_addr, int sLine, int bpp, int x, int y, int color)
-{
-	char *color_pixel = frame_addr + ((y * sLine) + (x * (bpp / 8)));
-	*(int *)color_pixel = color;
-}
-
-
 void drawLine(t_game *game, int startX, int startY, int endX, int endY, int color)
 {
 	// pythaghors equation
@@ -85,6 +78,8 @@ void checkHorizontalCollision(t_game *game)
 		game->yinter += game->ystep;
 		game->xinter += game->xstep;
 	}
+	// if (game->rayUp)
+	// 	game->yinter++;
 	game->horizontalWallHitY = game->yinter;
 	game->horizontalWallHitX = game->xinter;
 }
@@ -121,6 +116,9 @@ void checkVerticalCollision(t_game *game)
 		game->xinter += game->xstep;
 		game->yinter += game->ystep;
 	}
+	// if (game->rayLeft)
+	// 	game->xinter++;
+
 	game->verticalWallHitY = game->yinter;
 	game->verticalWallHitX = game->xinter;
 }
@@ -144,6 +142,45 @@ int	out_of_container_borders(t_game *game)
 }
 
 
+void drawRect(t_game *game, int startX, int startY , int sizeX, int sizeY, int color)
+{
+	int y = 0;
+	int x;
+	while (y < sizeY)
+	{
+		x = 0;
+		while (x < sizeX)
+		{
+			edit_pixel(game->imgData->frame_addr, game->imgData->sLine, game->imgData->bpp, x + startX, y + startY, color);
+			x++;
+		}
+		y++;
+	}
+}
+
+void	old(t_game *game)
+{
+
+	double rayX = game->posX;
+	double rayY = game->posY;
+	int floorY;
+	int floorX;
+	int wallHit = 0;
+	while (!wallHit)
+	{
+		rayX += game->dirX;
+		rayY += game->dirY;
+		floorY = floor(rayY);
+		floorX = floor(rayX);
+
+		if (game->map[floorY / SQUARE_SIZE][floorX / SQUARE_SIZE] == '1')
+			break;
+	}
+	game->wallHitX = floorX;
+	game->wallHitY = floorY;
+}
+
+
 void rayCasting(t_game *game)
 {
 	int actualDistanceToWall;
@@ -154,48 +191,53 @@ void rayCasting(t_game *game)
 	if (game->rayAngle < 0)
 		game->rayAngle = 360 + game->rayAngle;
 
-	int i = -1;
-	while (++i < game->windowWidth)
+	game->distance_to_plane_wall = (game->windowHeight / 2) / tan(degreeToRadian(game->halfFov));
+
+	int y;
+	int coorectDistance;
+	int x = -1;
+	while (++x < game->windowWidth)
 	{
 		checkHorizontalCollision(game);
 		checkVerticalCollision(game);
 		verticalDistance = distance(game->posX, game->posY, game->verticalWallHitX, game->verticalWallHitY);
 		horizontalDistance = distance(game->posX, game->posY, game->horizontalWallHitX, game->horizontalWallHitY);
-
-
 		if (horizontalDistance < verticalDistance)
-		{
-			wallHitX = game->horizontalWallHitX;
-			wallHitY = game->horizontalWallHitY;
 			actualDistanceToWall = horizontalDistance;
-		}
 		else
-		{
-			wallHitX = game->verticalWallHitX;
-			wallHitY = game->verticalWallHitY;
 			actualDistanceToWall = verticalDistance;
 
+			// !!!!!fishe eye
+		coorectDistance = actualDistanceToWall * (cos(degreeToRadian(game->rayAngle - game->playerAngle)));
+			// !!!!! distance to plane wall
+		// game->plane_wall_height = (double) (SQUARE_HEIGHT * game->distance_to_plane_wall) / coorectDistance;
+		game->plane_wall_height = ((double)SQUARE_HEIGHT / coorectDistance) * game->distance_to_plane_wall ;
+		if (game->plane_wall_height > game->windowHeight) {
+			game->plane_wall_height = game->windowHeight;
 		}
+		y = (game->windowHeight/2) - (game->plane_wall_height/2); // wallHeight drawing start postion on the y-axis
 
-		game->distance_to_plane_wall = (game->windowWidth / 2) / tan(degreeToRadian(game->halfFov));
-		game->plane_wall_height = (SQUARE_HEIGHT * game->distance_to_plane_wall) / actualDistanceToWall;
+		printf("wH/2 : %d\n", game->windowHeight/2);
+		printf("pwH/2 : %d\n", game->plane_wall_height/2);
+		printf("distance : %d\n", coorectDistance);
+		printf("y : %d\n", y);
+		printf("distance pwall : %d\n", game->distance_to_plane_wall);
 
-		// drawLine(game, game->posX, game->posY, (int)wallHitX, (int)wallHitY, 0xcfc08);
-		drawRect(game, i, (game->windowHeight/2) - (game->plane_wall_height/2), 1, game->plane_wall_height, 0xffffff);
-
+		// printf("-----> : %d\n", y);
+		drawRect(game, x, y, 1, game->plane_wall_height, 0xffffff);
 
 		game->rayAngle += game->rayAngleIncrement; // needed for drawing next ray // if it goes over 360, will reset to 0 + rayAngle
 		if (game->rayAngle > 360)
 			game->rayAngle = 360 - game->rayAngle;
 		// correct_angle(); make this
 	}
+
 }
 
 int render(t_game *game)
 {
-	// drawWalls(game);
-	// rayCasting(game);
-	// mlx_put_image_to_window(game->mlx, game->win, game->imgData->frame, 0, 0);
+		// draw(game); // !! will get removed and used the render function
+
 
 	return 0;
 }

@@ -72,9 +72,17 @@ t_img_data *createImage(t_game *game)
 
 void deleteImage(t_game *game)
 {
-	if (game->imgData->frame)
+	// if (game->imgData->frame)
+	// {
+	// 	mlx_destroy_image(game->mlx, game->imgData->frame);
+	// 	game->imgData->frame = NULL;
+	// }
+	// if (game->imgData->frame_addr)
+	// {
+	// 	free(game->imgData->frame_addr);
+	// }
+	if (game->imgData)
 	{
-		mlx_destroy_image(game->mlx, game->imgData->frame);
-		game->imgData->frame = NULL;
+		free(game->imgData);
 	}
 }

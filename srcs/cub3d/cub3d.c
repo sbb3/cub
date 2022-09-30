@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:43 by adouib            #+#    #+#             */
-/*   Updated: 2022/09/28 22:06:16 by adouib           ###   ########.fr       */
+/*   Updated: 2022/09/30 21:33:10 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int keyPressed(int keycode, t_game *game)
 			game->posX += game->dirX * game->movementSpeed;
 			game->posY += game->dirY * game->movementSpeed;
 		}
+
 	}
 	if (keycode == S_KEY)
 	{
@@ -66,24 +67,20 @@ int keyPressed(int keycode, t_game *game)
 	deleteImage(game);
 	mlx_clear_window(game->mlx, game->win);
 	game->imgData = createImage(game); //!!!!
+	// system("clear");
+
+	// printf("%d\n", game->posX);
+	// printf("%d\n", game->posY);
+	// printf("%lf\n", game->dirX);
+	// printf("%lf\n", game->dirY);
 	draw(game); // !! will remove and use the render function
 	return (0);
 }
 
-void drawRect(t_game *game, int startX, int startY , int sizeX, int sizeY, int color)
+void edit_pixel(char *frame_addr, int sLine, int bpp, int x, int y, int color)
 {
-	int y = 0;
-	int x;
-	while (y < sizeY)
-	{
-		x = 0;
-		while (x < sizeX)
-		{
-			edit_pixel(game->imgData->frame_addr, game->imgData->sLine, game->imgData->bpp, x + startX, y + startY, color);
-			x++;
-		}
-		y++;
-	}
+	char *color_pixel = frame_addr + ((y * sLine) + (x * (bpp / 8)));
+	*(unsigned int *)color_pixel = color;
 }
 
 int	scaleDownHeight(t_game *game, int coordinateY)
@@ -103,81 +100,6 @@ void	minimap(t_game *game)
 {
 	drawWalls(game);
 	drawRect(game, scaleDownWidth(game, game->posX), scaleDownHeight(game, game->posY), 5, 5, 0xE4D00A);
-}
-
-
-
-
-
-
-
-void drawRectMinimap(char *frame_addr,int bpp, int sLine, int startX, int startY , int sizeX, int sizeY, int color)
-{
-	int y = 0;
-	int x;
-	while (y < sizeY)
-	{
-		x = 0;
-		while (x < sizeX)
-		{
-			edit_pixel(frame_addr, sLine, bpp, x + startX, y + startY, color);
-			x++;
-		}
-		y++;
-	}
-}
-void	draw_test_minimap(t_game *game)
-{
-	int bpp;
-	int sLine;
-	int endn;
-	char *frame_addr;
-	void *frame;
-
-	// int r =
-	frame = mlx_new_image(game->mlx, game->minimapWidth, game->windowHeight);
-	frame_addr = mlx_get_data_addr(frame, &bpp, &sLine, &endn);
-
-	int rW;
-	// if (game->posX > game->minimapWidth/2)
-	// 	rW = game->minimapWidth - ;
-	// int fromX = scaleDownWidth(game, game->posX - range);
-	// int fromY = scaleDownHeight(game, game->posY - range);
-
-	// int toX = scaleDownWidth(game, game->posX + range);
-	// int toY = scaleDownHeight(game, game->posY + range);
-
-	// // int x = fromX;
-	// int x = 0;
-	// int y = 0;
-
-	// int y = 0;
-	// int x;
-	// while (game->map[y])
-	// {
-	// 	x = 0;
-	// 	while (game->map[y][x])
-	// 	{
-	// 		if (game->map[y][x] == '1')
-	// 			drawRect(game, x * MINIMAP_SIZE, y * MINIMAP_SIZE, MINIMAP_SIZE, MINIMAP_SIZE, 0x2da9d2);
-	// 		else
-
-	// 			drawRect(game, x * MINIMAP_SIZE, y * MINIMAP_SIZE, MINIMAP_SIZE, MINIMAP_SIZE, 0x1f2e2e);
-	// 		x++;
-	// 	}
-	// 	y++;
-	// }
-
-	// drawRectMinimap(frame_addr, bpp, sLine, scaleDownWidth(game, game->posX), scaleDownHeight(game, game->posY), 5, 5, 0xE4D00A);
-	// mlx_put_image_to_window(game->mlx, game->win, frame, 0, 0);
-
-}
-
-void	test_minimap(t_game *game)
-{
-	draw_test_minimap(game);
-
-
 }
 
 void drawWalls(t_game *game)
@@ -231,6 +153,7 @@ int main(int ac, const char *av[])
 	// parser(av, game);
 	mlxInit(game);
 	draw(game); // !! will get removed and used the render function
+	// printf("%d\n", game->height);
 	// mlx_loop_hook(game->mlx, render, game); // infinite loop -> drawing
 	mlx_hook(game->win, 2, 0L, keyPressed, game);
 	mlx_hook(game->win, 17, 0L, red_cross_quit, game);

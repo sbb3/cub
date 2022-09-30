@@ -102,14 +102,16 @@ typedef struct s_game
 	double ystep;
 
 
-	double plane_wall_height;
-	double distance_to_plane_wall;
+	int plane_wall_height;
+	int distance_to_plane_wall;
 	int rays_count;
 
 
 	int minimapWidth;
 	int minimapHeight;
 
+	int wallHitX;
+	int wallHitY;
 
 	double scale_factor_width;
 	double scale_factor_height;
@@ -121,6 +123,7 @@ typedef struct s_game
 // typedef struct s_player {
 
 // }
+void	old(t_game *game);
 
 char *get_next_line(int fd);
 char *ft_strjoin(char *backup, char *file_buffer);
