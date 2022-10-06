@@ -70,7 +70,7 @@ void checkHorizontalCollision(t_game *game)
 	game->wallHit = 0;
 	while (!game->wallHit) // checking Horizontal intersection – the y-axis
 	{
-		if(out_of_container_borders(game))
+		if (out_of_container_borders(game))
 			break;
 		// drawRect(game, (int) yinter, (int) xinter, 5, 5, 0xcfc08);
 		if (game->map[(int)floor(game->yinter / SQUARE_SIZE)][(int)floor(game->xinter / SQUARE_SIZE)] == '1')
@@ -108,7 +108,7 @@ void checkVerticalCollision(t_game *game)
 	game->wallHit = 0;
 	while (!game->wallHit) // checking Horizontal intersection – the y-axis
 	{
-		if(out_of_container_borders(game))
+		if (out_of_container_borders(game))
 			break;
 		// drawRect(game, (int) yinter, (int) xinter, 5, 5, 0xff3399);
 		if (game->map[(int)floor(game->yinter / SQUARE_SIZE)][(int)floor(game->xinter / SQUARE_SIZE)] == '1')
@@ -123,7 +123,7 @@ void checkVerticalCollision(t_game *game)
 	game->verticalWallHitX = game->xinter;
 }
 
-void	init_vars_to_zero(t_game *game)
+void init_vars_to_zero(t_game *game)
 {
 	// deltaY  // deltaX | // first check if these coordinates are at wall, else increment them with ystep and xstep till u find a wall
 	game->yinter = 0;
@@ -132,7 +132,7 @@ void	init_vars_to_zero(t_game *game)
 	game->xstep = 0;
 }
 
-int	out_of_container_borders(t_game *game)
+int out_of_container_borders(t_game *game)
 {
 	if (game->yinter < 0 || game->yinter >= game->windowHeight)
 		return 1;
@@ -141,24 +141,7 @@ int	out_of_container_borders(t_game *game)
 	return 0;
 }
 
-
-void drawRect(t_game *game, int startX, int startY , int sizeX, int sizeY, int color)
-{
-	int y = 0;
-	int x;
-	while (y < sizeY)
-	{
-		x = 0;
-		while (x < sizeX)
-		{
-			edit_pixel(game->imgData->frame_addr, game->imgData->sLine, game->imgData->bpp, x + startX, y + startY, color);
-			x++;
-		}
-		y++;
-	}
-}
-
-void	old(t_game *game)
+void old(t_game *game)
 {
 
 	double rayX = game->posX;
@@ -180,6 +163,21 @@ void	old(t_game *game)
 	game->wallHitY = floorY;
 }
 
+void drawRect(t_game *game, int startX, int startY, int sizeX, int sizeY, int color)
+{
+	int y = 0;
+	int x;
+	while (y < sizeY)
+	{
+		x = 0;
+		while (x < sizeX)
+		{
+			edit_pixel(game->imgData->frame_addr, game->imgData->sLine, game->imgData->bpp, x + startX, y + startY, color);
+			x++;
+		}
+		y++;
+	}
+}
 
 void rayCasting(t_game *game)
 {
@@ -191,9 +189,12 @@ void rayCasting(t_game *game)
 	if (game->rayAngle < 0)
 		game->rayAngle = 360 + game->rayAngle;
 
-	game->distance_to_plane_wall = (game->windowHeight / 2) / tan(degreeToRadian(game->halfFov));
+	game->distanceToProjectedWall = (game->windowHeight / 2) / tan(degreeToRadian(game->halfFov));
 
-	int y;
+	int wallTopPixel;
+	int wallBottomPixel;
+	int floor;
+	int ceil;
 	int coorectDistance;
 	int x = -1;
 	while (++x < game->windowWidth)
@@ -207,37 +208,31 @@ void rayCasting(t_game *game)
 		else
 			actualDistanceToWall = verticalDistance;
 
-			// !!!!!fishe eye
+		// !!!!!fishe eye
 		coorectDistance = actualDistanceToWall * (cos(degreeToRadian(game->rayAngle - game->playerAngle)));
-			// !!!!! distance to plane wall
-		// game->plane_wall_height = (double) (SQUARE_HEIGHT * game->distance_to_plane_wall) / coorectDistance;
-		game->plane_wall_height = ((double)SQUARE_HEIGHT / coorectDistance) * game->distance_to_plane_wall ;
-		if (game->plane_wall_height > game->windowHeight) {
-			game->plane_wall_height = game->windowHeight;
-		}
-		y = (game->windowHeight/2) - (game->plane_wall_height/2); // wallHeight drawing start postion on the y-axis
 
-		printf("wH/2 : %d\n", game->windowHeight/2);
-		printf("pwH/2 : %d\n", game->plane_wall_height/2);
-		printf("distance : %d\n", coorectDistance);
-		printf("y : %d\n", y);
-		printf("distance pwall : %d\n", game->distance_to_plane_wall);
+		// !!!!! distance To Projectddd Wall
+		game->projectedWallHeight = (double)(SQUARE_HEIGHT * game->distanceToProjectedWall) / coorectDistance;
+		if (game->projectedWallHeight > game->windowHeight) game->projectedWallHeight = game->windowHeight;
 
-		// printf("-----> : %d\n", y);
-		drawRect(game, x, y, 1, game->plane_wall_height, 0xffffff);
+		wallTopPixel = (game->windowHeight / 2) - (game->projectedWallHeight / 2); // wallHeight drawing start postion on the y-axis
+		wallBottomPixel = (game->windowHeight/2) + (game->projectedWallHeight / 2);
+		floor = game->windowHeight - wallBottomPixel;
+
+		drawRect(game, x, 0, 1, wallTopPixel, 0x454745); // draw the ceil
+		drawRect(game, x, wallTopPixel, 1, game->projectedWallHeight, 0xffffff);
+		drawRect(game, x, wallBottomPixel, 1, floor, 0x808a83); // draw the floor
 
 		game->rayAngle += game->rayAngleIncrement; // needed for drawing next ray // if it goes over 360, will reset to 0 + rayAngle
 		if (game->rayAngle > 360)
 			game->rayAngle = 360 - game->rayAngle;
 		// correct_angle(); make this
 	}
-
 }
 
 int render(t_game *game)
 {
-		// draw(game); // !! will get removed and used the render function
-
+	// draw(game); // !! will get removed and used the render function
 
 	return 0;
 }

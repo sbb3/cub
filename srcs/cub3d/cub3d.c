@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:43 by adouib            #+#    #+#             */
-/*   Updated: 2022/09/30 21:33:10 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/07 00:21:45 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int keyPressed(int keycode, t_game *game)
 
 void edit_pixel(char *frame_addr, int sLine, int bpp, int x, int y, int color)
 {
+	// color the pixel on the x, y coordinates
 	char *color_pixel = frame_addr + ((y * sLine) + (x * (bpp / 8)));
 	*(unsigned int *)color_pixel = color;
 }
@@ -104,6 +105,7 @@ void	minimap(t_game *game)
 
 void drawWalls(t_game *game)
 {
+	// void *img =
 	int y = 0;
 	int x;
 	while (game->map[y])
@@ -137,10 +139,21 @@ void mlxInit(t_game *game)
 
 void draw(t_game *game)
 {
+	// drawWalls(game);
 	rayCasting(game);
-	minimap(game);
+	// minimap(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->imgData->frame, 0, 0);
 	// test_minimap(game);
+
+
+		int x, y, bpp, l, e;
+	void	*img = mlx_xpm_file_to_image(game->mlx, TEXTURE, &x, &y);
+	char *frame_addr = mlx_get_data_addr(img, &bpp, &l, &e);
+	// printf("%d\n", l); 256
+	// printf("%d\n", bpp); 32
+	// printf("%d\n", e); 0
+
+	mlx_put_image_to_window(game->mlx, game->win, img, TEXTURE_WIDTH, TEXTURE_HEIGHT);
 }
 
 int main(int ac, const char *av[])
@@ -153,6 +166,7 @@ int main(int ac, const char *av[])
 	// parser(av, game);
 	mlxInit(game);
 	draw(game); // !! will get removed and used the render function
+
 	// printf("%d\n", game->height);
 	// mlx_loop_hook(game->mlx, render, game); // infinite loop -> drawing
 	mlx_hook(game->win, 2, 0L, keyPressed, game);

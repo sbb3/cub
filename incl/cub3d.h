@@ -22,6 +22,8 @@
 #include <math.h>
 #include <sys/time.h>
 
+#define TEXTURE "./images/eagle.xpm"
+
 #define ESC_KEY 53
 #define W_KEY 13
 #define S_KEY 1
@@ -32,11 +34,14 @@
 
 #define COLOR 0x0000FF
 
-#define SQUARE_SIZE 48
+#define SQUARE_SIZE 64
+#define TEXTURE_WIDTH 64
+#define TEXTURE_HEIGHT 64
+#define TEXTURES_NUMS 64
 #define MINIMAP_SIZE 10
 
-#define SQUARE_WIDTH 48
-#define SQUARE_HEIGHT 48
+#define SQUARE_WIDTH 64
+#define SQUARE_HEIGHT 64
 
 #define BUFFER_SIZE 1
 #define degreeToRadian(angleInDegree) ((angleInDegree) * (M_PI / 180))
@@ -80,7 +85,6 @@ typedef struct s_game
 	double movementSpeed;
 	double rotation;
 
-
 	double rayAngle;
 	double rayAngleY;
 	double rayAngleX;
@@ -101,11 +105,9 @@ typedef struct s_game
 	double xstep;
 	double ystep;
 
-
-	int plane_wall_height;
-	int distance_to_plane_wall;
+	int projectedWallHeight;
+	int distanceToProjectedWall;
 	int rays_count;
-
 
 	int minimapWidth;
 	int minimapHeight;
@@ -116,14 +118,13 @@ typedef struct s_game
 	double scale_factor_width;
 	double scale_factor_height;
 
-
 	// int
 } t_game;
 
 // typedef struct s_player {
 
 // }
-void	old(t_game *game);
+void old(t_game *game);
 
 char *get_next_line(int fd);
 char *ft_strjoin(char *backup, char *file_buffer);
@@ -161,7 +162,7 @@ t_game *init(const char *av[]);
 void drawLinePlayer(t_game *game, int startY, int startX, int color);
 void drawLine(t_game *game, int startX, int startY, int endX, int endY, int color);
 
-void drawRect(t_game *game, int startX, int startY , int sizeX, int sizeY, int color);
+void drawRect(t_game *game, int startX, int startY, int sizeX, int sizeY, int color);
 void rayCasting(t_game *game);
 void checkRayDirection(t_game *game);
 void fix_angle(t_game *game, char c);
@@ -171,18 +172,14 @@ void checkVerticalCollision(t_game *game);
 t_img_data *createImage(t_game *game);
 void mlxInit(t_game *game);
 void draw(t_game *game);
-int	out_of_container_borders(t_game *game);
-void	init_vars_to_zero(t_game *game);
-void	minimap(t_game *game);
-int	scaleDownWidth(t_game *game, int coordinateX);
-int	scaleDownHeight(t_game *game, int coordinateY);
+int out_of_container_borders(t_game *game);
+void init_vars_to_zero(t_game *game);
+void minimap(t_game *game);
+int scaleDownWidth(t_game *game, int coordinateX);
+int scaleDownHeight(t_game *game, int coordinateY);
 
-
-
-
-void	draw_test_minimap(t_game *game);
-void	test_minimap(t_game *game);
-void drawRectMinimap(char *frame_addr,int bpp, int sLine, int startX, int startY , int sizeX, int sizeY, int color);
-
+void draw_test_minimap(t_game *game);
+void test_minimap(t_game *game);
+void drawRectMinimap(char *frame_addr, int bpp, int sLine, int startX, int startY, int sizeX, int sizeY, int color);
 
 #endif
