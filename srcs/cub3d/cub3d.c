@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:43 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/07 00:21:45 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/07 18:18:32 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,18 +142,18 @@ void draw(t_game *game)
 	// drawWalls(game);
 	rayCasting(game);
 	// minimap(game);
-	mlx_put_image_to_window(game->mlx, game->win, game->imgData->frame, 0, 0);
 	// test_minimap(game);
 
 
-		int x, y, bpp, l, e;
-	void	*img = mlx_xpm_file_to_image(game->mlx, TEXTURE, &x, &y);
-	char *frame_addr = mlx_get_data_addr(img, &bpp, &l, &e);
-	// printf("%d\n", l); 256
-	// printf("%d\n", bpp); 32
-	// printf("%d\n", e); 0
+	// 	int x, y, bpp, l, e;
+	// void	*img = mlx_xpm_file_to_image(game->mlx, TEXTURE, &x, &y);
+	// char *frame_addr = mlx_get_data_addr(img, &bpp, &l, &e);
+	// // printf("%d\n", l); line_bytes 256 |  256/4 = 64 pixelsCount
+	// // printf("%d\n", bpp); 32
+	// // printf("%d\n", e); 0
 
-	mlx_put_image_to_window(game->mlx, game->win, img, TEXTURE_WIDTH, TEXTURE_HEIGHT);
+	// mlx_put_image_to_window(game->mlx, game->win, img, game->windowWidth/2, game->windowHeight/2);
+
 }
 
 int main(int ac, const char *av[])

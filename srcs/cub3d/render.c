@@ -228,6 +228,11 @@ void rayCasting(t_game *game)
 			game->rayAngle = 360 - game->rayAngle;
 		// correct_angle(); make this
 	}
+
+
+	mlx_put_image_to_window(game->mlx, game->win, game->imgData->frame, 0, 0);
+	
+
 }
 
 int render(t_game *game)
