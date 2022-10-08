@@ -38,7 +38,7 @@ void drawLine(t_game *game, int startX, int startY, int endX, int endY, int colo
 
 	while (pixelsCount)
 	{
-		edit_pixel(game->imgData->frame_addr, game->imgData->sLine, game->imgData->bpp, pixelX, pixelY, color);
+		edit_pixel(game->globalImgData->frame_addr, game->globalImgData->line_bytes, game->globalImgData->bpp, pixelX, pixelY, color);
 		pixelX += game->rayAngleX; // dirX = direction, default to 0, range  [ -1 < 0 < 1 ]
 		pixelY += game->rayAngleY; // dirY = direction, default to -1, range [ -1 < 0 < 1 ]
 		pixelsCount--;
@@ -159,8 +159,8 @@ void old(t_game *game)
 		if (game->map[floorY / SQUARE_SIZE][floorX / SQUARE_SIZE] == '1')
 			break;
 	}
-	game->wallHitX = floorX;
-	game->wallHitY = floorY;
+	// game->wallHitX = floorX;
+	// game->wallHitY = floorY;
 }
 
 void drawRect(t_game *game, int startX, int startY, int sizeX, int sizeY, int color)
@@ -172,7 +172,7 @@ void drawRect(t_game *game, int startX, int startY, int sizeX, int sizeY, int co
 		x = 0;
 		while (x < sizeX)
 		{
-			edit_pixel(game->imgData->frame_addr, game->imgData->sLine, game->imgData->bpp, x + startX, y + startY, color);
+			edit_pixel(game->globalImgData->frame_addr, game->globalImgData->line_bytes, game->globalImgData->bpp, x + startX, y + startY, color);
 			x++;
 		}
 		y++;
@@ -183,45 +183,79 @@ void rayCasting(t_game *game)
 {
 	int actualDistanceToWall;
 	// system("clear");
-	double wallHitY = 0, wallHitX = 0; // deltaY  // deltaX | // first check if these coordinates are at wall, else increment them with ystep and xstep till u find a wall
+	// double wallHitY = 0, wallHitX = 0; // deltaY  // deltaX | // first check if these coordinates are at wall, else increment them with ystep and xstep till u find a wall
 	int horizontalDistance = 0, verticalDistance = 0;
 	game->rayAngle = (game->playerAngle - game->halfFov) % 360; // needed for drawing next ray // if it goes over 360, will reset to 0
 	if (game->rayAngle < 0)
 		game->rayAngle = 360 + game->rayAngle;
 
 	game->distanceToProjectedWall = (game->windowHeight / 2) / tan(degreeToRadian(game->halfFov));
-
+	unsigned int color;
 	int wallTopPixel;
 	int wallBottomPixel;
 	int floor;
 	int ceil;
 	int coorectDistance;
 	int x = -1;
+
+	// textures info
+	int y, bpp, l, e, c, d, scaling_factor;
+	// void	*img = mlx_xpm_file_to_image(game->mlx, TEXTURE, &x, &y);
+	// char *frame_addr = mlx_get_data_addr(img, &bpp, &l, &e);
+
+	game->texture_data->frame = mlx_xpm_file_to_image(game->mlx, TEXTURE, &d, &c);
+	game->texture_data->frame_addr = mlx_get_data_addr(game->texture_data->frame, &game->texture_data->bpp, &game->texture_data->line_bytes, &game->texture_data->endn);
+
 	while (++x < game->windowWidth)
+	// while (++x < 64)
 	{
+
 		checkHorizontalCollision(game);
 		checkVerticalCollision(game);
 		verticalDistance = distance(game->posX, game->posY, game->verticalWallHitX, game->verticalWallHitY);
 		horizontalDistance = distance(game->posX, game->posY, game->horizontalWallHitX, game->horizontalWallHitY);
 		if (horizontalDistance < verticalDistance)
+		{
+			game->horizontalHit = 1;
+			game->wallHitX = game->horizontalWallHitX;
+			game->wallHitY = game->horizontalWallHitY;
 			actualDistanceToWall = horizontalDistance;
+		}
 		else
+		{
+			game->wallHitX = game->verticalWallHitX;
+			game->wallHitY = game->verticalWallHitY;
 			actualDistanceToWall = verticalDistance;
+		}
 
 		// !!!!!fishe eye
 		coorectDistance = actualDistanceToWall * (cos(degreeToRadian(game->rayAngle - game->playerAngle)));
 
 		// !!!!! distance To Projectddd Wall
 		game->projectedWallHeight = (double)(SQUARE_HEIGHT * game->distanceToProjectedWall) / coorectDistance;
-		if (game->projectedWallHeight > game->windowHeight) game->projectedWallHeight = game->windowHeight;
+		if (game->projectedWallHeight > game->windowHeight)
+			game->projectedWallHeight = game->windowHeight;
 
 		wallTopPixel = (game->windowHeight / 2) - (game->projectedWallHeight / 2); // wallHeight drawing start postion on the y-axis
-		wallBottomPixel = (game->windowHeight/2) + (game->projectedWallHeight / 2);
+		if (wallTopPixel < 0)
+			wallTopPixel = 0;
+		wallBottomPixel = (game->windowHeight / 2) + (game->projectedWallHeight / 2);
+		if (wallBottomPixel > game->windowHeight)
+			wallBottomPixel = game->windowHeight;
+
 		floor = game->windowHeight - wallBottomPixel;
+		if (game->horizontalHit)
+			game->textureOffsetX = game->wallHitX % SQUARE_SIZE;
+		else
+			game->textureOffsetX = game->wallHitY % SQUARE_SIZE;
 
 		drawRect(game, x, 0, 1, wallTopPixel, 0x454745); // draw the ceil
-		drawRect(game, x, wallTopPixel, 1, game->projectedWallHeight, 0xffffff);
+		// drawRect(game, x, wallTopPixel, 1, game->projectedWallHeight, 0xffffff);
 		drawRect(game, x, wallBottomPixel, 1, floor, 0x808a83); // draw the floor
+
+		// calculate the offsetY
+		game->scaling_factor = (double)TEXTURE_HEIGHT / game->projectedWallHeight; // projectedWallHeight
+		drawTexture(game, x, wallTopPixel, 1, game->projectedWallHeight, wallTopPixel);
 
 		game->rayAngle += game->rayAngleIncrement; // needed for drawing next ray // if it goes over 360, will reset to 0 + rayAngle
 		if (game->rayAngle > 360)
@@ -229,15 +263,43 @@ void rayCasting(t_game *game)
 		// correct_angle(); make this
 	}
 
-
-	mlx_put_image_to_window(game->mlx, game->win, game->imgData->frame, 0, 0);
-	
-
+	mlx_put_image_to_window(game->mlx, game->win, game->globalImgData->frame, 0, 0);
 }
 
-int render(t_game *game)
+unsigned int get_the_color(t_game *game)
 {
-	// draw(game); // !! will get removed and used the render function
-
-	return 0;
+	return *(unsigned int *)(game->texture_data->frame_addr + (game->textureOffsetY * 64) + (game->textureOffsetX ));
 }
+
+void edit(t_game *game, int x, int y, int color)
+{
+	// color the pixel on the x, y coordinates
+	char *color_pixel = game->globalImgData->frame_addr + ((y * game->globalImgData->line_bytes) + (x * (game->globalImgData->bpp / 8)));
+	*(unsigned int *)color_pixel = color;
+}
+
+void drawTexture(t_game *game, int startX, int startY, int sizeX, int sizeY, int wallTopPixel)
+{
+
+	int color;
+	int y;
+	int x;
+
+	x = -1;
+	while (++x < sizeX) // WALL_HEIGHT = projectedWallHeight
+	{
+		y = -1;
+		while (++y < sizeY) // WALLWIDTH = 1
+		{
+			game->textureOffsetY = ( y - wallTopPixel ) * game->scaling_factor;
+			color = get_the_color(game);
+			// printf("color : %d\n", color);
+			// break;
+			edit(game, x + startX, y + startY, color);
+		}
+	}
+}
+
+// printf("%d\n", l); line_bytes 256 |  256/4 = 64 pixelsCount
+// printf("%d\n", bpp); 32
+// printf("%d\n", e); 0

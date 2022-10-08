@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:56 by adouib            #+#    #+#             */
-/*   Updated: 2022/09/30 21:46:23 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/08 22:31:14 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,9 @@ t_game *init(const char *av[])
 
 	game->minimapWidth = MINIMAP_SIZE * game->mapWidth;
 	game->minimapHeight = MINIMAP_SIZE * game->mapHeight;
+
+		game->horizontalHit = 0;
+
+
 	return game;
 }

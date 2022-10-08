@@ -46,18 +46,28 @@
 #define BUFFER_SIZE 1
 #define degreeToRadian(angleInDegree) ((angleInDegree) * (M_PI / 180))
 
-typedef struct s_img_data
+typedef struct s_texture
 {
 	int bpp;
-	int sLine;
+	int line_bytes;
 	int endn;
 	char *frame_addr;
 	void *frame;
-} t_img_data;
+} t_texture;
+
+typedef struct s_global_img_data
+{
+	int bpp;
+	int line_bytes;
+	int endn;
+	char *frame_addr;
+	void *frame;
+} t_global_img_data;
 
 typedef struct s_game
 {
-	t_img_data *imgData;
+	t_global_img_data *globalImgData;
+	t_texture *texture_data;
 
 	void *mlx;
 	void *win;
@@ -117,6 +127,10 @@ typedef struct s_game
 
 	double scale_factor_width;
 	double scale_factor_height;
+	int horizontalHit;
+	double scaling_factor;
+	int textureOffsetX;
+	int textureOffsetY;
 
 	// int
 } t_game;
@@ -142,7 +156,7 @@ int ft_strrstr(const char *haystack, const char *needle, int n);
 int ft_strchr(char *s, char c);
 int ft_strlen(const char *s);
 
-int render(t_game *game);
+// int drawTexture(t_game *game);
 void draw_wall_floor(t_game *game, char c, int x, int y);
 void throw_rays(t_game *game, int y, int x);
 void draw_exit(t_game *game);
@@ -169,7 +183,7 @@ void fix_angle(t_game *game, char c);
 
 void checkHorizontalCollision(t_game *game);
 void checkVerticalCollision(t_game *game);
-t_img_data *createImage(t_game *game);
+t_global_img_data *createGlobalImage(t_game *game);
 void mlxInit(t_game *game);
 void draw(t_game *game);
 int out_of_container_borders(t_game *game);
@@ -181,5 +195,9 @@ int scaleDownHeight(t_game *game, int coordinateY);
 void draw_test_minimap(t_game *game);
 void test_minimap(t_game *game);
 void drawRectMinimap(char *frame_addr, int bpp, int sLine, int startX, int startY, int sizeX, int sizeY, int color);
+unsigned int get_the_color(t_game *game);
+void drawTexture(t_game *game, int startX, int startY, int sizeX, int sizeY, int wallTopPixel);
+t_texture *createTextureImage(t_game *game);
+void edit(t_game *game, int x, int y, int color);
 
 #endif

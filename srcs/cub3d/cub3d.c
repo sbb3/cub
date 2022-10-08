@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:43 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/07 18:18:32 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/08 23:38:42 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,16 @@ int keyPressed(int keycode, t_game *game)
 	if (keycode == W_KEY)
 	{
 		if (game->map[(int)((game->posY + game->dirY * game->movementSpeed) / SQUARE_HEIGHT)]
-			[(int)((game->posX + game->dirX * game->movementSpeed) / SQUARE_WIDTH)] == '0')
+					 [(int)((game->posX + game->dirX * game->movementSpeed) / SQUARE_WIDTH)] == '0')
 		{
 			game->posX += game->dirX * game->movementSpeed;
 			game->posY += game->dirY * game->movementSpeed;
 		}
-
 	}
 	if (keycode == S_KEY)
 	{
 		if (game->map[(int)((game->posY - game->dirY * game->movementSpeed) / SQUARE_HEIGHT)]
-			[(int)((game->posX - game->dirX * game->movementSpeed) / SQUARE_WIDTH)] == '0')
+					 [(int)((game->posX - game->dirX * game->movementSpeed) / SQUARE_WIDTH)] == '0')
 		{
 			game->posX -= game->dirX * game->movementSpeed;
 			game->posY -= game->dirY * game->movementSpeed;
@@ -66,7 +65,7 @@ int keyPressed(int keycode, t_game *game)
 	// fix the above part
 	deleteImage(game);
 	mlx_clear_window(game->mlx, game->win);
-	game->imgData = createImage(game); //!!!!
+	game->globalImgData = createGlobalImage(game); //!!!!
 	// system("clear");
 
 	// printf("%d\n", game->posX);
@@ -77,27 +76,27 @@ int keyPressed(int keycode, t_game *game)
 	return (0);
 }
 
-void edit_pixel(char *frame_addr, int sLine, int bpp, int x, int y, int color)
+void edit_pixel(char *frame_addr, int line_bytes, int bpp, int x, int y, int color)
 {
 	// color the pixel on the x, y coordinates
-	char *color_pixel = frame_addr + ((y * sLine) + (x * (bpp / 8)));
+	char *color_pixel = frame_addr + ((y * line_bytes) + (x * (bpp / 8)));
 	*(unsigned int *)color_pixel = color;
 }
 
-int	scaleDownHeight(t_game *game, int coordinateY)
+int scaleDownHeight(t_game *game, int coordinateY)
 {
 
-	game->scale_factor_height = (double) game->minimapHeight / game->windowHeight;
+	game->scale_factor_height = (double)game->minimapHeight / game->windowHeight;
 	return (coordinateY * game->scale_factor_height);
 }
-int	scaleDownWidth(t_game *game, int coordinateX)
+int scaleDownWidth(t_game *game, int coordinateX)
 {
 
-	game->scale_factor_width = (double) game->minimapWidth / game->windowWidth;
+	game->scale_factor_width = (double)game->minimapWidth / game->windowWidth;
 	return (coordinateX * game->scale_factor_width);
 }
 
-void	minimap(t_game *game)
+void minimap(t_game *game)
 {
 	drawWalls(game);
 	drawRect(game, scaleDownWidth(game, game->posX), scaleDownHeight(game, game->posY), 5, 5, 0xE4D00A);
@@ -132,10 +131,9 @@ void mlxInit(t_game *game)
 	game->win = mlx_new_window(game->mlx, game->windowWidth, game->windowHeight, "CUB3D");
 	if (!game->win)
 		quit(game, "New window initialization failed");
-	game->imgData = createImage(game);
+	game->globalImgData = createGlobalImage(game);
+	game->texture_data = createTextureImage(game);
 }
-
-
 
 void draw(t_game *game)
 {
@@ -143,17 +141,6 @@ void draw(t_game *game)
 	rayCasting(game);
 	// minimap(game);
 	// test_minimap(game);
-
-
-	// 	int x, y, bpp, l, e;
-	// void	*img = mlx_xpm_file_to_image(game->mlx, TEXTURE, &x, &y);
-	// char *frame_addr = mlx_get_data_addr(img, &bpp, &l, &e);
-	// // printf("%d\n", l); line_bytes 256 |  256/4 = 64 pixelsCount
-	// // printf("%d\n", bpp); 32
-	// // printf("%d\n", e); 0
-
-	// mlx_put_image_to_window(game->mlx, game->win, img, game->windowWidth/2, game->windowHeight/2);
-
 }
 
 int main(int ac, const char *av[])

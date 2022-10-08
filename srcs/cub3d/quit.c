@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:08:14 by adouib            #+#    #+#             */
-/*   Updated: 2022/09/27 16:16:28 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/08 23:16:46 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void quit(t_game *game, char *s)
 	}
 	if (game->map)
 		free_map(game->map);
-	if (game->imgData->frame)
-		mlx_destroy_image(game->mlx, game->imgData->frame);
+	if (game->globalImgData->frame)
+		mlx_destroy_image(game->mlx, game->globalImgData->frame);
 	if (game->win)
 		mlx_destroy_window(game->mlx, game->win);
 	if (game->mlx)
@@ -51,8 +51,8 @@ int red_cross_quit(t_game *game)
 {
 	if (game->map)
 		free_map(game->map);
-	if (game->imgData->frame)
-		mlx_destroy_image(game->mlx, game->imgData->frame);
+	if (game->globalImgData->frame)
+		mlx_destroy_image(game->mlx, game->globalImgData->frame);
 	if (game->win)
 		mlx_destroy_window(game->mlx, game->win);
 	if (game->mlx)

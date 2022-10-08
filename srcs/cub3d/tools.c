@@ -56,18 +56,30 @@ int search_map(char *s, char c)
 	return (count);
 }
 
-
-t_img_data *createImage(t_game *game)
+t_global_img_data *createGlobalImage(t_game *game)
 {
-	t_img_data *imgData;
+	t_global_img_data *imgData;
 
-	imgData = ft_calloc(1, sizeof(t_img_data));
+	imgData = ft_calloc(1, sizeof(t_global_img_data));
 	if (!imgData)
 		exit_if_null(imgData, "Could not create an image");
 	imgData->frame = mlx_new_image(game->mlx, game->windowWidth, game->windowHeight);
-	imgData->frame_addr = mlx_get_data_addr(imgData->frame, &imgData->bpp, &imgData->sLine, &imgData->endn);
+	imgData->frame_addr = mlx_get_data_addr(imgData->frame, &imgData->bpp, &imgData->line_bytes, &imgData->endn);
 
 	return imgData;
+}
+
+t_texture *createTextureImage(t_game *game)
+{
+	t_texture *texture_data;
+
+	texture_data = ft_calloc(1, sizeof(t_texture));
+	if (!texture_data)
+		exit_if_null(texture_data, "Could not create an image");
+	texture_data->frame = mlx_new_image(game->mlx, game->windowWidth, game->windowHeight);
+	texture_data->frame_addr = mlx_get_data_addr(texture_data->frame, &texture_data->bpp, &texture_data->line_bytes, &texture_data->endn);
+
+	return texture_data;
 }
 
 void deleteImage(t_game *game)
@@ -81,8 +93,8 @@ void deleteImage(t_game *game)
 	// {
 	// 	free(game->imgData->frame_addr);
 	// }
-	if (game->imgData)
+	if (game->globalImgData)
 	{
-		free(game->imgData);
+		free(game->globalImgData);
 	}
 }
