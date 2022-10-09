@@ -278,7 +278,7 @@ unsigned int get_the_color(t_game *game)  // main reason for doing the unsigned 
 void edit(t_game *game, int x, int y, int color)
 {
 	// color the pixel on the x, y coordinates
-	int pixelOffset = (y * game->globalImgData->line_bytes) + (x * game->globalImgData->bpp/8); // * 4 (4 bytes)
+	int pixelOffset = (y * game->globalImgData->line_bytes) + (x * game->globalImgData->bpp/8); // * 4 (4 bytes) // convert from bits to bytes
 
 	char *color_pixel = game->globalImgData->frame_addr + pixelOffset; // points to the first byte in the pixel (4 bytes)
 	*(unsigned int *)color_pixel = game->texture_data->txtcolor; // main reason for doing the unsigned int, is there is no sign bit as in int and the guarantee size 4 bytes
