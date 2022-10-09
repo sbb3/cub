@@ -267,21 +267,21 @@ void rayCasting(t_game *game)
 
 	mlx_put_image_to_window(game->mlx, game->win, game->globalImgData->frame, 0, 0);
 }
-int i = 0;
-unsigned int get_the_color(t_game *game)
+
+unsigned int get_the_color(t_game *game)  // main reason for doing the unsigned int, is there is no sign bit as in int and the guarantee size 4 bytes
 {
 	int pixelOffset = (game->textureOffsetY * game->texture_data->line_bytes) + (game->textureOffsetX * (game->texture_data->bpp/8));
 	char *color_pixel = game->texture_data->frame_addr + pixelOffset;
-	return *(unsigned int *) color_pixel; // sign bit
+	return *(unsigned int *) color_pixel;
 }
 
 void edit(t_game *game, int x, int y, int color)
 {
 	// color the pixel on the x, y coordinates
-	int pixelOffset = (y * game->globalImgData->line_bytes) + (x * game->globalImgData->bpp/8); // * 4
+	int pixelOffset = (y * game->globalImgData->line_bytes) + (x * game->globalImgData->bpp/8); // * 4 (4 bytes)
 
-	char *color_pixel = game->globalImgData->frame_addr + pixelOffset;
-	*(unsigned int *)color_pixel = game->texture_data->txtcolor;
+	char *color_pixel = game->globalImgData->frame_addr + pixelOffset; // points to the first byte in the pixel (4 bytes)
+	*(unsigned int *)color_pixel = game->texture_data->txtcolor; // main reason for doing the unsigned int, is there is no sign bit as in int and the guarantee size 4 bytes
 }
 
 void drawTexture(t_game *game, int startX, int startY, int sizeX, int sizeY, int wallTopPixel, int wallBottomPixel)
@@ -299,10 +299,10 @@ void drawTexture(t_game *game, int startX, int startY, int sizeX, int sizeY, int
 		// printf("wallTopPixel : %d\n", wallTopPixel);
 		// printf("wallBottomPixel : %d\n", wallBottomPixel);
 		// printf("startX : %d\n", startX);
-		while (++y < wallBottomPixel) // WALL_HEIGHT = projectedWallHeight/
+		while (++y < wallBottomPixel) // projectedWallHeight/ // start drawing from the wallTopPixel till wallBottomPixel
 		{
-			game->textureOffsetY = (y - wallTopPixel) * game->scaling_factor;
-			game->texture_data->txtcolor = get_the_color(game);
+			game->textureOffsetY = (y - wallTopPixel) * game->scaling_factor; // what pixel color to pick from the texture
+			game->texture_data->txtcolor = get_the_color(game); // hex color not rgb // the texture pixel color that will drawn on the globalImage
 
 			// printf("color %x\n", game->texture_data->red);
 			// exit(0);
