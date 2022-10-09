@@ -46,13 +46,23 @@
 #define BUFFER_SIZE 1
 #define degreeToRadian(angleInDegree) ((angleInDegree) * (M_PI / 180))
 
+typedef struct s_colors
+{
+	unsigned char red;
+	unsigned char green;
+	unsigned char blue;
+} t_colors;
+
 typedef struct s_texture
 {
+	t_colors *texture_colors;
 	int bpp;
 	int line_bytes;
 	int endn;
 	char *frame_addr;
 	void *frame;
+	unsigned int txtcolor;
+
 } t_texture;
 
 typedef struct s_global_img_data
@@ -196,7 +206,7 @@ void draw_test_minimap(t_game *game);
 void test_minimap(t_game *game);
 void drawRectMinimap(char *frame_addr, int bpp, int sLine, int startX, int startY, int sizeX, int sizeY, int color);
 unsigned int get_the_color(t_game *game);
-void drawTexture(t_game *game, int startX, int startY, int sizeX, int sizeY, int wallTopPixel);
+void drawTexture(t_game *game, int startX, int startY, int sizeX, int sizeY, int wallTopPixel, int wallBottomPixel);
 t_texture *createTextureImage(t_game *game);
 void edit(t_game *game, int x, int y, int color);
 
