@@ -278,6 +278,7 @@ unsigned int get_the_color(t_game *game)  // main reason for doing the unsigned 
 void edit(t_game *game, int x, int y, int color)
 {
 	// color the pixel on the x, y coordinates
+	// pixeloffset where the pixel laying down
 	int pixelOffset = (y * game->globalImgData->line_bytes) + (x * game->globalImgData->bpp/8); // * 4 (4 bytes) // convert from bits to bytes
 
 	char *color_pixel = game->globalImgData->frame_addr + pixelOffset; // points to the first byte in the pixel (4 bytes)
