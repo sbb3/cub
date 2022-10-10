@@ -62,6 +62,8 @@ typedef struct s_texture
 	char *frame_addr;
 	void *frame;
 	unsigned int txtcolor;
+	int w;
+	int h;
 
 } t_texture;
 
@@ -186,7 +188,7 @@ t_game *init(const char *av[]);
 void drawLinePlayer(t_game *game, int startY, int startX, int color);
 void drawLine(t_game *game, int startX, int startY, int endX, int endY, int color);
 
-void drawRect(t_game *game, int startX, int startY, int sizeX, int sizeY, int color);
+void draw_ceiling_floor(t_game *game, int startX, int startY, int sizeY, int color);
 void rayCasting(t_game *game);
 void checkRayDirection(t_game *game);
 void fix_angle(t_game *game, char c);
@@ -205,9 +207,11 @@ int scaleDownHeight(t_game *game, int coordinateY);
 void draw_test_minimap(t_game *game);
 void test_minimap(t_game *game);
 void drawRectMinimap(char *frame_addr, int bpp, int sLine, int startX, int startY, int sizeX, int sizeY, int color);
-unsigned int get_the_color(t_game *game);
-void drawTexture(t_game *game, int startX, int startY, int sizeX, int sizeY, int wallTopPixel, int wallBottomPixel);
+unsigned int get_the_color_from_texture(t_game *game);
+void draw_texture_colors_on_walls(t_game *game, int startX, int wallTopPixel, int wallBottomPixel);
 t_texture *createTextureImage(t_game *game);
-void edit(t_game *game, int x, int y, int color);
+void set_the_texture_color_on_walls(t_game *game, int x, int y, int color);
+void drawRect(t_game *game, int startX, int startY, int sizeX, int sizeY, int color);
+void draw_floor(t_game *game, int startX, int startY, int endX, int endY, int color);
 
 #endif

@@ -29,22 +29,6 @@ void checkRayDirection(t_game *game)
 	}
 }
 
-void drawLine(t_game *game, int startX, int startY, int endX, int endY, int color)
-{
-	// pythaghors equation
-	int pixelsCount = distance(startX, startY, endX, endY); // number of pixels will be in the line or the distance ! https://www.mathsisfun.com/algebra/distance-2-points.html
-	double pixelX = startX;
-	double pixelY = startY;
-
-	while (pixelsCount)
-	{
-		edit_pixel(game->globalImgData->frame_addr, game->globalImgData->line_bytes, game->globalImgData->bpp, pixelX, pixelY, color);
-		pixelX += game->rayAngleX; // dirX = direction, default to 0, range  [ -1 < 0 < 1 ]
-		pixelY += game->rayAngleY; // dirY = direction, default to -1, range [ -1 < 0 < 1 ]
-		pixelsCount--;
-	}
-}
-
 void checkHorizontalCollision(t_game *game)
 {
 	init_vars_to_zero(game);
@@ -141,41 +125,15 @@ int out_of_container_borders(t_game *game)
 	return 0;
 }
 
-void old(t_game *game)
+void draw_ceiling_floor(t_game *game, int startX, int startY, int endY, int color)
 {
-
-	double rayX = game->posX;
-	double rayY = game->posY;
-	int floorY;
-	int floorX;
-	int wallHit = 0;
-	while (!wallHit)
+	// draw_ceiling : starting from 0
+	// draw_floor : starting from wallBottomPixel
+	// going by x and drawing each y pixel
+	while (startY < endY)
 	{
-		rayX += game->dirX;
-		rayY += game->dirY;
-		floorY = floor(rayY);
-		floorX = floor(rayX);
-
-		if (game->map[floorY / SQUARE_SIZE][floorX / SQUARE_SIZE] == '1')
-			break;
-	}
-	// game->wallHitX = floorX;
-	// game->wallHitY = floorY;
-}
-
-void drawRect(t_game *game, int startX, int startY, int sizeX, int sizeY, int color)
-{
-	int y = 0;
-	int x;
-	while (y < sizeY)
-	{
-		x = 0;
-		while (x < sizeX)
-		{
-			edit_pixel(game->globalImgData->frame_addr, game->globalImgData->line_bytes, game->globalImgData->bpp, x + startX, y + startY, color);
-			x++;
-		}
-		y++;
+		edit_pixel(game->globalImgData->frame_addr, game->globalImgData->line_bytes, game->globalImgData->bpp, startX, startY, color);
+		startY++;
 	}
 }
 
@@ -198,17 +156,7 @@ void rayCasting(t_game *game)
 	int coorectDistance;
 	int x = -1;
 
-	// textures info
-	int y, bpp, l, e, c, d, scaling_factor;
-	// void	*img = mlx_xpm_file_to_image(game->mlx, TEXTURE, &x, &y);
-	// char *frame_addr = mlx_get_data_addr(img, &bpp, &l, &e);
-
-	game->texture_data->frame = mlx_xpm_file_to_image(game->mlx, TEXTURE, &d, &c);
-	game->texture_data->frame_addr = mlx_get_data_addr(game->texture_data->frame, &game->texture_data->bpp, &game->texture_data->line_bytes, &game->texture_data->endn);
-	// printf("BYTES : %d\n", game->globalImgData->line_bytes);
-
 	while (++x < game->windowWidth)
-	// while (++x < 64)
 	{
 
 		checkHorizontalCollision(game);
@@ -245,19 +193,17 @@ void rayCasting(t_game *game)
 		if (wallBottomPixel > game->windowHeight)
 			wallBottomPixel = game->windowHeight;
 
-		floor = game->windowHeight - wallBottomPixel;
 		if (game->horizontalHit)
 			game->textureOffsetX = game->wallHitX % SQUARE_SIZE;
 		else
 			game->textureOffsetX = game->wallHitY % SQUARE_SIZE;
 
-		drawRect(game, x, 0, 1, wallTopPixel, 0x454745); // draw the ceil
-		// // drawRect(game, x, wallTopPixel, 1, game->projectedWallHeight, 0xffffff);
-		drawRect(game, x, wallBottomPixel, 1, floor, 0x808a83); // draw the floor
+		// draw_ceiling_floor(game, x, 0, wallTopPixel, 0x454745); // draw the ceil
+		floor = game->windowHeight;
+		draw_ceiling_floor(game, x, wallBottomPixel, floor, 0x808a83); // draw the floor
 
-		// calculate the offsetY
 		game->scaling_factor = (double)TEXTURE_HEIGHT / game->projectedWallHeight; // projectedWallHeight
-		drawTexture(game, x, wallTopPixel, 1, game->projectedWallHeight, wallTopPixel, wallBottomPixel);
+		draw_texture_colors_on_walls(game, x, wallTopPixel, wallBottomPixel);
 
 		game->rayAngle += game->rayAngleIncrement; // needed for drawing next ray // if it goes over 360, will reset to 0 + rayAngle
 		if (game->rayAngle > 360)
@@ -268,53 +214,39 @@ void rayCasting(t_game *game)
 	mlx_put_image_to_window(game->mlx, game->win, game->globalImgData->frame, 0, 0);
 }
 
-unsigned int get_the_color(t_game *game)  // main reason for doing the unsigned int, is there is no sign bit as in int and the guarantee size 4 bytes
+unsigned int get_the_color_from_texture(t_game *game) // main reason for doing the unsigned int, is there is no sign bit as in int and the guarantee size 4 bytes
 {
-	int pixelOffset = (game->textureOffsetY * game->texture_data->line_bytes) + (game->textureOffsetX * (game->texture_data->bpp/8));
-	char *color_pixel = game->texture_data->frame_addr + pixelOffset;
-	return *(unsigned int *) color_pixel;
+	int pixelOffset; // pixeloffset where the pixel laying down
+	char *color_pixel;
+
+	pixelOffset = (game->textureOffsetY * game->texture_data->line_bytes) + (game->textureOffsetX * (game->texture_data->bpp / 8));
+	color_pixel = game->texture_data->frame_addr + pixelOffset;
+	return (*(unsigned int *)color_pixel);
 }
 
-void edit(t_game *game, int x, int y, int color)
+void set_the_texture_color_on_walls(t_game *game, int x, int y, int color)
 {
 	// color the pixel on the x, y coordinates
-	// pixeloffset where the pixel laying down
-	int pixelOffset = (y * game->globalImgData->line_bytes) + (x * game->globalImgData->bpp/8); // * 4 (4 bytes) // convert from bits to bytes
+	int pixelOffset; // pixeloffset where the pixel laying down
+	char *color_pixel;
 
-	char *color_pixel = game->globalImgData->frame_addr + pixelOffset; // points to the first byte in the pixel (4 bytes)
-	*(unsigned int *)color_pixel = game->texture_data->txtcolor; // main reason for doing the unsigned int, is there is no sign bit as in int and the guarantee size 4 bytes
+	pixelOffset = (y * game->globalImgData->line_bytes) + (x * game->globalImgData->bpp / 8); // * 4 (4 bytes) // convert from bits to bytes
+	color_pixel = game->globalImgData->frame_addr + pixelOffset;							  // points to the first byte in the pixel (4 bytes)
+	*(unsigned int *)color_pixel = game->texture_data->txtcolor;							  // main reason for doing the unsigned int, is there is no sign bit as in int and the guarantee size 4 bytes
+																							  // write the texture_color on the main image
 }
 
-void drawTexture(t_game *game, int startX, int startY, int sizeX, int sizeY, int wallTopPixel, int wallBottomPixel)
+void draw_texture_colors_on_walls(t_game *game, int startX, int wallTopPixel, int wallBottomPixel) // sizeX or width of the strip(column) will be 1, but since it is 1, there is no need to specify it here
 {
-
 	int color;
 	int y;
-	int x;
-
-	//x = -1;
-	//while (++x < sizeX) // WALLWIDTH = 1
-	//{
-		// y = -1;
-		y = wallTopPixel - 1;
-		// printf("wallTopPixel : %d\n", wallTopPixel);
-		// printf("wallBottomPixel : %d\n", wallBottomPixel);
-		// printf("startX : %d\n", startX);
-		while (++y < wallBottomPixel) // projectedWallHeight/ // start drawing from the wallTopPixel till wallBottomPixel
-		{
-			game->textureOffsetY = (y - wallTopPixel) * game->scaling_factor; // what pixel color to pick from the texture
-			game->texture_data->txtcolor = get_the_color(game); // hex color not rgb // the texture pixel color that will drawn on the globalImage
-
-			// printf("color %x\n", game->texture_data->red);
-			// exit(0);
-			edit(game, startX, y, color);
-		}
-		// i++;
-	//}
-	// printf("color : %x\n", &color);
+	y = wallTopPixel;
+	while (y < wallBottomPixel) // start drawing from the wallTopPixel till wallBottomPixel , this distance is equal to projectedWallHeight
+	{
+		// calculate the offsetY
+		game->textureOffsetY = (y - wallTopPixel) * game->scaling_factor; // what pixel color to pick from the texture
+		game->texture_data->txtcolor = get_the_color_from_texture(game);  // hex color not rgb // the texture pixel color that will drawn on the globalImage
+		set_the_texture_color_on_walls(game, startX, y, color);
+		y++;
+	}
 }
-
-// printf("%d\n", l); line_bytes 256 |  256/4 = 64 pixelsCount
-
-// printf("%d\n", bpp); 32
-// printf("%d\n", e); 0

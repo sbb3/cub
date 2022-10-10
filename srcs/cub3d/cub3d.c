@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:43 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/08 23:38:42 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/10 18:36:43 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,24 @@ void minimap(t_game *game)
 	drawRect(game, scaleDownWidth(game, game->posX), scaleDownHeight(game, game->posY), 5, 5, 0xE4D00A);
 }
 
+void drawRect(t_game *game, int startX, int startY, int sizeX, int sizeY, int color)
+{
+	int y = 0;
+	int x;
+	while (y < sizeY)
+	{
+		x = 0;
+		while (x < sizeX)
+		{
+			edit_pixel(game->globalImgData->frame_addr, game->globalImgData->line_bytes, game->globalImgData->bpp, x + startX, y + startY, color);
+			x++;
+		}
+		y++;
+	}
+}
+
 void drawWalls(t_game *game)
 {
-	// void *img =
 	int y = 0;
 	int x;
 	while (game->map[y])
@@ -128,7 +143,7 @@ void mlxInit(t_game *game)
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		quit(game, "Connection to the X-Window Server failed");
-	game->win = mlx_new_window(game->mlx, game->windowWidth, game->windowHeight, "CUB3D");
+	game->win = mlx_new_window(game->mlx, game->windowWidth, game->windowHeight, "cubF4KE3D");
 	if (!game->win)
 		quit(game, "New window initialization failed");
 	game->globalImgData = createGlobalImage(game);
@@ -138,8 +153,8 @@ void mlxInit(t_game *game)
 void draw(t_game *game)
 {
 	// drawWalls(game);
-	rayCasting(game);
-	// minimap(game);
+	// rayCasting(game);
+	minimap(game);
 	// test_minimap(game);
 }
 

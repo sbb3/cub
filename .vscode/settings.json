@@ -4,6 +4,9 @@
 	"stdio.h": "c",
 	"cub3d.h": "c",
 	"chrono": "c",
-	"type_traits": "c"
+	"type_traits": "c",
+	"__mutex_base": "c",
+	"memory": "c",
+	"mutex": "c"
 }
 }

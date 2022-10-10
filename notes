@@ -1,0 +1,4 @@
+// printf("%d\n", l); line_bytes 256 |  256/4 = 64 pixelsCount
+
+// printf("%d\n", bpp); 32
+// printf("%d\n", e); 0
