@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 09:02:07 by adouib            #+#    #+#             */
-/*   Updated: 2022/09/16 15:20:53 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/12 21:01:03 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char *get_next_line(int fd)
 		c = malloc(2);
 		if (!c)
 			return (0);
-		bytes_read = read(fd, c, BUFFER_SIZE);
+		bytes_read = read(fd, c, 1);
 		c[bytes_read] = '\0';
 		backup = ft_strjoin(backup, c);
 	}

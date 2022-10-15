@@ -27,129 +27,145 @@
 #define ESC_KEY 53
 #define W_KEY 13
 #define S_KEY 1
-#define A_KEY 2
-#define D_KEY 0
-#define LEFT_KEY 124
-#define RIGHT_KEY 123
-
-#define COLOR 0x0000FF
-
+#define A_KEY 0
+#define D_KEY 2
+#define LEFT_KEY 123
+#define RIGHT_KEY 124
 #define SQUARE_SIZE 64
 #define TEXTURE_WIDTH 64
 #define TEXTURE_HEIGHT 64
-#define TEXTURES_NUMS 64
 #define MINIMAP_SIZE 10
 
 #define SQUARE_WIDTH 64
 #define SQUARE_HEIGHT 64
 
-#define BUFFER_SIZE 1
-#define degreeToRadian(angleInDegree) ((angleInDegree) * (M_PI / 180))
+#define degreeToRadian(angleInDegree) ((angleInDegree) * M_PI / 180)
 
-typedef struct s_colors
-{
-	unsigned char red;
-	unsigned char green;
-	unsigned char blue;
-} t_colors;
+#define SPEED 10
+#define ROTATION 4
+#define FOV 60 // field of view of the player
+#define HALF_FOV (FOV / 2) // half of view of the player
+
+#define WINDOW_WIDTH (SQUARE_WIDTH * game->map_width)
+#define WINDOW_HEIGHT (SQUARE_WIDTH * game->map_height)
+
+#define HALF_WINDOW_WIDTH (WINDOW_WIDTH / 2)
+#define HALF_WINDOW_HEIGHT (WINDOW_HEIGHT / 2)
+
+#define RAYS WINDOW_WIDTH
+
 
 typedef struct s_texture
 {
-	t_colors *texture_colors;
+	void *frame;
+	char *frame_addr;
 	int bpp;
 	int line_bytes;
 	int endn;
-	char *frame_addr;
-	void *frame;
-	unsigned int txtcolor;
+	unsigned int texture_color;
 	int w;
 	int h;
-
 } t_texture;
 
-typedef struct s_global_img_data
+typedef struct s_global_image
 {
+	void *frame;
+	char *frame_addr;
 	int bpp;
 	int line_bytes;
 	int endn;
-	char *frame_addr;
-	void *frame;
-} t_global_img_data;
+} t_global_image;
+
+typedef struct s_ray
+{
+
+} t_ray;
+
+typedef struct s_player
+{
+
+} t_player;
+
+typedef struct s_wall
+{
+
+} t_wall;
 
 typedef struct s_game
 {
-	t_global_img_data *globalImgData;
+	t_global_image *global_img;
 	t_texture *texture_data;
 
 	void *mlx;
 	void *win;
 	int img_width;
 	int img_height;
-
 	int map_fd;
 	char **map;
 	char *line;
 	char *backup;
-	int mapWidth;
-	int mapHeight;
-	int windowWidth;
-	int windowHeight;
-	int halfWidth;
-	int halfHeight;
+	int map_width;
+	int map_height;
 
-	int posX;
-	int posY;
-	double dirX;	 // 1
-	double dirY;	 // 0
-	int playerAngle; // player angle
-	int fov;		 // 60 // filed of view
-	int halfFov;
-	double movementSpeed;
-	double rotation;
+	int window_width;
+	int window_height;
+	int half_width;
+	int half_height;
 
-	double rayAngle;
-	double rayAngleY;
-	double rayAngleX;
-	double rayAngleIncrement;
-	int rayUp;
-	int rayDown;
-	int rayLeft;
-	int rayRight;
+	int pos_x;
+	int pos_y;
+	float pdir_x;	  // 1
+	float pdir_y;	  // 0
+	int player_angle; // player angle
+	int fov;		  // 60 // filed of view
+	int half_fov;
+	int movement_speed;
+	float rotation;
 
-	int wallHit;
-	double horizontalWallHitX;
-	double horizontalWallHitY;
-	double verticalWallHitX;
-	double verticalWallHitY;
+	float ray_angle;
+	float ray_angle_increment;
+	int ray_up;
+	int ray_down;
+	int ray_left;
+	int ray_right;
 
-	double xinter;
-	double yinter;
-	double xstep;
-	double ystep;
+	float horizontal_wall_hit_x;
+	float horizontal_wall_hit_y;
+	float vertical_wall_hit_x;
+	float vertical_wall_hit_y;
 
-	int projectedWallHeight;
-	int distanceToProjectedWall;
+	float xinter;
+	float yinter;
+	float xstep;
+	float ystep;
+
+	int projected_wall_height;
+	int distance_to_projected_wall;
 	int rays_count;
 
-	int minimapWidth;
-	int minimapHeight;
+	int minimap_width;
+	int minimap_height;
 
-	int wallHitX;
-	int wallHitY;
+	int wall_hit;
+	int wall_hit_x;
+	int wall_hit_y;
 
-	double scale_factor_width;
-	double scale_factor_height;
-	int horizontalHit;
-	double scaling_factor;
-	int textureOffsetX;
-	int textureOffsetY;
+	int horizontal_Hit;
+	int texture_offset_x;
+	int texture_offset_y;
 
-	// int
+	// raycasting variables
+	int distance_to_wall;
+	int correct_distance;
+
+	int horizontal_distance_to_wall;
+	int vertical_distance_to_wall;
+
+	int wall_top_pixel;
+	int wall_bottom_pixel;
+
 } t_game;
 
-// typedef struct s_player {
-
-// }
 void old(t_game *game);
 
 char *get_next_line(int fd);
@@ -172,46 +188,57 @@ int ft_strlen(const char *s);
 void draw_wall_floor(t_game *game, char c, int x, int y);
 void throw_rays(t_game *game, int y, int x);
 void draw_exit(t_game *game);
-int keyPressed(int keycode, t_game *game);
+int movements(int keycode, t_game *game);
 
 void quit(t_game *game, char *s);
-void deleteImage(t_game *game);
+void deleteImages(t_game *game);
 int red_cross_quit(t_game *game);
 char **free_map(char **token);
-void drawWalls(t_game *game);
-void edit_pixel(char *frame_addr, int size_line, int bits_per_pixel, int x, int y, int color);
+void draw_minimap_walls(t_game *game);
+void coloring_pixel(t_game *game, int x, int y, int color);
 int distance(int startX, int startY, int endX, int endY);
 
 void *ft_calloc(size_t count, size_t size);
 void exit_if_null(void *p, char *message);
-t_game *init(const char *av[]);
+t_game *init_variables(const char *av[]);
 void drawLinePlayer(t_game *game, int startY, int startX, int color);
 void drawLine(t_game *game, int startX, int startY, int endX, int endY, int color);
 
 void draw_ceiling_floor(t_game *game, int startX, int startY, int sizeY, int color);
-void rayCasting(t_game *game);
-void checkRayDirection(t_game *game);
+void raycasting(t_game *game);
+void check_ray_direction(t_game *game);
 void fix_angle(t_game *game, char c);
 
-void checkHorizontalCollision(t_game *game);
-void checkVerticalCollision(t_game *game);
-t_global_img_data *createGlobalImage(t_game *game);
-void mlxInit(t_game *game);
+void ray_wall_collision_horizontally(t_game *game);
+void ray_wall_collision_vertically(t_game *game);
+t_global_image *createGlobalImage(t_game *game);
+void mlx_and_images_init(t_game *game);
 void draw(t_game *game);
-int out_of_container_borders(t_game *game);
-void init_vars_to_zero(t_game *game);
+int out_of_container_width_and_height(t_game *game);
+void reset_vars_to_zero(t_game *game);
 void minimap(t_game *game);
-int scaleDownWidth(t_game *game, int coordinateX);
-int scaleDownHeight(t_game *game, int coordinateY);
+int scale_down(t_game *game, int minimap_size, int window_size, int coordinate);
 
-void draw_test_minimap(t_game *game);
-void test_minimap(t_game *game);
 void drawRectMinimap(char *frame_addr, int bpp, int sLine, int startX, int startY, int sizeX, int sizeY, int color);
 unsigned int get_the_color_from_texture(t_game *game);
-void draw_texture_colors_on_walls(t_game *game, int startX, int wallTopPixel, int wallBottomPixel);
+void draw_texture_colors_on_walls(t_game *game, int startX, int wall_top_pixel, int wall_bottom_pixel);
 t_texture *createTextureImage(t_game *game);
 void set_the_texture_color_on_walls(t_game *game, int x, int y, int color);
-void drawRect(t_game *game, int startX, int startY, int sizeX, int sizeY, int color);
+void edit_pixel(t_game *game, int startX, int startY, int sizeX, int sizeY, int color);
 void draw_floor(t_game *game, int startX, int startY, int endX, int endY, int color);
+void correct_player_angle(t_game *game);
+void correct_ray_angle(t_game *game);
+void calculations(t_game *game);
+void get_the_short_distance(t_game *game);
+void get_projected_wall_height(t_game *game);
+void get_wall_top_bottom_pixels(t_game *game);
+void intersections_and_steps_vertically(t_game *game);
+void looking_for_wall_coordinates_vertically(t_game *game);
+void intersections_and_steps_horizontally(t_game *game);
+void looking_for_wall_coordinates_horizontally(t_game *game);
+void do_init(t_game *game);
+void do_init_more(t_game *game);
+void draw_minimap_player(t_game *game);
+void re_draw(t_game *game);
 
 #endif

@@ -6,13 +6,57 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:56 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/08 22:31:14 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/15 20:30:03 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/cub3d.h"
 
-t_game *init(const char *av[])
+void mlx_and_images_init(t_game *game)
+{
+	game->mlx = mlx_init();
+	if (!game->mlx)
+		quit(game, "Connection to the X-Window Server failed");
+	game->win = mlx_new_window(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "cubF4KE3D");
+	if (!game->win)
+		quit(game, "New window initialization failed");
+}
+
+void init_player_starting_direction(t_game *game)
+{
+	// change with the map character
+	char c = 'N';
+
+	if (c == 'N')
+		game->player_angle = 90;
+	else if (c == 'W')
+		game->player_angle = 180;
+	else if (c == 'S')
+		game->player_angle = 270;
+	else if (c == 'E')
+		game->player_angle = 360;
+
+	game->pdir_x = cos(degreeToRadian(game->player_angle));	 // player starting rotation angle
+	game->pdir_y = sin(degreeToRadian(game->player_angle)); // player starting rotattion angle, should match the sin in the movements function
+}
+
+void do_init_more(t_game *game)
+{
+	game->ray_angle_increment = ((double)FOV / RAYS); // fov / window_width
+	game->minimap_width = MINIMAP_SIZE * game->map_width;
+	game->minimap_height = MINIMAP_SIZE * game->map_height;
+	game->horizontal_Hit = 0;
+}
+
+void do_init(t_game *game)
+{
+	game->map_width = mapWidth(game->map[0]); // map width length
+	game->map_height = mapHeight(game->map);  // map height length
+	game->pos_x = WINDOW_WIDTH / 2; // init to the starting location on the map
+	game->pos_y = WINDOW_HEIGHT / 2;
+}
+
+t_game *init_variables(const char *av[])
 {
 	t_game *game;
 
@@ -22,33 +66,9 @@ t_game *init(const char *av[])
 	game->map = map_read(av, game);
 	if (!game->map)
 		quit(NULL, "map is empty");
-	game->mapWidth = mapWidth(game->map[0]); // map width length
-	game->mapHeight = mapHeight(game->map); // map height length
-	game->windowWidth = SQUARE_WIDTH * game->mapWidth;
-	game->windowHeight = SQUARE_HEIGHT * game->mapHeight;
-	game->halfWidth = game->windowWidth / 2;
-	game->halfHeight = game->windowHeight / 2;
-	game->movementSpeed = 5;
-	game->rotation = 2;
-	game->posX = game->windowWidth / 2; // init to the starting location on the map
-	game->posY = game->windowHeight / 2;
 
-
-	// game->miniX = game->minimapWidth;
-	// game->miniY = game->minimapHeight;
-	game->playerAngle = 90;
-	game->fov = 60;													   // field of view of the player
-	game->halfFov = game->fov / 2;									   // half of view of the player
-	game->dirX = 0;													   // player starting rotation angle
-	game->dirY = -1;												   // player starting rotattion angle
-	game->rays_count = game->windowWidth;
-	game->rayAngleIncrement = ((double)game->fov / game->rays_count); // fov / windowWidth
-
-	game->minimapWidth = MINIMAP_SIZE * game->mapWidth;
-	game->minimapHeight = MINIMAP_SIZE * game->mapHeight;
-
-		game->horizontalHit = 0;
-
-
+	do_init(game);
+	do_init_more(game);
+	init_player_starting_direction(game);
 	return game;
 }

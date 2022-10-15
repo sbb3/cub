@@ -2,3 +2,19 @@
 
 // printf("%d\n", bpp); 32
 // printf("%d\n", e); 0
+
+
+/*
+	scaling factor = little/bigger
+
+	ex:
+		sf =  minimapsize = windowsize
+*/
+
+/*
+	360%360=0;
+	0%360=0;
+	42%360=42;
+	-1%360=359
+	-2%360=358
+*/
