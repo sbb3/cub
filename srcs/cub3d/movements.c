@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:29:49 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/15 21:01:29 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/15 21:12:56 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int movements(int keycode, t_game *game)
 		if (new_angle_in_degrees > 360)
 			new_angle_in_degrees = new_angle_in_degrees - 360;
 
-		// int left = 0;
 		// int right = 0;
 		// int up = 0;
 		// int down = 0;
