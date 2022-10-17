@@ -39,11 +39,11 @@
 #define SQUARE_WIDTH 64
 #define SQUARE_HEIGHT 64
 
-#define degreeToRadian(angleInDegree) ((angleInDegree) * M_PI / 180)
+#define degreeToRadian(angleInDegree) ((angleInDegree)*M_PI / 180)
 
 #define SPEED 10
 #define ROTATION 4
-#define FOV 60 // field of view of the player
+#define FOV 60			   // field of view of the player
 #define HALF_FOV (FOV / 2) // half of view of the player
 
 #define WINDOW_WIDTH (SQUARE_WIDTH * game->map_width)
@@ -53,7 +53,6 @@
 #define HALF_WINDOW_HEIGHT (WINDOW_HEIGHT / 2)
 
 #define RAYS WINDOW_WIDTH
-
 
 typedef struct s_texture
 {
@@ -116,7 +115,7 @@ typedef struct s_game
 	int pos_y;
 	float pdir_x;	  // 1
 	float pdir_y;	  // 0
-	int player_angle; // player angle
+	float player_angle; // player angle
 	int fov;		  // 60 // filed of view
 	int half_fov;
 	int movement_speed;
@@ -155,14 +154,16 @@ typedef struct s_game
 	int texture_offset_y;
 
 	// raycasting variables
-	int distance_to_wall;
-	int correct_distance;
+	float distorted_ray_distance_to_wall;
+	float correct_distance;
 
-	int horizontal_distance_to_wall;
-	int vertical_distance_to_wall;
+	float horizontal_distance_to_wall;
+	float vertical_distance_to_wall;
 
 	int wall_top_pixel;
 	int wall_bottom_pixel;
+
+	double test;
 
 } t_game;
 
@@ -196,7 +197,7 @@ int red_cross_quit(t_game *game);
 char **free_map(char **token);
 void draw_minimap_walls(t_game *game);
 void coloring_pixel(t_game *game, int x, int y, int color);
-int distance(int startX, int startY, int endX, int endY);
+float distance(int startX, int startY, int endX, int endY);
 
 void *ft_calloc(size_t count, size_t size);
 void exit_if_null(void *p, char *message);

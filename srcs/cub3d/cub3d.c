@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:43 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/13 21:37:08 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/17 13:03:46 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void draw(t_game *game)
 	game->global_img = createGlobalImage(game);	   // create the global image
 	game->texture_data = createTextureImage(game); // create the texture image
 	raycasting(game);
-	minimap(game);
+	// minimap(game);
 }
 
 int main(int ac, const char *av[])

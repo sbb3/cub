@@ -6,13 +6,13 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:19:33 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/15 19:21:52 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/17 18:49:25 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/cub3d.h"
 
-int distance(int startX, int startY, int endX, int endY)
+float distance(int startX, int startY, int endX, int endY)
 {
 	return (sqrt(pow((abs(endX - startX)), 2) + pow((abs(endY - startY)), 2)));
 }
@@ -152,11 +152,9 @@ void get_wall_top_bottom_pixels(t_game *game)
 	if (game->wall_bottom_pixel > WINDOW_HEIGHT)
 		game->wall_bottom_pixel = WINDOW_HEIGHT;
 }
-
+// int k = 0;
 void get_projected_wall_height(t_game *game)
 {
-	// !!!!! fix fishe eye
-	game->correct_distance = game->distance_to_wall * (cos(degreeToRadian(game->ray_angle - game->player_angle)));
 	// !!!!! distance To Projectddd Wall
 	game->projected_wall_height = (double)(SQUARE_HEIGHT * game->distance_to_projected_wall) / game->correct_distance;
 	if (game->projected_wall_height > WINDOW_HEIGHT)
@@ -170,13 +168,21 @@ void get_the_short_distance(t_game *game)
 		game->horizontal_Hit = 1;
 		game->wall_hit_x = game->horizontal_wall_hit_x;
 		game->wall_hit_y = game->horizontal_wall_hit_y;
-		game->distance_to_wall = game->horizontal_distance_to_wall;
+		game->distorted_ray_distance_to_wall = game->horizontal_distance_to_wall;
+		// !!!!! fix fishe eye : he red rays all have a different lenght, so would compute different wall heights for different vertical stripes, hence the rounded effect. The green rays on the right all have the same length, so will give the correct result. The same still apllies for when the player rotates (then the camera plane is no longer horizontal and the green lines will have different lengths, but still with a constant change between each) and the walls become diagonal but straight lines on the screen. This explanation is somewhat handwavy but gives the idea.
+		// lodev fisheye explains it
+
 	}
 	else
 	{
 		game->horizontal_Hit = 0;
 		game->wall_hit_x = game->vertical_wall_hit_x;
 		game->wall_hit_y = game->vertical_wall_hit_y;
-		game->distance_to_wall = game->vertical_distance_to_wall;
+		game->distorted_ray_distance_to_wall = game->vertical_distance_to_wall;
+	// !!!!! fix fishe eye : he red rays all have a different lenght, so would compute different wall heights for different vertical stripes, hence the rounded effect. The green rays on the right all have the same length, so will give the correct result. The same still apllies for when the player rotates (then the camera plane is no longer horizontal and the green lines will have different lengths, but still with a constant change between each) and the walls become diagonal but straight lines on the screen. This explanation is somewhat handwavy but gives the idea.
 	}
+		game->correct_distance = game->distorted_ray_distance_to_wall * cos(((game->ray_angle - game->player_angle) * M_PI / 180));
+
+	printf("cd = %lf : rd = %lf : cos(ra - pa) = %lf\n", game->correct_distance, game->distorted_ray_distance_to_wall, cos(degreeToRadian(game->ray_angle - game->player_angle)));
 }
+// floor(cos(degreeToRadian(game->ray_angle - game->player_angle)) * 100) / 100));

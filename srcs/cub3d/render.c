@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:19:59 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/15 19:19:39 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/17 16:41:02 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,10 @@ void draw_ceiling_floor(t_game *game, int startX, int startY, int endY, int colo
 	while (startY < endY)
 	{
 		coloring_pixel(game, startX, startY, color);
+		// mlx_pixel_put(game->mlx, game->win, startX, startY, color);
 		startY++;
 	}
+	// printf("%d\n", endY);
 }
 
 void calculations(t_game *game)
@@ -80,6 +82,7 @@ void raycasting(t_game *game) // 64 grid
 	game->ray_angle = game->player_angle + HALF_FOV;
 	correct_ray_angle(game);
 	game->distance_to_projected_wall = (WINDOW_HEIGHT / 2) / tan(degreeToRadian(HALF_FOV));
+	game->test = cos(degreeToRadian(game->ray_angle - game->player_angle));
 	x = -1;
 	while (++x < WINDOW_WIDTH)
 	{
@@ -91,6 +94,7 @@ void raycasting(t_game *game) // 64 grid
 		draw_texture_colors_on_walls(game, x, game->wall_top_pixel, game->wall_bottom_pixel);
 		game->ray_angle -= game->ray_angle_increment; // needed for drawing next ray // if it goes over 360, will reset to 0 + rayAngle
 		correct_ray_angle(game);
+		// printf("%d\n", game->projected_wall_height);
 	}
 	mlx_put_image_to_window(game->mlx, game->win, game->global_img->frame, 0, 0);
 }
