@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:19:59 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/20 13:05:16 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/20 13:57:47 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,12 @@ void draw_texture_colors_on_walls(t_game *game, int startX, int wall_top_pixel, 
 	int y;
 
 	ray_direction(game);
-	scaling_factor = (double)TEXTURE_HEIGHT / game->projected_wall_height; // projectedWallHeight
+	if (game->projected_wall_height != WINDOW_HEIGHT)
+		scaling_factor = (double)TEXTURE_HEIGHT / game->projected_wall_height; // projectedWallHeight
+	else
+		scaling_factor = (double)TEXTURE_HEIGHT / game->test2;
+
+
 	y = wall_top_pixel;
 	while (y < wall_bottom_pixel) // start drawing from the wall_top_pixel till wall_bottom_pixel , this distance is equal to projectedWallHeight
 	{
@@ -101,6 +106,7 @@ void ray_wall_collision_horizontally(t_game *game)
 void raycasting(t_game *game) // 64 grid
 {
 	int x;
+	system("clear");
 
 	game->ray_angle = game->player_angle + HALF_FOV;
 	correct_ray_angle(game);

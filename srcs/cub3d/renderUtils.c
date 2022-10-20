@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:19:33 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/20 13:04:34 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/20 13:58:07 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,10 +165,12 @@ void get_projected_wall_height(t_game *game)
 {
 	// !!!!! distance To Projectddd Wall
 	game->projected_wall_height = (double)(SQUARE_HEIGHT * game->distance_to_projected_wall) / game->correct_ray_distance;
-	if (game->projected_wall_height > WINDOW_HEIGHT)
-		game->projected_wall_height = WINDOW_HEIGHT;
+	if (game->projected_wall_height > WINDOW_HEIGHT) {
+		game->test2 = game->projected_wall_height;
+		// game->projected_wall_height = WINDOW_HEIGHT;
+	}
 
-	// printf("%lf\n", game->distance_to_projected_wall);
+	printf("%lf\n", game->projected_wall_height);
 }
 
 void get_the_short_distance(t_game *game)

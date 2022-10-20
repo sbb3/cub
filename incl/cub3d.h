@@ -207,6 +207,7 @@ typedef struct s_game
 	int wall_bottom_pixel;
 
 	double test;
+	double test2;
 
 } t_game;
 

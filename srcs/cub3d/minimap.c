@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:51:55 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/19 13:35:50 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/20 14:00:37 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void minimap(t_game *game)
 {
 	draw_minimap_walls(game);
 	draw_minimap_player(game);
-	edit_pixel(game, (WINDOW_WIDTH / 2) - 1, 0, 1, WINDOW_HEIGHT, 0xFB2576);
+	// edit_pixel(game, (WINDOW_WIDTH / 2) - 1, 0, 1, WINDOW_HEIGHT, 0xFB2576);
 
 	mlx_put_image_to_window(game->mlx, game->win, game->global_img->frame, 0, 0);
 }

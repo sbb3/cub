@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 19:20:17 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/20 12:55:24 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/20 13:49:06 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,16 @@ void deleteImages(t_game *game)
 
 	if (game->n_t_data->frame) /* texture freeing */
 		mlx_destroy_image(game->mlx, game->n_t_data->frame);
+
+	// if (game->s_t_data->frame) /* texture freeing */
+	// 	mlx_destroy_image(game->mlx, game->s_t_data->frame);
+
+	// if (game->w_t_data->frame) /* texture freeing */
+	// 	mlx_destroy_image(game->mlx, game->w_t_data->frame);
+
+	// if (game->e_t_data->frame) /* texture freeing */
+	// 	mlx_destroy_image(game->mlx, game->e_t_data->frame);
+
 }
 
 void coloring_pixel(t_game *game, int x, int y, int color)
