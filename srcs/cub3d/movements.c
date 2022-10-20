@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:29:49 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/16 21:00:04 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/19 13:38:45 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int movements(int keycode, t_game *game)
 	if (keycode == W_KEY)
 	{
 
-		if (game->map[(int)((game->pos_y + game->pdir_y * SPEED) / SQUARE_HEIGHT)]
+		if (game->map[(int)((game->pos_y - game->pdir_y * SPEED) / SQUARE_HEIGHT)]
 					 [(int)((game->pos_x + game->pdir_x * SPEED) / SQUARE_WIDTH)] == '0')
 		{
 
@@ -36,7 +36,7 @@ int movements(int keycode, t_game *game)
 	}
 	if (keycode == S_KEY)
 	{
-		if (game->map[(int)((game->pos_y - game->pdir_y * SPEED) / SQUARE_HEIGHT)]
+		if (game->map[(int)((game->pos_y + game->pdir_y * SPEED) / SQUARE_HEIGHT)]
 					[(int)((game->pos_x - game->pdir_x * SPEED) / SQUARE_WIDTH)] == '0')
 		{
 			game->pos_x -= game->pdir_x * SPEED;

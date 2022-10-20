@@ -12,9 +12,9 @@ COLOUR_BLUE=\033[0;35m
 
 
 SRCS = ./srcs/cub3d/cub3d.c \
-	./srcs/cub3d/parser.c \
+	./srcs/cub3d/Parser.c \
 	./srcs/cub3d/init.c \
-	./srcs/cub3d/render.c \
+	./srcs/cub3d/Render.c \
 	./srcs/cub3d/minimap.c \
 	./srcs/cub3d/tools.c \
 	./srcs/cub3d/movements.c \

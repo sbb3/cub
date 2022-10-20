@@ -22,7 +22,10 @@
 #include <math.h>
 #include <sys/time.h>
 
-#define TEXTURE "./images/eagle.xpm"
+#define NORTH_TEXTURE "./images/purplestone.xpm"
+#define SOUTH_TEXTURE "./images/bluestone.xpm"
+#define WEST_TEXTURE "./images/greystone.xpm"
+#define EAST_TEXTURE "./images/redbrick.xpm"
 
 #define ESC_KEY 53
 #define W_KEY 13
@@ -41,8 +44,8 @@
 
 #define degreeToRadian(angleInDegree) ((angleInDegree)*M_PI / 180)
 
-#define SPEED 10
-#define ROTATION 4
+#define SPEED 15
+#define ROTATION 6
 #define FOV 60			   // field of view of the player
 #define HALF_FOV (FOV / 2) // half of view of the player
 
@@ -54,6 +57,18 @@
 
 #define RAYS WINDOW_WIDTH
 
+typedef struct n_texture
+{
+	void *frame;
+	char *frame_addr;
+	int bpp;
+	int line_bytes;
+	int endn;
+	unsigned int texture_color;
+	int w;
+	int h;
+} n_texture;
+
 typedef struct s_texture
 {
 	void *frame;
@@ -64,7 +79,31 @@ typedef struct s_texture
 	unsigned int texture_color;
 	int w;
 	int h;
-} t_texture;
+} s_texture;
+
+typedef struct w_texture
+{
+	void *frame;
+	char *frame_addr;
+	int bpp;
+	int line_bytes;
+	int endn;
+	unsigned int texture_color;
+	int w;
+	int h;
+} w_texture;
+
+typedef struct e_texture
+{
+	void *frame;
+	char *frame_addr;
+	int bpp;
+	int line_bytes;
+	int endn;
+	unsigned int texture_color;
+	int w;
+	int h;
+} e_texture;
 
 typedef struct s_global_image
 {
@@ -93,7 +132,10 @@ typedef struct s_wall
 typedef struct s_game
 {
 	t_global_image *global_img;
-	t_texture *texture_data;
+	n_texture *n_t_data;
+	s_texture *s_t_data;
+	w_texture *w_t_data;
+	e_texture *e_t_data;
 
 	void *mlx;
 	void *win;
@@ -113,13 +155,9 @@ typedef struct s_game
 
 	int pos_x;
 	int pos_y;
-	float pdir_x;	  // 1
-	float pdir_y;	  // 0
+	float pdir_x;		// 1
+	float pdir_y;		// 0
 	float player_angle; // player angle
-	int fov;		  // 60 // filed of view
-	int half_fov;
-	int movement_speed;
-	float rotation;
 
 	float ray_angle;
 	float ray_angle_increment;
@@ -127,6 +165,11 @@ typedef struct s_game
 	int ray_down;
 	int ray_left;
 	int ray_right;
+
+	int is_north;
+	int is_south;
+	int is_west;
+	int is_east;
 
 	float horizontal_wall_hit_x;
 	float horizontal_wall_hit_y;
@@ -138,16 +181,16 @@ typedef struct s_game
 	float xstep;
 	float ystep;
 
-	int projected_wall_height;
-	int distance_to_projected_wall;
+	float projected_wall_height;
+	float distance_to_projected_wall;
 	int rays_count;
 
 	int minimap_width;
 	int minimap_height;
 
 	int wall_hit;
-	int wall_hit_x;
-	int wall_hit_y;
+	float wall_hit_x;
+	float wall_hit_y;
 
 	int horizontal_Hit;
 	int texture_offset_x;
@@ -155,7 +198,7 @@ typedef struct s_game
 
 	// raycasting variables
 	float distorted_ray_distance_to_wall;
-	float correct_distance;
+	float correct_ray_distance;
 
 	float horizontal_distance_to_wall;
 	float vertical_distance_to_wall;
@@ -221,10 +264,10 @@ void minimap(t_game *game);
 int scale_down(t_game *game, int minimap_size, int window_size, int coordinate);
 
 void drawRectMinimap(char *frame_addr, int bpp, int sLine, int startX, int startY, int sizeX, int sizeY, int color);
-unsigned int get_the_color_from_texture(t_game *game);
+unsigned int get_the_color_from_north_texture(t_game *game);
 void draw_texture_colors_on_walls(t_game *game, int startX, int wall_top_pixel, int wall_bottom_pixel);
-t_texture *createTextureImage(t_game *game);
-void set_the_texture_color_on_walls(t_game *game, int x, int y, int color);
+n_texture *createNorthTextureImage(t_game *game);
+void set_the_texture_color_on_walls(t_game *game, int x, int y, unsigned int color);
 void edit_pixel(t_game *game, int startX, int startY, int sizeX, int sizeY, int color);
 void draw_floor(t_game *game, int startX, int startY, int endX, int endY, int color);
 void correct_player_angle(t_game *game);
@@ -241,5 +284,12 @@ void do_init(t_game *game);
 void do_init_more(t_game *game);
 void draw_minimap_player(t_game *game);
 void re_draw(t_game *game);
+s_texture *createSouthTextureImage(t_game *game);
+w_texture *createWestTextureImage(t_game *game);
+e_texture *createEastTextureImage(t_game *game);
+unsigned int get_the_color_from_south_texture(t_game *game);
+unsigned int get_the_color_from_west_texture(t_game *game);
+unsigned int get_the_color_from_east_texture(t_game *game);
+void ray_direction(t_game *game);
 
 #endif

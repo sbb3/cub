@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:51:55 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/17 12:54:02 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/19 13:35:50 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void draw_minimap_player(t_game *game)
 	player_pos_x_in_minimap = scale_down(game, game->minimap_width, WINDOW_WIDTH, game->pos_x);
 	player_pos_y_in_minimap = scale_down(game, game->minimap_height, WINDOW_HEIGHT, game->pos_y);
 	// draw the player
-	// edit_pixel(game, player_pos_x_in_minimap, player_pos_y_in_minimap, 5, 5, 0xFB2576);
+	edit_pixel(game, player_pos_x_in_minimap, player_pos_y_in_minimap, 5, 5, 0xFB2576);
 	drawLinePlayer(game, player_pos_y_in_minimap, player_pos_x_in_minimap, 0xffffff);
 }
 
@@ -88,7 +88,7 @@ void minimap(t_game *game)
 {
 	draw_minimap_walls(game);
 	draw_minimap_player(game);
-	// edit_pixel(game, (WINDOW_WIDTH / 2) - 1, 0, 1, WINDOW_HEIGHT, 0xFB2576);
+	edit_pixel(game, (WINDOW_WIDTH / 2) - 1, 0, 1, WINDOW_HEIGHT, 0xFB2576);
 
 	mlx_put_image_to_window(game->mlx, game->win, game->global_img->frame, 0, 0);
 }
