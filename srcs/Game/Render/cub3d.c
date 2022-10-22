@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:43 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/20 12:19:19 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/22 19:22:31 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,7 @@
 
 void draw(t_game *game)
 {
-	// dont create the images on each render
-	game->global_img = createGlobalImage(game);		// create the global image
-	game->n_t_data = createNorthTextureImage(game); // create the texture image
-	game->s_t_data = createSouthTextureImage(game); // create the texture image
-	game->w_t_data = createWestTextureImage(game); // create the texture image
-	game->e_t_data = createEastTextureImage(game); // create the texture image
+	game->global_img = createGlobalImage(game); // create the global image
 	raycasting(game);
 	minimap(game);
 }
@@ -30,11 +25,9 @@ int main(int ac, const char *av[])
 
 	if (ac != 2)
 		quit(NULL, "Format: ./cub3d <map name>.cub");
-	game = init_variables(av);
-	// parser(av, game);
-	mlx_and_images_init(game);
+	// game->map = parser(av);
+	game = init_variables_and_mlx_and_textures(game, av); /* print the address of game in subfunctions */
 	draw(game); // !! will get removed and used the render function
-	// mlx_loop_hook(game->mlx, render, game); // infinite loop -> drawing
 	mlx_hook(game->win, 2, 0L, movements, game);
 	mlx_hook(game->win, 17, 0L, red_cross_quit, game);
 	mlx_loop(game->mlx);
@@ -43,3 +36,11 @@ int main(int ac, const char *av[])
 /*
 debug
 */
+
+
+// int	render(t_game *game)
+// {
+// 	draw(game);
+// 	usleep(33 * 1000);
+// 	return 0;
+// }

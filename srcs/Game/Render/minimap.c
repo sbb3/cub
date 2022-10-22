@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:51:55 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/20 14:00:37 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/22 18:23:00 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void draw_minimap_player(t_game *game)
 	player_pos_y_in_minimap = scale_down(game, game->minimap_height, WINDOW_HEIGHT, game->pos_y);
 	// draw the player
 	edit_pixel(game, player_pos_x_in_minimap, player_pos_y_in_minimap, 5, 5, 0xFB2576);
-	drawLinePlayer(game, player_pos_y_in_minimap, player_pos_x_in_minimap, 0xffffff);
+	// drawLinePlayer(game, player_pos_y_in_minimap, player_pos_x_in_minimap, 0xffffff);
 }
 
 void draw_minimap_walls(t_game *game)

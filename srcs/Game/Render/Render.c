@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:19:59 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/20 13:57:47 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/22 17:04:50 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,29 @@ void draw_texture_colors_on_walls(t_game *game, int startX, int wall_top_pixel, 
 	float scaling_factor;
 	unsigned int color;
 	int y;
+	int start;
+	int end;
 
 	ray_direction(game);
-	if (game->projected_wall_height != WINDOW_HEIGHT)
+	// if (game->projected_wall_height < WINDOW_HEIGHT)
 		scaling_factor = (double)TEXTURE_HEIGHT / game->projected_wall_height; // projectedWallHeight
-	else
-		scaling_factor = (double)TEXTURE_HEIGHT / game->test2;
+	// else
+		// scaling_factor = (double)TEXTURE_HEIGHT / WINDOW_HEIGHT;
 
+	// WALL STRETCHING FIX using these 2 arguments, and dont reset wall_bottom_pixel and wall_top_pixel
+	if (game->projected_wall_height > WINDOW_HEIGHT) {
+		y =  0;
+		end = WINDOW_HEIGHT;
+	}
+	else { // if there is only these 2 statements below, and the protection for resetting walltoppixel and wallbottompixel to 0 and WINDOW_HEIGHT, it will start taking the color pixel from the texture at index 0, not dependng on the wallProjectedHeight
+		y = wall_top_pixel; // y should always start with;
+		end = wall_bottom_pixel;
+	}
 
-	y = wall_top_pixel;
-	while (y < wall_bottom_pixel) // start drawing from the wall_top_pixel till wall_bottom_pixel , this distance is equal to projectedWallHeight
+	while (y < end) // start drawing from the wall_top_pixel till wall_bottom_pixel , this distance is equal to projectedWallHeight
 	{
 		// calculate the offsetY
+		// when projected_wall_height > WINDOW_HEIGHT, wall_top_pixel will be negative and the sign -, then it will be positive
 		game->texture_offset_y = (y - wall_top_pixel) * scaling_factor; // what pixel color to pick from the texture
 		// is_north
 		if (game->is_north && game->horizontal_Hit)
@@ -106,7 +117,7 @@ void ray_wall_collision_horizontally(t_game *game)
 void raycasting(t_game *game) // 64 grid
 {
 	int x;
-	system("clear");
+	// system("clear");
 
 	game->ray_angle = game->player_angle + HALF_FOV;
 	correct_ray_angle(game);
@@ -119,7 +130,7 @@ void raycasting(t_game *game) // 64 grid
 		calculations(game);
 		draw_ceiling_floor(game, x, 0, game->wall_top_pixel, 0x454745);				   // draw the ceil
 		draw_ceiling_floor(game, x, game->wall_bottom_pixel, WINDOW_HEIGHT, 0x808a83); // draw the floor
-		draw_texture_colors_on_walls(game, x, game->wall_top_pixel, game->wall_bottom_pixel);
+		draw_texture_colors_on_walls(game, x, game->wall_top_pixel, game->wall_bottom_pixel); // change this prototype
 		// printf("%lf\n", game->ray_angle);
 		game->ray_angle -= game->ray_angle_increment; // needed for drawing next ray // if it goes over 360, will reset to 0 + rayAngle
 		correct_ray_angle(game);

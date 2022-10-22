@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:19:33 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/20 13:58:07 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/21 20:41:06 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,12 +150,17 @@ void intersections_and_steps_vertically(t_game *game)
 
 void get_wall_top_bottom_pixels(t_game *game)
 {
+	// / when HALF_WINDOW_HEIGHT < WINDOW_HEIGHT, wall_top_pixel will be negative
 	game->wall_top_pixel = HALF_WINDOW_HEIGHT - (double)(game->projected_wall_height / 2); // wallHeight drawing start postion on the y-axis
-	if (game->wall_top_pixel < 0)
-		game->wall_top_pixel = 0.00;
+	// if (HALF_WINDOW_HEIGHT < pwh)
+	// {
+	// 	game->wall_top_pixel = (double)(game->projected_wall_height / 2) - HALF_WINDOW_HEIGHT;
+	// }
+	// if (game->wall_top_pixel < 0)
+	// 	game->wall_top_pixel = 0;
 	game->wall_bottom_pixel = HALF_WINDOW_HEIGHT + (double)(game->projected_wall_height / 2); // (double) in case projected_wall_height low than 2, will not return a 0, but a double value like 0.22545
-	if (game->wall_bottom_pixel > WINDOW_HEIGHT)
-		game->wall_bottom_pixel = WINDOW_HEIGHT;
+	// if (game->wall_bottom_pixel > WINDOW_HEIGHT)
+		// game->wall_bottom_pixel = WINDOW_HEIGHT;
 
 	// printf("t : %d\n", game->wall_top_pixel);
 	// printf("b : %d\n", game->wall_bottom_pixel);
@@ -170,7 +175,7 @@ void get_projected_wall_height(t_game *game)
 		// game->projected_wall_height = WINDOW_HEIGHT;
 	}
 
-	printf("%lf\n", game->projected_wall_height);
+	// printf("%lf\n", game->projected_wall_height);
 }
 
 void get_the_short_distance(t_game *game)

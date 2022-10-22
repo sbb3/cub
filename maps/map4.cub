@@ -1,0 +1,23 @@
+NO ./textures/64/nord.xpm
+SO ./textures/64/sud.xpm
+WE ./textures/64/EW.xpm
+EA ./textures/64/EW.xpm
+
+
+
+F 200,200,200
+
+
+            C 255,200,200
+
+    
+
+
+    
+    1111111
+    1001001
+    1001001
+    1011111
+    1001001
+    1N01001
+  1111111

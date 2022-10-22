@@ -6,29 +6,17 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 19:20:17 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/20 13:49:06 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/22 16:22:37 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/cub3d.h"
 
-void deleteImages(t_game *game)
+void delete_global_image_then_clear_window(t_game *game)
 {
 	if (game->global_img->frame) /* global image freeing */
 		mlx_destroy_image(game->mlx, game->global_img->frame);
-
-	if (game->n_t_data->frame) /* texture freeing */
-		mlx_destroy_image(game->mlx, game->n_t_data->frame);
-
-	// if (game->s_t_data->frame) /* texture freeing */
-	// 	mlx_destroy_image(game->mlx, game->s_t_data->frame);
-
-	// if (game->w_t_data->frame) /* texture freeing */
-	// 	mlx_destroy_image(game->mlx, game->w_t_data->frame);
-
-	// if (game->e_t_data->frame) /* texture freeing */
-	// 	mlx_destroy_image(game->mlx, game->e_t_data->frame);
-
+	mlx_clear_window(game->mlx, game->win);
 }
 
 void coloring_pixel(t_game *game, int x, int y, int color)
@@ -89,10 +77,9 @@ void set_the_texture_color_on_walls(t_game *game, int x, int y, unsigned int col
 
 	pixelOffset = (y * game->global_img->line_bytes) + (x * game->global_img->bpp / 8); // * 4 (4 bytes) // convert from bits to bytes
 	color_pixel = game->global_img->frame_addr + pixelOffset;							// points to the first byte in the pixel (4 bytes)
-	*(unsigned int *)color_pixel = color;					// main reason for doing the unsigned int, is there is no sign bit as in int and the guarantee size 4 bytes
+	*(unsigned int *)color_pixel = color;												// main reason for doing the unsigned int, is there is no sign bit as in int and the guarantee size 4 bytes
 																						// write the texture_color on the main image
 }
-
 
 t_global_image *createGlobalImage(t_game *game) /* global image creation*/
 {
@@ -108,7 +95,6 @@ t_global_image *createGlobalImage(t_game *game) /* global image creation*/
 	return (image);
 }
 
-
 n_texture *createNorthTextureImage(t_game *game) /* north texture image creation*/
 {
 	n_texture *data;
@@ -123,7 +109,6 @@ n_texture *createNorthTextureImage(t_game *game) /* north texture image creation
 	return (data);
 }
 
-
 s_texture *createSouthTextureImage(t_game *game) /* south texture image creation*/
 {
 	s_texture *data;
@@ -137,7 +122,6 @@ s_texture *createSouthTextureImage(t_game *game) /* south texture image creation
 	data->frame_addr = mlx_get_data_addr(data->frame, &data->bpp, &data->line_bytes, &data->endn);
 	return (data);
 }
-
 
 w_texture *createWestTextureImage(t_game *game) /* w texture image creation*/
 {

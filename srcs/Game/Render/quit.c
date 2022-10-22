@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:08:14 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/12 17:19:30 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/22 14:26:51 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,25 @@ char **free_map(char **token)
 	return (NULL);
 }
 
+void	free_all(t_game *game)
+{
+	if (game->map)
+		free_map(game->map);
+	if (game->global_img->frame)
+		mlx_destroy_image(game->mlx, game->global_img->frame);
+	if (game->n_t_data->frame) /* texture freeing */
+		mlx_destroy_image(game->mlx, game->n_t_data->frame);
+	if (game->s_t_data->frame) /* texture freeing */
+		mlx_destroy_image(game->mlx, game->s_t_data->frame);
+	if (game->w_t_data->frame) /* texture freeing */
+		mlx_destroy_image(game->mlx, game->w_t_data->frame);
+	if (game->e_t_data->frame) /* texture freeing */
+	if (game->win)
+		mlx_destroy_window(game->mlx, game->win);
+	if (game->mlx)
+		free(game->mlx);
+}
+
 void quit(t_game *game, char *s)
 {
 	if (s)
@@ -35,28 +54,14 @@ void quit(t_game *game, char *s)
 		if (!game)
 			exit(1);
 	}
-	if (game->map)
-		free_map(game->map);
-	if (game->global_img->frame)
-		mlx_destroy_image(game->mlx, game->global_img->frame);
-	if (game->win)
-		mlx_destroy_window(game->mlx, game->win);
-	if (game->mlx)
-		free(game->mlx);
+	free_all(game);
 	exit(0);
 }
 
 /* when user press the red cross button, the window should be closed*/
 int red_cross_quit(t_game *game)
 {
-	if (game->map)
-		free_map(game->map);
-	if (game->global_img->frame)
-		mlx_destroy_image(game->mlx, game->global_img->frame);
-	if (game->win)
-		mlx_destroy_window(game->mlx, game->win);
-	if (game->mlx)
-		free(game->mlx);
+	free_all(game);
 	exit(0);
 	return (0);
 }
