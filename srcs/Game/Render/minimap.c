@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minimap.c                                          :+:      :+:    :+:   */
+/*   Minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:51:55 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/22 18:23:00 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/23 18:15:07 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incl/cub3d.h"
+#include "../../../incl/cub3d.h"
 
 int scale_down(t_game *game, int minimap_size, int window_size, int coordinate)
 {
@@ -56,8 +56,8 @@ void draw_minimap_player(t_game *game)
 	int player_pos_x_in_minimap;
 	int player_pos_y_in_minimap;
 
-	player_pos_x_in_minimap = scale_down(game, game->minimap_width, WINDOW_WIDTH, game->pos_x);
-	player_pos_y_in_minimap = scale_down(game, game->minimap_height, WINDOW_HEIGHT, game->pos_y);
+	player_pos_x_in_minimap = scale_down(game, MINIMAP_WIDTH, WINDOW_WIDTH, game->pos_x);
+	player_pos_y_in_minimap = scale_down(game, MINIMAP_HEIGHT, WINDOW_HEIGHT, game->pos_y);
 	// draw the player
 	edit_pixel(game, player_pos_x_in_minimap, player_pos_y_in_minimap, 5, 5, 0xFB2576);
 	// drawLinePlayer(game, player_pos_y_in_minimap, player_pos_x_in_minimap, 0xffffff);

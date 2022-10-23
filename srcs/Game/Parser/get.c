@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   get.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: labenall <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 10:22:58 by labenall          #+#    #+#             */
-/*   Updated: 2022/10/13 10:23:00 by labenall         ###   ########.fr       */
+/*   Updated: 2022/10/23 11:39:50 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../../incl/cub3d.h"
 
-char	*get_number(char *map, size_t *i, size_t a)
+char *get_number(char *map, size_t *i, size_t a)
 {
-	char	*r;
-	size_t	b;
+	char *r;
+	size_t b;
 
 	r = malloc(sizeof(char) * (a + 1));
 	b = 0;
@@ -28,13 +28,13 @@ char	*get_number(char *map, size_t *i, size_t a)
 	return (r);
 }
 
-//function katerja3 lina cha7al man charakter kayan f map li9rina 
-size_t	get_size_map(char *name_map)
+// function katerja3 lina cha7al man charakter kayan f map li9rina
+size_t get_size_map(const  char *name_map)
 {
-	size_t	size;
-	int		fd;
-	char	char_read;
-	int		nbr_read;
+	size_t size;
+	int fd;
+	char char_read;
+	int nbr_read;
 
 	fd = open(name_map, O_RDONLY);
 	size = 0;
@@ -47,10 +47,10 @@ size_t	get_size_map(char *name_map)
 	return (size);
 }
 
-size_t	get_nbr_line(char *map, size_t i)
+size_t get_nbr_line(char *map, size_t i)
 {
-	size_t	r;
-	int		k;
+	size_t r;
+	int k;
 
 	k = 0;
 	r = 0;
@@ -73,9 +73,9 @@ size_t	get_nbr_line(char *map, size_t i)
 	return (cas_is_space_or_new_line(map, i, r, k));
 }
 
-int	get_nbr_char(char *map, int i)
+int get_nbr_char(char *map, int i)
 {
-	int	r;
+	int r;
 
 	r = 0;
 	while (map[i] && map[i] != '\n')
@@ -86,11 +86,11 @@ int	get_nbr_char(char *map, int i)
 	return (r);
 }
 
-char	*get_line(char *map, size_t *i)
+char *get_line(char *map, size_t *i)
 {
-	char	*res;
-	int		nbr_char;
-	int		a;
+	char *res;
+	int nbr_char;
+	int a;
 
 	nbr_char = get_nbr_char(map, *i);
 	res = malloc(sizeof(char) * (nbr_char + 1));

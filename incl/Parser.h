@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   Parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 16:43:18 by labenall          #+#    #+#             */
-/*   Updated: 2022/10/22 19:27:37 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/23 11:39:56 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,17 @@ typedef struct s_map
 	t_type *so;
 	t_type *we;
 	t_type *ea;
-	t_color *f; // floor color
-	t_color *c; // ceiling color
-	char p;		// starting direction
-	int xp;		// starting coordinatesx
-	int yp;		// starting coordinatesy
+	t_color *f;					// floor color
+	t_color *c;					// ceiling color
+	char p_direction;  			// starting direction
+	int xp;						// starting coordinatesx
+	int yp;						// starting coordinatesy
 	int height;
 	int width;
 } t_map;
 
 void exit_erreur(char *s);
-int ft_strcmp(char *s1, char *s2);
+int ft_strcmp(const  char *s1, char *s2);
 int ft_strlen(const char *s);
 int is_sapce(char c);
 int ft_atoi(char *s);
@@ -62,9 +62,9 @@ char *get_map(size_t size, int fd);
 char *get_line(char *map, size_t *i);
 int get_nbr_char(char *map, int i);
 size_t get_nbr_line(char *map, size_t i);
-size_t get_size_map(char *name_map);
+size_t get_size_map(const  char *name_map);
 char *get_number(char *map, size_t *i, size_t a);
-int cheak_name(char *name);
+int cheak_name(const char *name);
 int cheak_name_texure(char *name);
 void cheak_type(t_map *map_struct);
 void cheak_content_map(t_map *map_struct);
@@ -81,5 +81,7 @@ void cas_stel2(t_map *map, char *type, int *nbr_type, size_t *i);
 void cas_strlen1(t_map *map, char *type, int *nbr_type, size_t *i);
 size_t cas_is_space_or_new_line(char *map, size_t i, size_t r, int k);
 void cheak_texure(t_map *map_struct);
+t_map *parser(const char *av[]);
+t_type *add_content(t_map *map, size_t *i);
 
 #endif

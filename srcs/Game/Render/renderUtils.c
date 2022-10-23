@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   renderUtils.c                                      :+:      :+:    :+:   */
+/*   RenderUtils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:19:33 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/21 20:41:06 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/23 18:33:40 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incl/cub3d.h"
+#include "../../../incl/cub3d.h"
 
 float distance(int startX, int startY, int endX, int endY)
 {
@@ -76,6 +76,7 @@ void correct_ray_angle(t_game *game)
 
 void looking_for_wall_coordinates_horizontally(t_game *game)
 {
+
 	game->wall_hit = 0;
 	while (!game->wall_hit) // checking Horizontal intersection – the y-axis
 	{
@@ -86,8 +87,35 @@ void looking_for_wall_coordinates_horizontally(t_game *game)
 		game->yinter += game->ystep;
 		game->xinter += game->xstep;
 	}
+
 	game->horizontal_wall_hit_y = game->yinter;
 	game->horizontal_wall_hit_x = game->xinter;
+}
+
+void looking_for_wall_coordinates_vertically(t_game *game)
+{
+	game->wall_hit = 0;
+	while (!game->wall_hit) // checking vertical intersection – the x-axis
+	{
+		if (out_of_container_width_and_height(game))
+			break;
+		// printf("%lf\n", game->yinter);
+
+			// printf("xi : %d\n", (int)floor(game->xinter / SQUARE_SIZE));
+			// printf("yi : %lf\n", (int)floor(game->yinter/ SQUARE_SIZE));
+		if (game->map[(int)floor(game->yinter / SQUARE_SIZE)] == NULL) {
+			break;
+		}
+		if (game->map[(int)floor(game->yinter / SQUARE_SIZE)][(int)floor(game->xinter / SQUARE_SIZE)] == '1') {
+			break;
+		}
+		game->xinter += game->xstep;
+		game->yinter += game->ystep;
+	}
+	if (game->ray_left)
+		game->xinter++;
+	game->vertical_wall_hit_y = game->yinter;
+	game->vertical_wall_hit_x = game->xinter;
 }
 
 void intersections_and_steps_horizontally(t_game *game)
@@ -108,22 +136,6 @@ void intersections_and_steps_horizontally(t_game *game)
 		game->xstep *= -1; // xstep on right down side will be negative so we turn it to positive same as the right up side, is already positive
 	if (game->ray_up)
 		game->yinter--; // substract a pixel to check if nextY is in the wall
-}
-
-void looking_for_wall_coordinates_vertically(t_game *game)
-{
-	game->wall_hit = 0;
-	while (!game->wall_hit) // checking vertical intersection – the x-axis
-	{
-		if (out_of_container_width_and_height(game))
-			break;
-		if (game->map[(int)floor(game->yinter / SQUARE_SIZE)][(int)floor(game->xinter / SQUARE_SIZE)] == '1')
-			break;
-		game->xinter += game->xstep;
-		game->yinter += game->ystep;
-	}
-	game->vertical_wall_hit_y = game->yinter;
-	game->vertical_wall_hit_x = game->xinter;
 }
 
 void intersections_and_steps_vertically(t_game *game)

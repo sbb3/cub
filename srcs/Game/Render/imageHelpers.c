@@ -6,11 +6,11 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 19:20:17 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/22 16:22:37 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/23 12:19:21 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incl/cub3d.h"
+#include "../../../incl/cub3d.h"
 
 void delete_global_image_then_clear_window(t_game *game)
 {
@@ -90,7 +90,7 @@ t_global_image *createGlobalImage(t_game *game) /* global image creation*/
 		exit_if_null(image, "Allocation failed");
 	image->frame = mlx_new_image(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!image->frame)
-		exit_if_null(image, "Could not create an global image");
+		exit_if_null(image->frame , "Could not create an global image");
 	image->frame_addr = mlx_get_data_addr(image->frame, &image->bpp, &image->line_bytes, &image->endn);
 	return (image);
 }
@@ -104,8 +104,10 @@ n_texture *createNorthTextureImage(t_game *game) /* north texture image creation
 		exit_if_null(data, "Allocation failed");
 	data->frame = mlx_xpm_file_to_image(game->mlx, NORTH_TEXTURE, &data->w, &data->h);
 	if (!data->frame)
-		exit_if_null(data, "Could not load the texture from the xpm");
+		exit_if_null(data->frame, "Could not load the texture from the xpm");
 	data->frame_addr = mlx_get_data_addr(data->frame, &data->bpp, &data->line_bytes, &data->endn);
+	if (!data->frame_addr)
+		exit_if_null(data->frame_addr, "Could not get the frame data");
 	return (data);
 }
 
@@ -118,8 +120,10 @@ s_texture *createSouthTextureImage(t_game *game) /* south texture image creation
 		exit_if_null(data, "Allocation failed");
 	data->frame = mlx_xpm_file_to_image(game->mlx, SOUTH_TEXTURE, &data->w, &data->h);
 	if (!data->frame)
-		exit_if_null(data, "Could not load the texture from the xpm");
+		exit_if_null(data->frame, "Could not load the texture from the xpm");
 	data->frame_addr = mlx_get_data_addr(data->frame, &data->bpp, &data->line_bytes, &data->endn);
+	if (!data->frame_addr)
+		exit_if_null(data->frame_addr, "Could not get the frame data");
 	return (data);
 }
 
@@ -132,8 +136,10 @@ w_texture *createWestTextureImage(t_game *game) /* w texture image creation*/
 		exit_if_null(data, "Allocation failed");
 	data->frame = mlx_xpm_file_to_image(game->mlx, WEST_TEXTURE, &data->w, &data->h);
 	if (!data->frame)
-		exit_if_null(data, "Could not load the texture from the xpm");
+		exit_if_null(data->frame, "Could not load the texture from the xpm");
 	data->frame_addr = mlx_get_data_addr(data->frame, &data->bpp, &data->line_bytes, &data->endn);
+	if (!data->frame_addr)
+		exit_if_null(data->frame_addr, "Could not get the frame data");
 	return (data);
 }
 
@@ -146,7 +152,9 @@ e_texture *createEastTextureImage(t_game *game) /* e texture image creation*/
 		exit_if_null(data, "Allocation failed");
 	data->frame = mlx_xpm_file_to_image(game->mlx, EAST_TEXTURE, &data->w, &data->h);
 	if (!data->frame)
-		exit_if_null(data, "Could not load the texture from the xpm");
+		exit_if_null(data->frame, "Could not load the texture from the xpm");
 	data->frame_addr = mlx_get_data_addr(data->frame, &data->bpp, &data->line_bytes, &data->endn);
+	if (!data->frame_addr)
+		exit_if_null(data->frame_addr, "Could not get the frame data");
 	return (data);
 }

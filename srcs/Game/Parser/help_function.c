@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   help_function.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: labenall <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 16:43:37 by labenall          #+#    #+#             */
-/*   Updated: 2022/09/30 16:43:40 by labenall         ###   ########.fr       */
+/*   Updated: 2022/10/23 11:39:09 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../../incl/cub3d.h"
 
-void	exit_erreur(char *s)
+void exit_erreur(char *s)
 {
 	printf("Error\n%s\n", s);
 	exit(1);
 }
 
-int	ft_strlen(const char *s)
+int ft_strlen(const char *s)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (s[i])
@@ -28,9 +28,9 @@ int	ft_strlen(const char *s)
 	return (i);
 }
 
-int	ft_strcmp(char *s1, char *s2)
+int ft_strcmp(const  char *s1, char *s2)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (s1[i] && s2[i] && (s1[i] == s2[i]))
@@ -38,7 +38,7 @@ int	ft_strcmp(char *s1, char *s2)
 	return ((s1[i] - s2[i]));
 }
 
-int	is_sapce(char c)
+int is_sapce(char c)
 {
 	if (c == ' ' || c == '\t')
 		return (1);
@@ -46,10 +46,10 @@ int	is_sapce(char c)
 		return (0);
 }
 
-int	ft_atoi(char *s)
+int ft_atoi(char *s)
 {
-	size_t	i;
-	int		res;
+	size_t i;
+	int res;
 
 	if (ft_strlen(s) == 0)
 		exit_erreur("nbr not good");

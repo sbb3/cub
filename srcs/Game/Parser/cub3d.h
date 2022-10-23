@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 16:43:18 by labenall          #+#    #+#             */
-/*   Updated: 2022/10/22 19:27:19 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/23 10:47:29 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ typedef struct s_map
 	t_type *so;
 	t_type *we;
 	t_type *ea;
-	t_color *f; // floor color
-	t_color *c; // ceiling color
-	char p;		// starting direction
-	int xp;		// starting coordinatesx
-	int yp;		// starting coordinatesy
+	t_color *f;		  // floor color
+	t_color *c;		  // ceiling color
+	char p_direction; // starting direction
+	int xp;			  // starting coordinatesx
+	int yp;			  // starting coordinatesy
 	int height;
 	int width;
 } t_map;

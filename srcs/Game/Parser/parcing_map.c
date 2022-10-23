@@ -6,11 +6,11 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 16:43:47 by labenall          #+#    #+#             */
-/*   Updated: 2022/10/22 19:21:56 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/23 18:03:05 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../../incl/cub3d.h"
 
 // function kanpranti biha map man ba3d ma7waltha l array dyal string
 void print_array_string(char **array_str)
@@ -91,7 +91,7 @@ t_map *initial_map_struct(size_t size, int fd)
 	map_struct->ea = NULL;
 	map_struct->f = NULL;
 	map_struct->c = NULL;
-	map_struct->p = 0;
+	map_struct->p_direction = 0;
 	map_struct->xp = 0;
 	map_struct->yp = 0;
 	return (map_struct);
@@ -109,8 +109,10 @@ t_map *parser(const char *av[])
 		exit_erreur("Check Existence or  Access Control of file");
 	map_struct = initial_map_struct(get_size_map(av[1]), fd);
 	cheak_map(map_struct);
-	cheak_type(map_struct);
+	// cheak_type(map_struct);
 	cheak_content_map(map_struct);
-	print_strct_map(map_struct);
+	// print_strct_map(map_struct);
+	// printf("herer\n");
+
 	return (map_struct);
 }

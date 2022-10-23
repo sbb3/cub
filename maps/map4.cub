@@ -1,7 +1,7 @@
-NO ./textures/64/nord.xpm
-SO ./textures/64/sud.xpm
-WE ./textures/64/EW.xpm
-EA ./textures/64/EW.xpm
+NO ./srcs/Assets/Textures/purplestone.xpm
+SO ./srcs/Assets/Textures/bluestone.xpm
+WE ./srcs/Assets/Textures/greystone.xpm
+EA ./srcs/Assets/Textures/redbrick.xpm
 
 
 
@@ -10,10 +10,10 @@ F 200,200,200
 
             C 255,200,200
 
-    
 
 
-    
+
+
     1111111
     1001001
     1001001

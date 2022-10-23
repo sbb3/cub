@@ -6,14 +6,14 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 19:30:34 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/22 19:31:28 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/23 10:55:35 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 #define CUB3D_H
 
-#include "parser.h"
-#include "render.h"
+#include "Parser.h"
+#include "Render.h"
 
 #endif

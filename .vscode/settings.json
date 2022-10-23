@@ -12,6 +12,13 @@
     "istream": "c",
     "locale": "c",
     "ostream": "c",
-    "bitset": "c"
+    "bitset": "c",
+    "exception": "c",
+    "functional": "c",
+    "new": "c",
+    "string": "c",
+    "utility": "c",
+    "render.h": "c",
+    "parser.h": "c"
   }
 }

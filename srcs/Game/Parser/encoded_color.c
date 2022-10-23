@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   encoded_color.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: labenall <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 10:22:51 by labenall          #+#    #+#             */
-/*   Updated: 2022/10/13 10:22:53 by labenall         ###   ########.fr       */
+/*   Updated: 2022/10/23 10:31:18 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../../incl/cub3d.h"
 
-char	res_mod1(int *n)
+char res_mod1(int *n)
 {
-	int	r;
+	int r;
 
 	r = *n / 16;
 	if (r >= 10)
@@ -25,7 +25,7 @@ char	res_mod1(int *n)
 	return (r);
 }
 
-char	res_mod2(int n)
+char res_mod2(int n)
 {
 	if (n >= 10)
 		n += 'a' - 10;
@@ -34,9 +34,9 @@ char	res_mod2(int n)
 	return (n);
 }
 
-char	*encodec_color(int r, int g, int b)
+char *encodec_color(int r, int g, int b)
 {
-	char	*res;
+	char *res;
 
 	res = malloc(sizeof(char) * 8);
 	res[0] = '0';

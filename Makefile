@@ -4,25 +4,33 @@ CFLAGS =  -I../incl/ -g3 -fsanitize=address
 #  -g3 -fsanitize=address
 MLXFLAGS = -lmlx -framework OpenGL -framework AppKit
 
-LIBFTPATH = ./srcs/libft/libft.a
+# LIBFTPATH = ./srcs/libft/libft.a
 
 RM = rm -rf
 
 COLOUR_BLUE=\033[0;35m
 
 
-SRCS = ./srcs/cub3d/cub3d.c \
-	./srcs/cub3d/Parser.c \
-	./srcs/cub3d/init.c \
-	./srcs/cub3d/Render.c \
-	./srcs/cub3d/minimap.c \
-	./srcs/cub3d/tools.c \
-	./srcs/cub3d/Movements.c \
-	./srcs/cub3d/MovementsHelpers.c \
-	./srcs/cub3d/imageHelpers.c \
-	./srcs/cub3d/renderUtils.c \
-	./srcs/cub3d/quit.c \
-	./srcs/gnl/get_next_line.c
+SRCS = ./srcs/Game/Render/Cub3d.c \
+	./srcs/Game/Render/Init.c \
+	./srcs/Game/Render/Render.c \
+	./srcs/Game/Render/Minimap.c \
+	./srcs/Game/Render/Helpers.c \
+	./srcs/Game/Render/Movements.c \
+	./srcs/Game/Render/MovementsHelpers.c \
+	./srcs/Game/Render/ImageHelpers.c \
+	./srcs/Game/Render/RenderUtils.c \
+	./srcs/Game/Render/Quit.c \
+	./srcs/Game/Parser/autre_function.c \
+	./srcs/Game/Parser/cheak_content_map.c \
+	./srcs/Game/Parser/cheak.c \
+	./srcs/Game/Parser/encoded_color.c \
+	./srcs/Game/Parser/get_content.c \
+	./srcs/Game/Parser/get.c \
+	./srcs/Game/Parser/help_function.c \
+	./srcs/Game/Parser/les_cas.c \
+	./srcs/Game/Parser/parcing_map.c \
+
 
 OBJS = $(SRCS:%.c=%.o)
 
@@ -33,8 +41,7 @@ $(VERBOSE).SILENT:
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@make -C ./srcs/libft/
-	@$(CC) $(CFLAGS) $(OBJS) $(MLXFLAGS) $(LIBFTPATH) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(MLXFLAGS)  -o $(NAME)
 	@echo "👉 $(COLOUR_BLUE)COMPILING DONE$(COLOUR_END) 👈"
 
 %.o : %.cpp
@@ -42,11 +49,8 @@ $(NAME): $(OBJS)
 
 clean:
 	@$(RM) $(OBJS)
-	@$(RM) ./srcs/libft/*.o
-	@make clean -C ./srcs/libft/
 
 fclean: clean
 	@$(RM) $(NAME)
-	@make fclean -C ./srcs/libft/
 
 re: fclean all

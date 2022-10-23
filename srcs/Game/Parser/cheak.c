@@ -6,13 +6,13 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 10:22:41 by labenall          #+#    #+#             */
-/*   Updated: 2022/10/22 18:49:00 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/23 11:38:49 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../../incl/cub3d.h"
 
-int cheak_name(char *name)
+int cheak_name(const char *name)
 {
 	size_t size;
 

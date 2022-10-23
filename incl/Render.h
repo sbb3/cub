@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.h                                           :+:      :+:    :+:   */
+/*   Render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:43 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/22 19:33:23 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/23 12:24:27 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@
 #include <math.h>
 #include <sys/time.h>
 
-#define NORTH_TEXTURE "./images/purplestone.xpm"
-#define SOUTH_TEXTURE "./images/bluestone.xpm"
-#define WEST_TEXTURE "./images/greystone.xpm"
-#define EAST_TEXTURE "./images/redbrick.xpm"
+#define NORTH_TEXTURE game->parser->no->path
+#define SOUTH_TEXTURE game->parser->so->path
+#define WEST_TEXTURE game->parser->we->path
+#define EAST_TEXTURE game->parser->ea->path
 
 #define ESC_KEY 53
 #define W_KEY 13
@@ -51,6 +51,9 @@
 
 #define WINDOW_WIDTH (SQUARE_WIDTH * game->map_width)
 #define WINDOW_HEIGHT (SQUARE_WIDTH * game->map_height)
+
+#define MINIMAP_WIDTH (MINIMAP_SIZE * game->map_width)
+#define MINIMAP_HEIGHT (MINIMAP_SIZE * game->map_height)
 
 #define HALF_WINDOW_WIDTH (WINDOW_WIDTH / 2)
 #define HALF_WINDOW_HEIGHT (WINDOW_HEIGHT / 2)
@@ -136,6 +139,7 @@ typedef struct s_game
 	s_texture *s_t_data;
 	w_texture *w_t_data;
 	e_texture *e_t_data;
+	t_map *parser;
 
 	void *mlx;
 	void *win;
@@ -219,7 +223,6 @@ char *ft_strdup(char *s);
 int search_newline(char *s, char c);
 int ft_slen(char *s);
 
-void parser(const char *av[], t_game *game);
 char **map_read(const char *av[], t_game *game);
 void check_map_extension(const char *av[]);
 int mapWidth(char *s);
