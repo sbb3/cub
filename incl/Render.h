@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:43 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/23 12:24:27 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/25 17:08:14 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -259,7 +259,6 @@ void fix_angle(t_game *game, char c);
 
 void ray_wall_collision_horizontally(t_game *game);
 void ray_wall_collision_vertically(t_game *game);
-t_global_image *createGlobalImage(t_game *game);
 void draw(t_game *game);
 int out_of_container_width_and_height(t_game *game);
 void reset_vars_to_zero(t_game *game);
@@ -269,7 +268,6 @@ int scale_down(t_game *game, int minimap_size, int window_size, int coordinate);
 void drawRectMinimap(char *frame_addr, int bpp, int sLine, int startX, int startY, int sizeX, int sizeY, int color);
 unsigned int get_the_color_from_north_texture(t_game *game);
 void draw_texture_colors_on_walls(t_game *game, int startX, int wall_top_pixel, int wall_bottom_pixel);
-n_texture *createNorthTextureImage(t_game *game);
 void set_the_texture_color_on_walls(t_game *game, int x, int y, unsigned int color);
 void edit_pixel(t_game *game, int startX, int startY, int sizeX, int sizeY, int color);
 void draw_floor(t_game *game, int startX, int startY, int endX, int endY, int color);
@@ -287,9 +285,11 @@ void do_init(t_game *game);
 void do_init_more(t_game *game);
 void draw_minimap_player(t_game *game);
 void re_draw(t_game *game);
-s_texture *createSouthTextureImage(t_game *game);
-w_texture *createWestTextureImage(t_game *game);
-e_texture *createEastTextureImage(t_game *game);
+t_global_image *create_global_image(t_game *game);
+n_texture *create_north_texture_image(t_game *game);
+s_texture *create_south_texture_image(t_game *game);
+w_texture *create_west_texture_image(t_game *game);
+e_texture *create_east_texture_image(t_game *game);
 unsigned int get_the_color_from_south_texture(t_game *game);
 unsigned int get_the_color_from_west_texture(t_game *game);
 unsigned int get_the_color_from_east_texture(t_game *game);
@@ -300,7 +300,7 @@ void move_down(t_game *game);
 void move_left(t_game *game);
 void move_right(t_game *game);
 void rotate(t_game *game, char c);
-void correct_angle(int *angle);
+void correct_angle(float *angle);
 void move_up_down(t_game *game, char c);
 void move_left_right(t_game *game, char c);
 void rotate(t_game *game, char c);

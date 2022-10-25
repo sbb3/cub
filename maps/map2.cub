@@ -3,8 +3,8 @@ SO ./srcs/Assets/Textures/bluestone.xpm
 WE ./srcs/Assets/Textures/greystone.xpm
 EA ./srcs/Assets/Textures/redbrick.xpm
 
-C 200,000,00
-F 000,000,000
+C 162,227,20
+F 160,14,176
 
 111111111111111111
 100000000000000001

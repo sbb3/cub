@@ -6,28 +6,28 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:43 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/23 11:56:08 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/25 17:03:48 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/cub3d.h"
 
-void draw(t_game *game)
+void	draw(t_game *game)
 {
-	game->global_img = createGlobalImage(game); // create the global image
+	/*create the global image*/
+	game->global_img = create_global_image(game);
 	raycasting(game);
 	minimap(game);
 }
 
-int main(int ac, const char *av[])
+int	main(int ac, const char *av[])
 {
-	t_game *game;
+	t_game	*game;
 
 	if (ac != 2)
 		quit(NULL, "Format: ./cub3d <map name>.cub");
-	game = init_variables_and_mlx_and_textures(game, av); /* print the address of game in subfunctions */
-	
-	draw(game); // !! will get removed and used the render function
+	game = init_variables_and_mlx_and_textures(game, av);
+	draw(game);
 	mlx_hook(game->win, 2, 0L, movements, game);
 	mlx_hook(game->win, 17, 0L, red_cross_quit, game);
 	mlx_loop(game->mlx);
@@ -36,8 +36,6 @@ int main(int ac, const char *av[])
 /*
 debug
 */
-
-
 // int	render(t_game *game)
 // {
 // 	draw(game);

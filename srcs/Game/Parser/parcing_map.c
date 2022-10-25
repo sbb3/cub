@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 16:43:47 by labenall          #+#    #+#             */
-/*   Updated: 2022/10/23 18:03:05 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/25 12:01:08 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ t_map *parser(const char *av[])
 		exit_erreur("Check Existence or  Access Control of file");
 	map_struct = initial_map_struct(get_size_map(av[1]), fd);
 	cheak_map(map_struct);
-	// cheak_type(map_struct);
+	cheak_type(map_struct);
 	cheak_content_map(map_struct);
 	// print_strct_map(map_struct);
 	// printf("herer\n");

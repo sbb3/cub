@@ -6,20 +6,20 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:19:33 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/23 18:33:40 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/25 17:06:30 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/cub3d.h"
 
-float distance(int startX, int startY, int endX, int endY)
+/*deltaY  // deltaX | // first check if these coordinates are at wall, else increment them with ystep and xstep till u find a wall*/
+float	distance(int startX, int startY, int endX, int endY)
 {
 	return (sqrt(pow((abs(endX - startX)), 2) + pow((abs(endY - startY)), 2)));
 }
 
-void reset_vars_to_zero(t_game *game)
+void	reset_vars_to_zero(t_game *game)
 {
-	// deltaY  // deltaX | // first check if these coordinates are at wall, else increment them with ystep and xstep till u find a wall
 	game->yinter = 0;
 	game->xinter = 0;
 	game->ystep = 0;
@@ -28,23 +28,22 @@ void reset_vars_to_zero(t_game *game)
 	game->ray_down = 0;
 	game->ray_left = 0;
 	game->ray_right = 0;
-
 	game->is_north = 0;
 	game->is_south = 0;
 	game->is_west = 0;
 	game->is_east = 0;
 }
 
-int out_of_container_width_and_height(t_game *game)
+int	out_of_container_width_and_height(t_game *game)
 {
 	if (game->yinter < 0 || game->yinter >= WINDOW_HEIGHT)
-		return 1;
+		return (1);
 	if (game->xinter < 0 || game->xinter > WINDOW_WIDTH)
-		return 1;
-	return 0;
+		return (1);
+	return (0);
 }
 
-void check_ray_direction(t_game *game)
+void	check_ray_direction(t_game *game)
 {
 	if (game->ray_angle > 0 && game->ray_angle <= 180)
 		game->ray_up = 1;
@@ -52,21 +51,20 @@ void check_ray_direction(t_game *game)
 		game->ray_down = 1;
 	if (game->ray_angle >= 90 && game->ray_angle < 270)
 		game->ray_left = 1;
-	else if ((game->ray_angle >= 270 && game->ray_angle <= 360) || (game->ray_angle >= 0 && game->ray_angle < 90))
+	else if ((game->ray_angle >= 270 && game->ray_angle <= 360)\
+		|| (game->ray_angle >= 0 && game->ray_angle < 90))
 		game->ray_right = 1;
 }
 
-void correct_player_angle(t_game *game)
+void	correct_player_angle(t_game *game)
 {
 	if (game->player_angle < 0)
 		game->player_angle = 360 + game->player_angle;
 	if (game->player_angle > 360)
 		game->player_angle = game->player_angle - 360;
-	// 360%360=0; 0%360=0; 362%360=2 42%360=42; -1%360=359
-	// return (angle % 360); // a<0 360-a < 360-360=0 <a-360
 }
 
-void correct_ray_angle(t_game *game)
+void	correct_ray_angle(t_game *game)
 {
 	if (game->ray_angle < 0)
 		game->ray_angle = 360 + game->ray_angle;
@@ -74,7 +72,7 @@ void correct_ray_angle(t_game *game)
 		game->ray_angle = game->ray_angle - 360;
 }
 
-void looking_for_wall_coordinates_horizontally(t_game *game)
+void	looking_for_wall_coordinates_horizontally(t_game *game)
 {
 
 	game->wall_hit = 0;
@@ -82,6 +80,9 @@ void looking_for_wall_coordinates_horizontally(t_game *game)
 	{
 		if (out_of_container_width_and_height(game))
 			break;
+		if (game->map[(int)floor(game->yinter / SQUARE_SIZE)] == NULL) {
+			break;
+		}
 		if (game->map[(int)floor(game->yinter / SQUARE_SIZE)][(int)floor(game->xinter / SQUARE_SIZE)] == '1')
 			break;
 		game->yinter += game->ystep;
@@ -92,7 +93,7 @@ void looking_for_wall_coordinates_horizontally(t_game *game)
 	game->horizontal_wall_hit_x = game->xinter;
 }
 
-void looking_for_wall_coordinates_vertically(t_game *game)
+void	looking_for_wall_coordinates_vertically(t_game *game)
 {
 	game->wall_hit = 0;
 	while (!game->wall_hit) // checking vertical intersection – the x-axis
@@ -118,7 +119,7 @@ void looking_for_wall_coordinates_vertically(t_game *game)
 	game->vertical_wall_hit_x = game->xinter;
 }
 
-void intersections_and_steps_horizontally(t_game *game)
+void	intersections_and_steps_horizontally(t_game *game)
 {
 	game->yinter = (game->pos_y / SQUARE_SIZE) * SQUARE_SIZE; // floor it
 	if (game->ray_down)
@@ -138,7 +139,7 @@ void intersections_and_steps_horizontally(t_game *game)
 		game->yinter--; // substract a pixel to check if nextY is in the wall
 }
 
-void intersections_and_steps_vertically(t_game *game)
+void	intersections_and_steps_vertically(t_game *game)
 {
 	// calc xinter
 	game->xinter = (game->pos_x / SQUARE_SIZE) * SQUARE_SIZE; // floor it
@@ -160,7 +161,7 @@ void intersections_and_steps_vertically(t_game *game)
 		game->xinter--;
 }
 
-void get_wall_top_bottom_pixels(t_game *game)
+void	get_wall_top_bottom_pixels(t_game *game)
 {
 	// / when HALF_WINDOW_HEIGHT < WINDOW_HEIGHT, wall_top_pixel will be negative
 	game->wall_top_pixel = HALF_WINDOW_HEIGHT - (double)(game->projected_wall_height / 2); // wallHeight drawing start postion on the y-axis
@@ -178,7 +179,7 @@ void get_wall_top_bottom_pixels(t_game *game)
 	// printf("b : %d\n", game->wall_bottom_pixel);
 }
 // int k = 0;
-void get_projected_wall_height(t_game *game)
+void	get_projected_wall_height(t_game *game)
 {
 	// !!!!! distance To Projectddd Wall
 	game->projected_wall_height = (double)(SQUARE_HEIGHT * game->distance_to_projected_wall) / game->correct_ray_distance;
@@ -190,7 +191,7 @@ void get_projected_wall_height(t_game *game)
 	// printf("%lf\n", game->projected_wall_height);
 }
 
-void get_the_short_distance(t_game *game)
+void	get_the_short_distance(t_game *game)
 {
 	game->vertical_distance_to_wall = distance(game->pos_x, game->pos_y, game->vertical_wall_hit_x, game->vertical_wall_hit_y);
 	game->horizontal_distance_to_wall = distance(game->pos_x, game->pos_y, game->horizontal_wall_hit_x, game->horizontal_wall_hit_y);

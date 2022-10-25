@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 10:22:41 by labenall          #+#    #+#             */
-/*   Updated: 2022/10/23 11:38:49 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/25 12:24:51 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,9 @@ void cheak_type(t_map *map_struct)
 										 map_struct->c->g, map_struct->c->b);
 	map_struct->f->color = encodec_color(map_struct->f->r,
 										 map_struct->f->g, map_struct->f->b);
+
+	map_struct->c->cl = (unsigned int ) strtol(map_struct->c->color, NULL, 16);
+	map_struct->f->cl = (unsigned int ) strtol(map_struct->f->color, NULL, 16);
 }
 
 void cheak_and_get_type(t_map *map, size_t *i, size_t *j, int *nbr_type)

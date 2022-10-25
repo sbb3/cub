@@ -1,6 +1,6 @@
 CC = gcc
 # -Wall -Wextra -Werror -g3 -fsanitize=address
-CFLAGS =  -I../incl/ -g3 -fsanitize=address
+CFLAGS =  -I../incl/ -g
 #  -g3 -fsanitize=address
 MLXFLAGS = -lmlx -framework OpenGL -framework AppKit
 
@@ -15,11 +15,13 @@ SRCS = ./srcs/Game/Render/Cub3d.c \
 	./srcs/Game/Render/Init.c \
 	./srcs/Game/Render/Render.c \
 	./srcs/Game/Render/Minimap.c \
-	./srcs/Game/Render/Helpers.c \
+	./srcs/Game/Render/GeneralHelpers.c \
 	./srcs/Game/Render/Movements.c \
 	./srcs/Game/Render/MovementsHelpers.c \
 	./srcs/Game/Render/ImageHelpers.c \
 	./srcs/Game/Render/RenderUtils.c \
+	./srcs/Game/Render/CreateImages.c \
+	./srcs/Game/Render/GetSetColors.c \
 	./srcs/Game/Render/Quit.c \
 	./srcs/Game/Parser/autre_function.c \
 	./srcs/Game/Parser/cheak_content_map.c \

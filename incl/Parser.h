@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 16:43:18 by labenall          #+#    #+#             */
-/*   Updated: 2022/10/23 11:39:56 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/25 11:59:54 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ typedef struct s_type
 
 typedef struct s_color
 {
-	char *color;
+	unsigned int cl;
+	char * color;
 	int r;
 	int g;
 	int b;
@@ -69,7 +70,7 @@ int cheak_name_texure(char *name);
 void cheak_type(t_map *map_struct);
 void cheak_content_map(t_map *map_struct);
 void cheak_map(t_map *map);
-char *encodec_color(int r, int g, int b);
+	char * encodec_color(int r, int g, int b);
 int ft_isdigit(char c);
 int is_player(char c);
 int is_char_map(char c);

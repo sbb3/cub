@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quit.c                                             :+:      :+:    :+:   */
+/*   Quit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:08:14 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/23 10:32:27 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/25 16:54:25 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/cub3d.h"
 
-char **free_map(char **token)
+char	**free_map(char **token)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (token[i])
@@ -32,20 +32,21 @@ void	free_all(t_game *game)
 		free_map(game->map);
 	if (game->global_img->frame)
 		mlx_destroy_image(game->mlx, game->global_img->frame);
-	if (game->n_t_data->frame) /* texture freeing */
+	if (game->n_t_data->frame)
 		mlx_destroy_image(game->mlx, game->n_t_data->frame);
-	if (game->s_t_data->frame) /* texture freeing */
+	if (game->s_t_data->frame)
 		mlx_destroy_image(game->mlx, game->s_t_data->frame);
-	if (game->w_t_data->frame) /* texture freeing */
+	if (game->w_t_data->frame)
 		mlx_destroy_image(game->mlx, game->w_t_data->frame);
-	if (game->e_t_data->frame) /* texture freeing */
+	if (game->e_t_data->frame)
+		mlx_destroy_image(game->mlx, game->e_t_data->frame);
 	if (game->win)
 		mlx_destroy_window(game->mlx, game->win);
 	if (game->mlx)
 		free(game->mlx);
 }
 
-void quit(t_game *game, char *s)
+void	quit(t_game *game, char *s)
 {
 	if (s)
 	{
@@ -55,18 +56,17 @@ void quit(t_game *game, char *s)
 			exit(1);
 	}
 	free_all(game);
-	exit(0);
+	exit(EXIT_FAILURE);
 }
 
-/* when user press the red cross button, the window should be closed*/
-int red_cross_quit(t_game *game)
+int	red_cross_quit(t_game *game)
 {
 	free_all(game);
-	exit(0);
+	exit(EXIT_SUCCESS);
 	return (0);
 }
 
-void exit_if_null(void *p, char *message)
+void	exit_if_null(void *p, char *message)
 {
 	if (!p)
 	{

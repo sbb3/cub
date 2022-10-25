@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:19:59 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/23 18:31:22 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/25 17:09:56 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,17 +58,17 @@ void draw_texture_colors_on_walls(t_game *game, int startX, int wall_top_pixel, 
 		// when projected_wall_height > WINDOW_HEIGHT, wall_top_pixel will be negative and the sign -, then it will be positive
 		game->texture_offset_y = (y - wall_top_pixel) * scaling_factor; // what pixel color to pick from the texture
 		// is_north
-		// if (game->is_north && game->horizontal_Hit)
-		// 	color = get_the_color_from_north_texture(game); // hex color not rgb // the texture pixel color that will drawn on the globalImage
-		// // is_west
-		// else if (game->is_west && !game->horizontal_Hit)
-		// 	color = get_the_color_from_west_texture(game); // hex color not rgb // the texture pixel color that will drawn on the globalImage
-		// // is_south
-		// else if (game->is_south && game->horizontal_Hit)
-		// 	color = get_the_color_from_south_texture(game);
+		if (game->is_north && game->horizontal_Hit)
+			color = get_the_color_from_north_texture(game); // hex color not rgb // the texture pixel color that will drawn on the globalImage
+		// is_west
+		else if (game->is_west && !game->horizontal_Hit)
+			color = get_the_color_from_west_texture(game); // hex color not rgb // the texture pixel color that will drawn on the globalImage
+		// is_south
+		else if (game->is_south && game->horizontal_Hit)
+			color = get_the_color_from_south_texture(game);
 		// is_east texture
-		// else if (game->is_east && !game->horizontal_Hit)
-		// 	color = get_the_color_from_east_texture(game);
+		else if (game->is_east && !game->horizontal_Hit)
+			color = get_the_color_from_east_texture(game);
 
 		set_the_texture_color_on_walls(game, startX, y, color);
 		y++;
@@ -122,7 +122,7 @@ void raycasting(t_game *game) // 64 grid
 	// system("clear");
 
 	game->ray_angle = game->player_angle + HALF_FOV;
-	correct_ray_angle(game);
+	correct_angle(&game->ray_angle);
 	game->distance_to_projected_wall = (WINDOW_HEIGHT / 2) / tan(degreeToRadian(HALF_FOV));
 	x = -1;
 		// printf("%lf\n", game->player_angle);
@@ -131,12 +131,12 @@ void raycasting(t_game *game) // 64 grid
 		ray_wall_collision_horizontally(game);
 		ray_wall_collision_vertically(game);
 		calculations(game);
-		draw_ceiling_floor(game, x, 0, game->wall_top_pixel, 0x454745);						  // draw the ceil
-		draw_ceiling_floor(game, x, game->wall_bottom_pixel, WINDOW_HEIGHT, 0x808a83);		  // draw the floor
+		draw_ceiling_floor(game, x, 0, game->wall_top_pixel, game->parser->c->cl);						  // draw the ceil
+		draw_ceiling_floor(game, x, game->wall_bottom_pixel, WINDOW_HEIGHT, game->parser->f->cl);		  // draw the floor
 		draw_texture_colors_on_walls(game, x, game->wall_top_pixel, game->wall_bottom_pixel); // change this prototype
 		// printf("%lf\n", game->ray_angle);
 		game->ray_angle -= game->ray_angle_increment; // needed for drawing next ray // if it goes over 360, will reset to 0 + rayAngle
-		correct_ray_angle(game);
+		correct_angle(&game->ray_angle);
 		// printf("%d\n", game->projected_wall_height);
 	}
 

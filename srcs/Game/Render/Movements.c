@@ -6,27 +6,19 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:29:49 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/23 10:32:26 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/25 16:49:57 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/cub3d.h"
 
-void correct_angle(int *angle)
-{
-	if (*angle < 0)
-		*angle = 360 + *angle;
-	if (*angle > 360)
-		*angle = *angle - 360;
-}
-
-void re_draw(t_game *game)
+void	re_draw(t_game *game)
 {
 	delete_global_image_then_clear_window(game);
-	draw(game); /* redraw again*/
+	draw(game);
 }
 
-int movements(int keycode, t_game *game)
+int	movements(int keycode, t_game *game)
 {
 	if (keycode == ESC_KEY)
 		quit(game, NULL);
@@ -42,7 +34,6 @@ int movements(int keycode, t_game *game)
 		rotate(game, 'L');
 	if (keycode == RIGHT_KEY)
 		rotate(game, 'R');
-
 	re_draw(game);
 	return (0);
 }
