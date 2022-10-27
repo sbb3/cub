@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:29:49 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/25 16:49:57 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/27 10:53:45 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,17 @@ int	movements(int keycode, t_game *game)
 	if (keycode == ESC_KEY)
 		quit(game, NULL);
 	if (keycode == W_KEY)
-		move_up_down(game, 'u');
+		move_up(game);
 	if (keycode == S_KEY)
-		move_up_down(game, 'd');
+		move_down(game);
 	if (keycode == A_KEY)
-		move_left_right(game, 'L');
+		move_left(game);
 	if (keycode == D_KEY)
-		move_left_right(game, 'R');
+		move_right(game);
 	if (keycode == LEFT_KEY)
-		rotate(game, 'L');
+		rotate_left(game);
 	if (keycode == RIGHT_KEY)
-		rotate(game, 'R');
+		rotate_right(game);
 	re_draw(game);
 	return (0);
 }

@@ -6,82 +6,77 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 15:31:52 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/25 17:10:28 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/27 10:42:35 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/cub3d.h"
 
-void	move_up_down(t_game *game, char c)
+void	move_up(t_game *game)
 {
-	if (c == 'u')
+	int	next_move_y;
+	int	next_move_x;
+
+	next_move_y = (game->pos_y - game->pdir_y * SPEED) / SQUARE_HEIGHT;
+	next_move_x = (game->pos_x + game->pdir_x * SPEED) / SQUARE_WIDTH;
+	if (game->map[next_move_y][next_move_x] != '1')
 	{
-		if (game->map[(int)((game->pos_y - game->pdir_y * SPEED) / SQUARE_HEIGHT)]
-					 [(int)((game->pos_x + game->pdir_x * SPEED) / SQUARE_WIDTH)] != '1')
-		{
-			game->pos_x += game->pdir_x * SPEED;
-			/* pdir_y : 1 */
-			game->pos_y -= game->pdir_y * SPEED;
-		}
-	}
-	else if (c == 'd')
-	{
-		if (game->map[(int)((game->pos_y + game->pdir_y * SPEED) / SQUARE_HEIGHT)]
-					 [(int)((game->pos_x - game->pdir_x * SPEED) / SQUARE_WIDTH)] != '1')
-		{
-			game->pos_x -= game->pdir_x * SPEED;
-			/* up pdir_y : 1, low pdir_y : -1 */
-			game->pos_y += game->pdir_y * SPEED;
-		}
+		game->pos_x += game->pdir_x * SPEED;
+		/* pdir_y : 1 */
+		game->pos_y -= game->pdir_y * SPEED;
 	}
 }
 
-void	move_left_right(t_game *game, char c)
+void	move_down(t_game *game)
 {
-	/* new_angle_to_which_player_will_move */
+	int	next_move_y;
+	int	next_move_x;
+
+	next_move_y = (game->pos_y + game->pdir_y * SPEED) / SQUARE_HEIGHT;
+	next_move_x = (game->pos_x - game->pdir_x * SPEED) / SQUARE_WIDTH;
+	if (game->map[next_move_y][next_move_x] != '1')
+	{
+		game->pos_x -= game->pdir_x * SPEED;
+		/* up pdir_y : 1, low pdir_y : -1 */
+		game->pos_y += game->pdir_y * SPEED;\
+
+	}
+}
+
+void	move_left(t_game *game)
+{
 	float	new_angle;
-	 /* move left */
-	if (c == 'L')
+	int		next_move_y;
+	int		next_move_x;
+
+	new_angle = game->player_angle + 90;
+	correct_angle(&new_angle);
+	next_move_y = (game->pos_y - sin(degreeToRadian(new_angle)) * SPEED)\
+		/ SQUARE_HEIGHT;
+	next_move_x = (game->pos_x + cos(degreeToRadian(new_angle)) * SPEED)\
+		/ SQUARE_HEIGHT;
+	if (game->map[next_move_y][next_move_x] != '1')
 	{
-		new_angle = game->player_angle + 90;
-		correct_angle(&new_angle);
-		if (game->map[(int)((game->pos_y - sin(degreeToRadian(new_angle)) * SPEED) / SQUARE_HEIGHT)]
-					 [(int)((game->pos_x + cos(degreeToRadian(new_angle)) * SPEED) / SQUARE_HEIGHT)] != '1')
-		{
-			game->pos_x += cos(degreeToRadian(new_angle)) * SPEED;
-			game->pos_y -= sin(degreeToRadian(new_angle)) * SPEED;
-		}
-	}
-	/* move right */
-	else if (c == 'R')
-	{
-		new_angle = game->player_angle - 90;
-		correct_angle(&new_angle);
-		if (game->map[(int)((game->pos_y - sin(degreeToRadian(new_angle)) * SPEED) / SQUARE_HEIGHT)]
-					 [(int)((game->pos_x + cos(degreeToRadian(new_angle)) * SPEED) / SQUARE_HEIGHT)] != '1')
-		{
-			game->pos_x += cos(degreeToRadian(new_angle)) * SPEED;
-			game->pos_y -= sin(degreeToRadian(new_angle)) * SPEED;
-		}
+		game->pos_x += cos(degreeToRadian(new_angle)) * SPEED;
+		game->pos_y -= sin(degreeToRadian(new_angle)) * SPEED;
 	}
 }
 
-void	rotate(t_game *game, char c)
+void	move_right(t_game *game)
 {
-	/* rotate left */
-	if (c == 'L')
+	float	new_angle;
+	int		next_move_y;
+	int		next_move_x;
+
+	new_angle = game->player_angle - 90;
+	correct_angle(&new_angle);
+	next_move_y = (game->pos_y - sin(degreeToRadian(new_angle)) * SPEED) \
+		/ SQUARE_HEIGHT;
+	next_move_x = (game->pos_x + cos(degreeToRadian(new_angle)) * SPEED) \
+		/ SQUARE_HEIGHT;
+	if (game->map[next_move_y][next_move_x] != '1')
 	{
-		game->player_angle += ROTATION;
-		correct_angle(&game->player_angle);
-		game->pdir_x = cos(degreeToRadian(game->player_angle));
-		game->pdir_y = sin(degreeToRadian(game->player_angle));
-	}
-	 /* rotate right */
-	else if (c == 'R')
-	{
-		game->player_angle -= ROTATION;
-		correct_angle(&game->player_angle);
-		game->pdir_x = cos(degreeToRadian(game->player_angle));
-		game->pdir_y = sin(degreeToRadian(game->player_angle));
+		game->pos_x += cos(degreeToRadian(new_angle)) * SPEED;
+		game->pos_y -= sin(degreeToRadian(new_angle)) * SPEED;
 	}
 }
