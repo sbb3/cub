@@ -6,11 +6,11 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 13:34:21 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/27 22:20:23 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/27 22:29:48 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../incl/cub3d.h"
+#include "../../../../incl/cub3d.h"
 
 /* WALL STRETCHING FIX using these 2 arguments,
 and dont reset wall_bottom_pixel and wall_top_pixel */

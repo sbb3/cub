@@ -6,11 +6,11 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 15:50:46 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/27 22:17:53 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/27 22:29:25 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../incl/cub3d.h"
+#include "../../../../incl/cub3d.h"
 
 /* global image creation*/
 t_global_image	*create_global_image(t_game *game)

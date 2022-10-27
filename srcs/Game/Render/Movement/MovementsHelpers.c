@@ -6,11 +6,11 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 15:31:52 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/27 22:19:18 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/27 22:30:11 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../incl/cub3d.h"
+#include "../../../../incl/cub3d.h"
 
 void	move_up(t_game *game)
 {

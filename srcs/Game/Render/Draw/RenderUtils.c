@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   renderUtils.c                                      :+:      :+:    :+:   */
+/*   RenderUtils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:19:33 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/27 18:13:45 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/27 22:30:01 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../incl/cub3d.h"
+#include "../../../../incl/cub3d.h"
 
 /*checking Horizontal intersection – the y-axis*/
 void	looking_for_wall_coordinates_horizontally(t_game *game)

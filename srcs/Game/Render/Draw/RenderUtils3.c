@@ -6,11 +6,11 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:19:33 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/27 22:21:44 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/27 22:30:05 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../incl/cub3d.h"
+#include "../../../../incl/cub3d.h"
 
 void	reset_vars_to_zero(t_game *game)
 {

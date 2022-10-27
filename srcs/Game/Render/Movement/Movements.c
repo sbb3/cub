@@ -6,11 +6,11 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:29:49 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/27 22:18:18 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/27 22:30:09 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../incl/cub3d.h"
+#include "../../../../incl/cub3d.h"
 
 void	re_draw(t_game *game)
 {

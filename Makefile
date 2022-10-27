@@ -13,19 +13,19 @@ COLOUR_BLUE=\033[0;35m
 
 SRCS = ./srcs/Game/Render/Cub3d.c \
 	./srcs/Game/Render/Init.c \
-	./srcs/Game/Render/Render.c \
-	./srcs/Game/Render/Paint.c \
-	./srcs/Game/Render/RenderUtils.c \
-	./srcs/Game/Render/RenderUtils2.c \
-	./srcs/Game/Render/RenderUtils3.c \
-	./srcs/Game/Render/Minimap.c \
+	./srcs/Game/Render/Draw/Render.c \
+	./srcs/Game/Render/Draw/Paint.c \
+	./srcs/Game/Render/Draw/RenderUtils.c \
+	./srcs/Game/Render/Draw/RenderUtils2.c \
+	./srcs/Game/Render/Draw/RenderUtils3.c \
+	./srcs/Game/Render/Draw/Minimap.c \
+	./srcs/Game/Render/Movement/Movements.c \
+	./srcs/Game/Render/Movement/MovementsHelpers.c \
+	./srcs/Game/Render/Movement/MovementsHelpers2.c \
+	./srcs/Game/Render/ImageHelpers/ImageHelpers.c \
+	./srcs/Game/Render/ImageHelpers/CreateImages.c \
+	./srcs/Game/Render/ImageHelpers/GetSetColors.c \
 	./srcs/Game/Render/GeneralHelpers.c \
-	./srcs/Game/Render/Movements.c \
-	./srcs/Game/Render/MovementsHelpers.c \
-	./srcs/Game/Render/MovementsHelpers2.c \
-	./srcs/Game/Render/ImageHelpers.c \
-	./srcs/Game/Render/CreateImages.c \
-	./srcs/Game/Render/GetSetColors.c \
 	./srcs/Game/Render/Quit.c \
 	./srcs/Game/Parser/autre_function.c \
 	./srcs/Game/Parser/cheak_content_map.c \
