@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 16:40:25 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/25 17:06:02 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/27 15:50:58 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ unsigned int	get_the_color_from_east_texture(t_game *game)
 	return (*(unsigned int *)color_pixel);
 }
 
-void	set_the_texture_color_on_walls(t_game *game, int x, int y, unsigned int color)
+void	set_the_texture_color_on_walls(t_game *game, int x, int y, \
+	unsigned int color)
 {
 	int		pixel_offset;
 	char	*color_pixel;
@@ -66,8 +67,8 @@ void	set_the_texture_color_on_walls(t_game *game, int x, int y, unsigned int col
 		+ (x * game->global_img->bpp / 8);
 	color_pixel = game->global_img->frame_addr + pixel_offset;
 	*(unsigned int *)color_pixel = color;
-
 }
+
 /*
 set_the_texture_color_on_walls
 

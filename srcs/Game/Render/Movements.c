@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:29:49 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/27 10:53:45 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/27 22:18:18 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ int	movements(int keycode, t_game *game)
 		// printf("down %d\n", down);
 		// printf("pa %d\n", game->player_angle);
 		// printf("na %d\n", new_angle_in_degrees);
-		// printf("cos(na) %lf\n", cos(degreeToRadian(new_angle_in_degrees)));
-		// printf("sin(na) %lf\n", sin(degreeToRadian(new_angle_in_degrees)));
+		// printf("cos(na) %lf\n", cos(degree_to_radian(new_angle_in_degrees)));
+		// printf("sin(na) %lf\n", sin(degree_to_radian(new_angle_in_degrees)));
 		// printf("new_pos_x %d\n", new_pos_x);
 		// printf("new_pos_y %d\n", new_pos_y);
 		// printf("pos_x %d\n", game->pos_x);

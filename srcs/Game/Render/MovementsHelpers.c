@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 15:31:52 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/27 10:42:35 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/27 22:19:18 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ void	move_down(t_game *game)
 	{
 		game->pos_x -= game->pdir_x * SPEED;
 		/* up pdir_y : 1, low pdir_y : -1 */
-		game->pos_y += game->pdir_y * SPEED;\
-
+		game->pos_y += game->pdir_y * SPEED;
 	}
 }
 
@@ -51,14 +50,14 @@ void	move_left(t_game *game)
 
 	new_angle = game->player_angle + 90;
 	correct_angle(&new_angle);
-	next_move_y = (game->pos_y - sin(degreeToRadian(new_angle)) * SPEED)\
+	next_move_y = (game->pos_y - sin(degree_to_radian(new_angle)) * SPEED) \
 		/ SQUARE_HEIGHT;
-	next_move_x = (game->pos_x + cos(degreeToRadian(new_angle)) * SPEED)\
+	next_move_x = (game->pos_x + cos(degree_to_radian(new_angle)) * SPEED) \
 		/ SQUARE_HEIGHT;
 	if (game->map[next_move_y][next_move_x] != '1')
 	{
-		game->pos_x += cos(degreeToRadian(new_angle)) * SPEED;
-		game->pos_y -= sin(degreeToRadian(new_angle)) * SPEED;
+		game->pos_x += cos(degree_to_radian(new_angle)) * SPEED;
+		game->pos_y -= sin(degree_to_radian(new_angle)) * SPEED;
 	}
 }
 
@@ -70,13 +69,13 @@ void	move_right(t_game *game)
 
 	new_angle = game->player_angle - 90;
 	correct_angle(&new_angle);
-	next_move_y = (game->pos_y - sin(degreeToRadian(new_angle)) * SPEED) \
+	next_move_y = (game->pos_y - sin(degree_to_radian(new_angle)) * SPEED) \
 		/ SQUARE_HEIGHT;
-	next_move_x = (game->pos_x + cos(degreeToRadian(new_angle)) * SPEED) \
+	next_move_x = (game->pos_x + cos(degree_to_radian(new_angle)) * SPEED) \
 		/ SQUARE_HEIGHT;
 	if (game->map[next_move_y][next_move_x] != '1')
 	{
-		game->pos_x += cos(degreeToRadian(new_angle)) * SPEED;
-		game->pos_y -= sin(degreeToRadian(new_angle)) * SPEED;
+		game->pos_x += cos(degree_to_radian(new_angle)) * SPEED;
+		game->pos_y -= sin(degree_to_radian(new_angle)) * SPEED;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 15:50:46 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/25 16:02:20 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/27 22:17:53 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ t_global_image	*create_global_image(t_game *game)
 	image = ft_calloc(1, sizeof(t_global_image));
 	if (!image)
 		exit_if_null(image, "Allocation failed");
-	image->frame = mlx_new_image(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	image->frame = mlx_new_image(game->mlx, game->window_width, \
+		game->window_height);
 	if (!image->frame)
 		exit_if_null(image->frame, "Could not create an global image");
 	image->frame_addr = mlx_get_data_addr(image->frame, &image->bpp, \
@@ -29,14 +30,16 @@ t_global_image	*create_global_image(t_game *game)
 }
 
 /* north texture image creation*/
-n_texture	*create_north_texture_image(t_game *game)
+t_n_texture	*create_north_texture_image(t_game *game)
 {
-	n_texture	*data;
+	t_n_texture	*data;
+	char		*texture_path;
 
-	data = ft_calloc(1, sizeof(n_texture));
+	texture_path = game->parser->no->path;
+	data = ft_calloc(1, sizeof(t_n_texture));
 	if (!data)
 		exit_if_null(data, "Allocation failed");
-	data->frame = mlx_xpm_file_to_image(game->mlx, NORTH_TEXTURE, \
+	data->frame = mlx_xpm_file_to_image(game->mlx, texture_path, \
 		&data->w, &data->h);
 	if (!data->frame)
 		exit_if_null(data->frame, "Could not load the texture from the xpm");
@@ -48,14 +51,16 @@ n_texture	*create_north_texture_image(t_game *game)
 }
 
 /* south texture image creation*/
-s_texture	*create_south_texture_image(t_game *game)
+t_s_texture	*create_south_texture_image(t_game *game)
 {
-	s_texture	*data;
+	t_s_texture	*data;
+	char		*texture_path;
 
-	data = ft_calloc(1, sizeof(s_texture));
+	texture_path = game->parser->so->path;
+	data = ft_calloc(1, sizeof(t_s_texture));
 	if (!data)
 		exit_if_null(data, "Allocation failed");
-	data->frame = mlx_xpm_file_to_image(game->mlx, SOUTH_TEXTURE, \
+	data->frame = mlx_xpm_file_to_image(game->mlx, texture_path, \
 		&data->w, &data->h);
 	if (!data->frame)
 		exit_if_null(data->frame, "Could not load the texture from the xpm");
@@ -67,14 +72,16 @@ s_texture	*create_south_texture_image(t_game *game)
 }
 
 /* w texture image creation*/
-w_texture	*create_west_texture_image(t_game *game)
+t_w_texture	*create_west_texture_image(t_game *game)
 {
-	w_texture	*data;
+	t_w_texture	*data;
+	char		*texture_path;
 
-	data = ft_calloc(1, sizeof(w_texture));
+	texture_path = game->parser->we->path;
+	data = ft_calloc(1, sizeof(t_w_texture));
 	if (!data)
 		exit_if_null(data, "Allocation failed");
-	data->frame = mlx_xpm_file_to_image(game->mlx, WEST_TEXTURE, \
+	data->frame = mlx_xpm_file_to_image(game->mlx, texture_path, \
 		&data->w, &data->h);
 	if (!data->frame)
 		exit_if_null(data->frame, "Could not load the texture from the xpm");
@@ -86,14 +93,16 @@ w_texture	*create_west_texture_image(t_game *game)
 }
 
 /* e texture image creation*/
-e_texture	*create_east_texture_image(t_game *game)
+t_e_texture	*create_east_texture_image(t_game *game)
 {
-	e_texture	*data;
+	t_e_texture	*data;
+	char		*texture_path;
 
-	data = ft_calloc(1, sizeof(e_texture));
+	texture_path = game->parser->ea->path;
+	data = ft_calloc(1, sizeof(t_e_texture));
 	if (!data)
 		exit_if_null(data, "Allocation failed");
-	data->frame = mlx_xpm_file_to_image(game->mlx, EAST_TEXTURE, \
+	data->frame = mlx_xpm_file_to_image(game->mlx, texture_path, \
 		&data->w, &data->h);
 	if (!data->frame)
 		exit_if_null(data->frame, "Could not load the texture from the xpm");

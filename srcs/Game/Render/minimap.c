@@ -1,72 +1,71 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Minimap.c                                          :+:      :+:    :+:   */
+/*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:51:55 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/23 18:15:07 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/27 22:15:46 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/cub3d.h"
 
-int scale_down(t_game *game, int minimap_size, int window_size, int coordinate)
+int	scale_down(t_game *game, int minimap_size, int window_size, int coordinate)
 {
-	double scale_factor;
+	double	scale_factor;
 
 	scale_factor = (double)minimap_size / window_size;
 	return (coordinate * scale_factor);
 }
 
-void edit_pixel(t_game *game, int startX, int startY, int sizeX, int sizeY, int color)
+void	draw_arrow_line(t_game *game, int start_x, int start_y, float new_angle)
 {
-	int y = 0;
-	int x;
-	while (y < sizeY)
+	int		pixels_count;
+	double	pixel_x;
+	double	pixel_y;
+
+	pixels_count = 10;
+	pixel_x = start_x;
+	pixel_y = start_y;
+
+	while (pixels_count)
 	{
-		x = 0;
-		while (x < sizeX)
-		{
-			coloring_pixel(game, x + startX, y + startY, color);
-			x++;
-		}
-		y++;
+		coloring_pixel(game, pixel_x, pixel_y, 0x0000ff);
+		pixel_x += cos(degree_to_radian(new_angle));
+		pixel_y -= sin(degree_to_radian(new_angle));
+		pixels_count--;
 	}
 }
 
-void drawLinePlayer(t_game *game, int startY, int startX, int color)
+/*
+draw right arrow line => game->player_angle - 140
+draw left arrow line => game->player_angle + 140
+*/
+void	draw_minimap_arrow(t_game *game)
 {
-	// pythaghors equation
-	int pixelsCount = 100;
-	double pixelX = startX;
-	double pixelY = startY;
-	while (pixelsCount)
-	{
-		coloring_pixel(game, pixelX, pixelY, color);
-		pixelX += game->pdir_x; // dirX = direction, default to 0, range  [ -1 < 0 < 1 ]
-		pixelY -= game->pdir_y; // dirY = direction, default to -1, range [ -1 < 0 < 1 ]
-		pixelsCount--;
-	}
+	int		scaled_pos_x;
+	int		scaled_pos_y;
+	float	right_arrow_angle;
+	float	left_arrow_angle;
+
+	scaled_pos_x = scale_down(game, game->minimap_width, game->window_width, \
+		game->pos_x);
+	scaled_pos_y = scale_down(game, game->minimap_height, game->window_height, \
+		game->pos_y);
+	right_arrow_angle = (game->player_angle - 140);
+	correct_angle(&right_arrow_angle);
+	draw_arrow_line(game, scaled_pos_x, scaled_pos_y, right_arrow_angle);
+	left_arrow_angle = (game->player_angle + 140);
+	correct_angle(&left_arrow_angle);
+	draw_arrow_line(game, scaled_pos_x, scaled_pos_y, left_arrow_angle);
 }
 
-void draw_minimap_player(t_game *game)
+void	draw_minimap_walls(t_game *game)
 {
-	int player_pos_x_in_minimap;
-	int player_pos_y_in_minimap;
-
-	player_pos_x_in_minimap = scale_down(game, MINIMAP_WIDTH, WINDOW_WIDTH, game->pos_x);
-	player_pos_y_in_minimap = scale_down(game, MINIMAP_HEIGHT, WINDOW_HEIGHT, game->pos_y);
-	// draw the player
-	edit_pixel(game, player_pos_x_in_minimap, player_pos_y_in_minimap, 5, 5, 0xFB2576);
-	// drawLinePlayer(game, player_pos_y_in_minimap, player_pos_x_in_minimap, 0xffffff);
-}
-
-void draw_minimap_walls(t_game *game)
-{
-	int y;
-	int x;
+	int	y;
+	int	x;
 
 	y = 0;
 	while (game->map[y])
@@ -75,20 +74,28 @@ void draw_minimap_walls(t_game *game)
 		while (game->map[y][x])
 		{
 			if (game->map[y][x] == '1')
-				edit_pixel(game, x * MINIMAP_SIZE, y * MINIMAP_SIZE, MINIMAP_SIZE, MINIMAP_SIZE, 0x554994);
+				edit_pixel(game, x * MINIMAP_SIZE, y * MINIMAP_SIZE, 0x554994);
 			else
-				edit_pixel(game, x * MINIMAP_SIZE, y * MINIMAP_SIZE, MINIMAP_SIZE, MINIMAP_SIZE, 0xF29393);
+				edit_pixel(game, x * MINIMAP_SIZE, y * MINIMAP_SIZE, 0xF29393);
 			x++;
 		}
 		y++;
 	}
 }
 
-void minimap(t_game *game)
+void	minimap(t_game *game)
 {
 	draw_minimap_walls(game);
-	draw_minimap_player(game);
-	// edit_pixel(game, (WINDOW_WIDTH / 2) - 1, 0, 1, WINDOW_HEIGHT, 0xFB2576);
-
-	mlx_put_image_to_window(game->mlx, game->win, game->global_img->frame, 0, 0);
+	draw_minimap_arrow(game);
+	mlx_put_image_to_window(game->mlx, game->win, game->global_img->frame, \
+		0, 0);
 }
+
+/*
+scaled_pos_x = player_pos_x_in_minimap;
+
+draw_arrow_line:
+	pixel_x += cos(degree_to_radian(new_angle)); // dirX = direction, default to 0, range  [ -1 < 0 < 1 ]
+	pixel_y -= sin(degree_to_radian(new_angle)); // dirY = direction, default to -1, range [ -1 < 0 < 1 ]
+
+*/

@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 15:44:06 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/25 17:08:04 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/27 18:12:53 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,9 @@ void	correct_angle(float *angle)
 		*angle = 360 + *angle;
 	if (*angle > 360)
 		*angle = *angle - 360;
+}
+
+float	degree_to_radian(float angleInDegree)
+{
+	return ((angleInDegree * M_PI) / 180);
 }
