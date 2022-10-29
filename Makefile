@@ -8,7 +8,6 @@ RM = rm -rf
 
 COLOUR_BLUE=\033[0;35m
 
-
 SRCS = ./srcs/Game/Render/Cub3d.c \
 	./srcs/Game/Render/Init.c \
 	./srcs/Game/Render/Draw/Render.c \
