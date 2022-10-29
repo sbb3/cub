@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:56 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/27 21:20:57 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/29 15:42:27 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	init_player_starting_direction(t_game *game)
 
 void	init_textures(t_game *game)
 {
+	game->global_img = create_global_image(game);
 	game->n_t_data = create_north_texture_image(game); /*create the texture image*/
 	game->s_t_data = create_south_texture_image(game); /*create the texture image*/
 	game->w_t_data = create_west_texture_image(game);  /*create the texture image*/

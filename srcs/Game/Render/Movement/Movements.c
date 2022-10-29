@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:29:49 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/27 22:30:09 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/29 15:43:25 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	re_draw(t_game *game)
 {
-	delete_global_image_then_clear_window(game);
+	mlx_clear_window(game->mlx, game->win);
 	draw(game);
 }
 

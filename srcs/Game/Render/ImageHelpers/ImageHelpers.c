@@ -6,19 +6,11 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 19:20:17 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/27 22:29:41 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/29 15:43:34 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../incl/cub3d.h"
-
-/* global image freeing */
-void	delete_global_image_then_clear_window(t_game *game)
-{
-	if (game->global_img->frame)
-		mlx_destroy_image(game->mlx, game->global_img->frame);
-	mlx_clear_window(game->mlx, game->win);
-}
 
 void	edit_pixel(t_game *game, int startX, int startY, int color)
 {

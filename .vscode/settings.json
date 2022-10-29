@@ -22,6 +22,7 @@
     "parser.h": "c",
     "types.h": "c",
     "fcntl.h": "c",
-    "complex": "c"
+    "complex": "c",
+    "unistd.h": "c"
   }
 }

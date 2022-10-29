@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:43 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/29 11:46:29 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/29 15:42:18 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 the main image which will draw on it the minimap and the raycasting stuff*/
 void	draw(t_game *game)
 {
-	game->global_img = create_global_image(game);
+	// game->global_img = create_global_image(game);
 	raycaster(game);
 	minimap(game);
 }
