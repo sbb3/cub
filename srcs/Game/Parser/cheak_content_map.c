@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 11:52:32 by labenall          #+#    #+#             */
-/*   Updated: 2022/10/23 14:54:48 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/29 11:49:18 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void cas_strlen1(t_map *map, char *type, int *nbr_type, size_t *i)
 	(*nbr_type)++;
 }
 
-void cheak_incorecte_space(t_map *map_struct, size_t a, size_t b)
+void cheak_incorecte_space(t_map *map_struct, size_t a, int b)
 {
 	if (b == 0)
 		exit_erreur("0 or player in begin of line");

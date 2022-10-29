@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:43 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/27 22:15:55 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/29 11:47:10 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,7 +238,7 @@ void			draw_minimap_walls(t_game *game);
 void			draw_minimap_arrow(t_game *game);
 void			draw_arrow_line(t_game *game, int start_x, int start_y, \
 	float new_angle);
-int				scale_down(t_game *game, int minimap_size, int window_size, \
+int				scale_down(int minimap_size, int window_size, \
 	int coordinate);
 void			edit_pixel(t_game *game, int startX, int startY, int color);
 

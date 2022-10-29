@@ -1,10 +1,10 @@
-NO ./srcs/Assets/Textures/purplestone.xpm
-SO ./srcs/Assets/Textures/bluestone.xpm
-WE ./srcs/Assets/Textures/greystone.xpm
-EA ./srcs/Assets/Textures/redbrick.xpm
+NO ./srcs/Assets/Textures/texture1.xpm
+SO ./srcs/Assets/Textures/texture2.xpm
+WE ./srcs/Assets/Textures/texture3.xpm
+EA ./srcs/Assets/Textures/texture4.xpm
 
-C 162,227,20
-F 160,14,176
+C 194,196,195
+F 247,247,247
 
 111111111111111111
 100000000000000001

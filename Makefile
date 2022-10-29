@@ -1,10 +1,8 @@
-CC = gcc
-# -Wall -Wextra -Werror -g3 -fsanitize=address
+CC = gcc -Wall -Wextra -Werror
+
 CFLAGS =  -I../incl/ -g
 #  -g3 -fsanitize=address
 MLXFLAGS = -lmlx -framework OpenGL -framework AppKit
-
-# LIBFTPATH = ./srcs/libft/libft.a
 
 RM = rm -rf
 

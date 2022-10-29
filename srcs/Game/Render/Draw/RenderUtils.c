@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:19:33 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/27 22:30:01 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/29 11:38:59 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,8 @@ void	intersections_and_steps_vertically(t_game *game)
 	if (game->ray_left)
 		game->xinter--;
 }
-
-/* intersections_and_steps_horizontally
+/*
+intersections_and_steps_horizontally
 
 	// !!!!1 inf or nan
 	if (tan(degree_to_radian(game->ray_angle) == 0))

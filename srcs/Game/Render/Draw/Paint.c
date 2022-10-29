@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 13:34:21 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/27 22:29:48 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/29 11:38:28 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ void	paint(t_game *game, int x)
 }
 
 /*
-
 paint_walls_helper_function:
 if (game->wall_height > game->window_height)
 	{

@@ -6,13 +6,12 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 16:40:25 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/27 22:29:38 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/29 11:40:41 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../incl/cub3d.h"
 
-/* main reason for doing the unsigned int, is there is no sign bit as in int and the guarantee size 4 bytes */
 unsigned int	get_the_color_from_north_texture(t_game *game)
 {
 	int		pixel_offset;

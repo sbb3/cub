@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:19:59 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/27 22:29:50 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/29 11:39:49 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,7 @@ raycasting:
 		// printf("%d\n", game->projected_wall_height);
 
 	coordinates 0 0
+
+deltaY  // deltaX | // first check if these coordinates are at wall, else increment them with ystep and xstep till u find a wall
+
 */

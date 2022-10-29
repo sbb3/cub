@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 15:31:52 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/27 22:30:11 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/29 11:37:47 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	move_up(t_game *game)
 	if (game->map[next_move_y][next_move_x] != '1')
 	{
 		game->pos_x += game->pdir_x * SPEED;
-		/* pdir_y : 1 */
 		game->pos_y -= game->pdir_y * SPEED;
 	}
 }
@@ -37,7 +36,6 @@ void	move_down(t_game *game)
 	if (game->map[next_move_y][next_move_x] != '1')
 	{
 		game->pos_x -= game->pdir_x * SPEED;
-		/* up pdir_y : 1, low pdir_y : -1 */
 		game->pos_y += game->pdir_y * SPEED;
 	}
 }
@@ -79,3 +77,7 @@ void	move_right(t_game *game)
 		game->pos_y -= sin(degree_to_radian(new_angle)) * SPEED;
 	}
 }
+
+/**
+ *  max pdir_y : 1, min pdir_y : -1
+*/

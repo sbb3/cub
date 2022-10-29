@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:19:33 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/27 22:30:05 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/29 11:39:36 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	ray_direction(t_game *game)
 	}
 }
 
-/*deltaY  // deltaX | // first check if these coordinates are at wall, else increment them with ystep and xstep till u find a wall*/
 float	distance(int startX, int startY, int endX, int endY)
 {
 	return (sqrt(pow((abs(endX - startX)), 2) + pow((abs(endY - startY)), 2)));

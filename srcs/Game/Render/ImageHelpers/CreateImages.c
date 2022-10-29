@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 15:50:46 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/27 22:29:25 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/29 11:40:14 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ t_s_texture	*create_south_texture_image(t_game *game)
 	return (data);
 }
 
-/* w texture image creation*/
+/* west texture image creation*/
 t_w_texture	*create_west_texture_image(t_game *game)
 {
 	t_w_texture	*data;
@@ -92,7 +92,7 @@ t_w_texture	*create_west_texture_image(t_game *game)
 	return (data);
 }
 
-/* e texture image creation*/
+/* east texture image creation*/
 t_e_texture	*create_east_texture_image(t_game *game)
 {
 	t_e_texture	*data;
