@@ -24,6 +24,7 @@ SRCS = ./srcs/Game/Render/Cub3d.c \
 	./srcs/Game/Render/ImageHelpers/GetSetColors.c \
 	./srcs/Game/Render/GeneralHelpers.c \
 	./srcs/Game/Render/Quit.c \
+	./srcs/Game/Render/Free.c \
 	./srcs/Game/Parser/autre_function.c \
 	./srcs/Game/Parser/cheak_content_map.c \
 	./srcs/Game/Parser/cheak.c \

@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:43 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/29 15:50:56 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/30 11:26:38 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,8 +226,10 @@ void			ray_direction(t_game *game);
 void			correct_angle(float *angle);
 void			quit(t_game *game, char *s);
 void			free_all(t_game *game);
-void	destroy_parser_allocations(t_game *game);
-void	destroy_render_allocations(t_game *game);
+void			destroy_parser_allocations(t_game *game);
+void			destroy_parser_allocations_more(t_game *game);
+void			destroy_render_allocations(t_game *game);
+void			destroy_render_allocations_more(t_game *game);
 int				red_cross_quit(t_game *game);
 char			**free_map(char **token);
 void			*ft_calloc(size_t count, size_t size);
