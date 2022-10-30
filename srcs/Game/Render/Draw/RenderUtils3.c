@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:19:33 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/29 11:39:36 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/30 12:09:40 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ray_direction(t_game *game)
 		game->ray_up = 1;
 		game->is_north = 1;
 	}
-	else if (game->ray_angle > 180 && game->ray_angle <= 360)
+	else if (!game->is_north && !game->ray_up)
 	{
 		game->ray_down = 1;
 		game->is_south = 1;
@@ -45,8 +45,7 @@ void	ray_direction(t_game *game)
 		game->ray_left = 1;
 		game->is_west = 1;
 	}
-	else if ((game->ray_angle >= 270 && game->ray_angle <= 360) \
-		|| (game->ray_angle >= 0 && game->ray_angle < 90))
+	else if (!game->is_west && !game->ray_left)
 	{
 		game->ray_right = 1;
 		game->is_east = 1;
