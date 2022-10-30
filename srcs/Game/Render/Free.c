@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 11:20:22 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/30 11:21:39 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/30 11:37:41 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,6 @@ void	destroy_parser_allocations(t_game *game)
 		free(game->parser->we);
 }
 
-void	destroy_render_allocations_more(t_game *game)
-{
-	if (game->win)
-		free(game->win);
-	if (game->mlx)
-		free(game->mlx);
-	if (game->parser)
-		free(game->parser);
-	if (game)
-		free(game);
-}
-
 void	destroy_render_allocations(t_game *game)
 {
 	if (game->global_img->frame)
@@ -82,6 +70,10 @@ void	destroy_render_allocations(t_game *game)
 		free(game->w_t_data);
 	if (game->e_t_data)
 		free(game->e_t_data);
+	if (game->parser)
+		free(game->parser);
+	if (game)
+		free(game);
 }
 
 void	free_all(t_game *game)
@@ -89,5 +81,4 @@ void	free_all(t_game *game)
 	destroy_parser_allocations(game);
 	destroy_parser_allocations_more(game);
 	destroy_render_allocations(game);
-	destroy_render_allocations_more(game);
 }

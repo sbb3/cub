@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:08:14 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/30 11:30:06 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/30 11:38:37 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,13 @@ void	quit(t_game *game, char *s)
 		if (!game)
 			exit(1);
 	}
-	// printf("%p\n", game->mlx);
 	free_all(game);
-	// system("leaks cub3d");
-	// printf("%p\n", game->mlx);
 	exit(EXIT_FAILURE);
 }
 
 int	red_cross_quit(t_game *game)
 {
 	free_all(game);
-	// system("leaks cub3d");
 	exit(EXIT_SUCCESS);
 	return (0);
 }
