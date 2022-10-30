@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 15:31:52 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/30 17:09:08 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/30 17:10:04 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void	move_up(t_game *game)
 		game->pos_y -= game->pdir_y * SPEED;
 		game->pos_x += game->pdir_x * SPEED;
 	}
-
-
 }
 
 void	move_down(t_game *game)
