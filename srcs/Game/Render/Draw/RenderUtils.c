@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:19:33 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/29 11:38:59 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/30 13:57:19 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	looking_for_wall_coordinates_horizontally(t_game *game)
 		game->yinter += game->ystep;
 		game->xinter += game->xstep;
 	}
+	// if (game->ray_up)
+	// 	game->yinter++;
 	game->h_wall_hit_y = game->yinter;
 	game->h_wall_hit_x = game->xinter;
 }
@@ -56,8 +58,8 @@ void	looking_for_wall_coordinates_vertically(t_game *game)
 		game->xinter += game->xstep;
 		game->yinter += game->ystep;
 	}
-	if (game->ray_left)
-		game->xinter++;
+	// if (game->ray_left)
+	// 	game->xinter++;
 	game->v_wall_hit_y = game->yinter;
 	game->v_wall_hit_x = game->xinter;
 }

@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 15:31:52 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/29 11:37:47 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/30 17:09:08 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,15 @@ void	move_up(t_game *game)
 	int	next_move_y;
 	int	next_move_x;
 
-	next_move_y = (game->pos_y - game->pdir_y * SPEED) / SQUARE_HEIGHT;
-	next_move_x = (game->pos_x + game->pdir_x * SPEED) / SQUARE_WIDTH;
+	next_move_y = ((game->pos_y - game->pdir_y * SPEED) / SQUARE_HEIGHT);
+	next_move_x = ((game->pos_x + game->pdir_x * SPEED) / SQUARE_WIDTH);
 	if (game->map[next_move_y][next_move_x] != '1')
 	{
-		game->pos_x += game->pdir_x * SPEED;
 		game->pos_y -= game->pdir_y * SPEED;
+		game->pos_x += game->pdir_x * SPEED;
 	}
+
+
 }
 
 void	move_down(t_game *game)
@@ -35,8 +37,8 @@ void	move_down(t_game *game)
 	next_move_x = (game->pos_x - game->pdir_x * SPEED) / SQUARE_WIDTH;
 	if (game->map[next_move_y][next_move_x] != '1')
 	{
-		game->pos_x -= game->pdir_x * SPEED;
 		game->pos_y += game->pdir_y * SPEED;
+		game->pos_x -= game->pdir_x * SPEED;
 	}
 }
 
