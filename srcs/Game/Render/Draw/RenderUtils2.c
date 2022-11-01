@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:19:33 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/30 13:21:12 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/01 21:18:35 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	get_the_short_distance(t_game *game)
 		game->distorted_ray_distance_to_wall = game->v_dist_to_wall;
 	}
 	game->ray_distance = game->distorted_ray_distance_to_wall \
-		* cos(degree_to_radian(game->ray_angle - game->player_angle));
+		* cos(deg_2_rad(game->ray_angle - game->player_angle));
 }
 
 /* calculing the projected wall hegiht, then from it,
@@ -78,6 +78,6 @@ get_the_short_distance
 		// lodev fisheye explains it
 
 
-		// printf("cd = %lf : rd = %lf : cos(ra - pa) = %lf\n", game->ray_distance, game->distorted_ray_distance_to_wall, cos(degree_to_radian(game->ray_angle - game->player_angle)));
+		// printf("cd = %lf : rd = %lf : cos(ra - pa) = %lf\n", game->ray_distance, game->distorted_ray_distance_to_wall, cos(deg_2_rad(game->ray_angle - game->player_angle)));
 
 */

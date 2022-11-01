@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:51:55 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/01 11:00:40 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/01 21:18:44 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	draw_arrow_line(t_game *game, int start_x, int start_y, float new_angle)
 	while (pixels_count)
 	{
 		coloring_pixel(game, pixel_x, pixel_y, 0xff0000);
-		pixel_x += cos(degree_to_radian(new_angle));
-		pixel_y -= sin(degree_to_radian(new_angle));
+		pixel_x += cos(deg_2_rad(new_angle));
+		pixel_y -= sin(deg_2_rad(new_angle));
 		pixels_count--;
 	}
 }
@@ -94,7 +94,7 @@ void	minimap(t_game *game)
 scaled_pos_x = player_pos_x_in_minimap;
 
 draw_arrow_line:
-	pixel_x += cos(degree_to_radian(new_angle)); // dirX = direction, default to 0, range  [ -1 < 0 < 1 ]
+	pixel_x += cos(deg_2_rad(new_angle)); // dirX = direction, default to 0, range  [ -1 < 0 < 1 ]
 	pixel_y -= sin(degree_to_radian(new_angle)); // dirY = direction, default to -1, range [ -1 < 0 < 1 ]
 
 */

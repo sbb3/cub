@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Init.c                                             :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:56 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/29 15:42:27 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/01 21:17:47 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	init_player_starting_direction(t_game *game)
 		game->player_angle = 270;
 	else if (game->parser->p_direction == 'E')
 		game->player_angle = 360;
-	game->pdir_x = cos(degree_to_radian(game->player_angle)); /*player starting rotation angle*/
-	game->pdir_y = sin(degree_to_radian(game->player_angle)); /*player starting rotattion angle, should match the sin in the movements function*/
+	game->pdir_x = cos(deg_2_rad(game->player_angle)); /*player starting rotation angle*/
+	game->pdir_y = sin(deg_2_rad(game->player_angle)); /*player starting rotattion angle, should match the sin in the movements function*/
 }
 
 void	init_textures(t_game *game)

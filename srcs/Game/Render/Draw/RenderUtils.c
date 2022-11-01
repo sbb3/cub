@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:19:33 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/30 13:57:19 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/01 21:18:23 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,14 @@ void	intersections_and_steps_horizontally(t_game *game)
 	game->yinter = (game->pos_y / SQUARE_SIZE) * SQUARE_SIZE;
 	if (game->ray_down)
 		game->yinter += SQUARE_SIZE;
-	if (tan(degree_to_radian(game->ray_angle) == 0))
-		game->ray_angle -= degree_to_radian(1);
+	if (tan(deg_2_rad(game->ray_angle) == 0))
+		game->ray_angle -= deg_2_rad(1);
 	game->xinter = (game->pos_x + ((game->pos_y - game->yinter) \
-		/ tan(degree_to_radian(game->ray_angle))));
+		/ tan(deg_2_rad(game->ray_angle))));
 	game->ystep = SQUARE_SIZE;
 	if (game->ray_up)
 		game->ystep *= -1;
-	game->xstep = SQUARE_SIZE / tan(degree_to_radian(game->ray_angle));
+	game->xstep = SQUARE_SIZE / tan(deg_2_rad(game->ray_angle));
 	if (game->ray_left && game->xstep > 0)
 		game->xstep *= -1;
 	if (game->ray_right && game->xstep < 0)
@@ -91,11 +91,11 @@ void	intersections_and_steps_vertically(t_game *game)
 	if (game->ray_right)
 		game->xinter += SQUARE_SIZE;
 	game->yinter = (game->pos_y + ((game->pos_x - game->xinter) \
-		* tan(degree_to_radian(game->ray_angle))));
+		* tan(deg_2_rad(game->ray_angle))));
 	game->xstep = SQUARE_SIZE;
 	if (game->ray_left)
 		game->xstep *= -1;
-	game->ystep = SQUARE_SIZE * tan(degree_to_radian(game->ray_angle));
+	game->ystep = SQUARE_SIZE * tan(deg_2_rad(game->ray_angle));
 	if (game->ray_up && game->ystep > 0)
 		game->ystep *= -1;
 	if (game->ray_down && game->ystep < 0)
@@ -107,7 +107,7 @@ void	intersections_and_steps_vertically(t_game *game)
 intersections_and_steps_horizontally
 
 	// !!!!1 inf or nan
-	if (tan(degree_to_radian(game->ray_angle) == 0))
+	if (tan(deg_2_rad(game->ray_angle) == 0))
 			game->ray_angle -= degree_to_radian(1);
 
 	// xstep on left down side will be positive so we turn it to negative same as the left up side, is already negative

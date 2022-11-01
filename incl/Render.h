@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:43 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/01 21:16:09 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/01 21:17:24 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,7 +226,7 @@ int				out_of_container_width_and_height(t_game *game);
 void			reset_vars_to_zero(t_game *game);
 
 /* other utils */
-float			degree_to_radian(float angleInDegree);
+float			deg_2_rad(float angleInDegree);
 void			ray_direction(t_game *game);
 void			correct_angle(float *angle);
 float			fix_angle(float angle);

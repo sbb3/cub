@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 15:31:52 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/01 21:13:26 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/01 22:19:20 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,30 @@ void	move_down(t_game *game)
 	}
 }
 
+ /* new_angle : game->player_angle + 90 */
+ /* !is_wall_on_left(game, 90) : should move left when 90 degree its way is free  */
 void	move_left(t_game *game)
 {
-	if (!is_wall_on_left(game, 90)) /* should move left when 90 degree its way is free  */
+	if ((!is_wall_on_left(game, 90) && !is_wall_on_up(game)) \
+		|| (!is_wall_on_left(game, 90) && !is_wall_on_down(game)))
 	{
-		game->pos_x += cos(degree_to_radian(fix_angle(game->player_angle + 90))) * SPEED; /* new_angle : game->player_angle + 90 */
-		game->pos_y -= sin(degree_to_radian(fix_angle(game->player_angle + 90))) * SPEED;
+		game->pos_x += cos(deg_2_rad(fix_angle(game->player_angle + 90))) \
+			* SPEED;
+		game->pos_y -= sin(deg_2_rad(fix_angle(game->player_angle + 90))) \
+			* SPEED;
 	}
 }
 
+/* (!is_wall_on_right(game, 90)) without 45 degree, if there was 45 degree, player could not move when intersected with wall on  */
 void	move_right(t_game *game)
 {
-	if (!is_wall_on_right(game, 90)) /* without 45 degree, if there was 45 degree, player could not move when intersected with wall on  */
+	if ((!is_wall_on_right(game, 90) && !is_wall_on_up(game)) \
+		|| (!is_wall_on_right(game, 90) && !is_wall_on_down(game)))
 	{
-		game->pos_x += cos(degree_to_radian(fix_angle(game->player_angle - 90))) * SPEED;
-		game->pos_y -= sin(degree_to_radian(fix_angle(game->player_angle - 90))) * SPEED;
+		game->pos_x += cos(deg_2_rad(fix_angle(game->player_angle - 90))) \
+			* SPEED;
+		game->pos_y -= sin(deg_2_rad(fix_angle(game->player_angle - 90))) \
+			* SPEED;
 	}
 }
 

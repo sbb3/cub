@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 15:44:06 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/01 20:50:36 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/01 21:17:13 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ float	fix_angle(float angle)
 	return (angle);
 }
 
-float	degree_to_radian(float angleInDegree)
+float	deg_2_rad(float angleInDegree)
 {
 	return ((angleInDegree * M_PI) / 180);
 }

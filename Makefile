@@ -39,7 +39,7 @@ SRCS = ./srcs/Game/Render/Cub3d.c \
 
 OBJS = $(SRCS:%.c=%.o)
 
-NAME = cub3d
+NAME = cub3D
 
 $(VERBOSE).SILENT:
 
