@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:51:55 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/29 11:47:19 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/01 11:00:40 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	draw_arrow_line(t_game *game, int start_x, int start_y, float new_angle)
 	pixel_y = start_y;
 	while (pixels_count)
 	{
-		coloring_pixel(game, pixel_x, pixel_y, 0x0000ff);
+		coloring_pixel(game, pixel_x, pixel_y, 0xff0000);
 		pixel_x += cos(degree_to_radian(new_angle));
 		pixel_y -= sin(degree_to_radian(new_angle));
 		pixels_count--;
@@ -81,7 +81,7 @@ void	draw_minimap_walls(t_game *game)
 		y++;
 	}
 }
-
+// 0x554994
 void	minimap(t_game *game)
 {
 	draw_minimap_walls(game);

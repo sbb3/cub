@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:43 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/30 15:19:37 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/01 21:16:09 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,6 +204,11 @@ void			move_left(t_game *game);
 void			move_right(t_game *game);
 void			rotate_left(t_game *game);
 void			rotate_right(t_game *game);
+int				is_wall_on_left(t_game *game, int angle);
+int				is_wall_on_right(t_game *game, int angle);
+int				is_wall_on_down(t_game *game);
+int				is_wall_on_up(t_game *game);
+
 
 /* Raycaster */
 void			raycaster(t_game *game);
@@ -224,6 +229,7 @@ void			reset_vars_to_zero(t_game *game);
 float			degree_to_radian(float angleInDegree);
 void			ray_direction(t_game *game);
 void			correct_angle(float *angle);
+float			fix_angle(float angle);
 void			quit(t_game *game, char *s);
 void			free_all(t_game *game);
 void			destroy_parser_allocations(t_game *game);

@@ -19,6 +19,7 @@ SRCS = ./srcs/Game/Render/Cub3d.c \
 	./srcs/Game/Render/Movement/Movements.c \
 	./srcs/Game/Render/Movement/MovementsHelpers.c \
 	./srcs/Game/Render/Movement/MovementsHelpers2.c \
+	./srcs/Game/Render/Movement/MovementsHelpers3.c \
 	./srcs/Game/Render/ImageHelpers/ImageHelpers.c \
 	./srcs/Game/Render/ImageHelpers/CreateImages.c \
 	./srcs/Game/Render/ImageHelpers/GetSetColors.c \
