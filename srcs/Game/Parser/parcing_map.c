@@ -13,9 +13,9 @@
 #include "../../../incl/cub3d.h"
 
 // function kanpranti biha map man ba3d ma7waltha l array dyal string
-void print_array_string(char **array_str)
+void	print_array_string(char **array_str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (array_str[i])
@@ -26,7 +26,7 @@ void print_array_string(char **array_str)
 }
 
 // function kanchiki fiha samya wach katsali b .cub
-void print_strct_map(t_map *map)
+/*void	print_strct_map(t_map *map)
 {
 	if (map)
 	{
@@ -72,12 +72,12 @@ void print_strct_map(t_map *map)
 	}
 	else
 		printf("map est NULL");
-}
+}*/
 
 // function kat9ra liya map man file
-t_map *initial_map_struct(size_t size, int fd)
+t_map	*initial_map_struct(size_t size, int fd)
 {
-	t_map *map_struct;
+	t_map	*map_struct;
 
 	map_struct = malloc(sizeof(t_map));
 	map_struct->all_map = NULL;
@@ -97,10 +97,10 @@ t_map *initial_map_struct(size_t size, int fd)
 	return (map_struct);
 }
 
-t_map *parser(const char *av[])
+t_map	*parser(const char *av[])
 {
-	t_map *map_struct;
-	int fd;
+	t_map	*map_struct;
+	int		fd;
 
 	if (cheak_name(av[1]))
 		exit_erreur("Name of file must end with .cub");
@@ -111,8 +111,5 @@ t_map *parser(const char *av[])
 	cheak_map(map_struct);
 	cheak_type(map_struct);
 	cheak_content_map(map_struct);
-	// print_strct_map(map_struct);
-	// printf("herer\n");
-
 	return (map_struct);
 }

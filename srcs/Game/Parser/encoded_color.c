@@ -12,9 +12,9 @@
 
 #include "../../../incl/cub3d.h"
 
-char res_mod1(int *n)
+char	res_mod1(int *n)
 {
-	int r;
+	int	r;
 
 	r = *n / 16;
 	if (r >= 10)
@@ -25,7 +25,7 @@ char res_mod1(int *n)
 	return (r);
 }
 
-char res_mod2(int n)
+char	res_mod2(int n)
 {
 	if (n >= 10)
 		n += 'a' - 10;
@@ -34,11 +34,11 @@ char res_mod2(int n)
 	return (n);
 }
 
-char *encodec_color(int r, int g, int b)
+char	*encodec_color(int r, int g, int b)
 {
-	char *res;
+	char	*res;
 
-	res = malloc(sizeof(char) * 8);
+	res = malloc(sizeof(char) * 9);
 	res[0] = '0';
 	res[1] = 'x';
 	res[2] = res_mod1(&r);

@@ -12,9 +12,9 @@
 
 #include "../../../incl/cub3d.h"
 
-int cheak_name(const char *name)
+int	cheak_name(const char *name)
 {
-	size_t size;
+	size_t	size;
 
 	size = ft_strlen(name);
 	if (ft_strcmp((name + size - 4), ".cub") != 0)
@@ -23,9 +23,9 @@ int cheak_name(const char *name)
 		return (0);
 }
 
-int cheak_name_texure(char *name)
+int	cheak_name_texure(char *name)
 {
-	size_t size;
+	size_t	size;
 
 	size = ft_strlen(name);
 	if (ft_strcmp((name + size - 4), ".xpm") != 0)
@@ -34,7 +34,7 @@ int cheak_name_texure(char *name)
 		return (0);
 }
 
-void cheak_type(t_map *map_struct)
+void	cheak_type(t_map *map_struct)
 {
 	if (map_struct->c == NULL)
 		exit_erreur("C not exit in map");
@@ -48,23 +48,24 @@ void cheak_type(t_map *map_struct)
 		exit_erreur("SO not exist in map");
 	if (map_struct->we == NULL)
 		exit_erreur("WE not exist in map");
-	map_struct->c->color = encodec_color(map_struct->c->r,
-										 map_struct->c->g, map_struct->c->b);
-	map_struct->f->color = encodec_color(map_struct->f->r,
-										 map_struct->f->g, map_struct->f->b);
-
+	map_struct->c->color = encodec_color(map_struct->c->r, \
+	map_struct->c->g, map_struct->c->b);
+	map_struct->f->color = encodec_color(map_struct->f->r, \
+	map_struct->f->g, map_struct->f->b);
 	map_struct->c->cl = (unsigned int ) strtol(map_struct->c->color, NULL, 16);
 	map_struct->f->cl = (unsigned int ) strtol(map_struct->f->color, NULL, 16);
 }
 
-void cheak_and_get_type(t_map *map, size_t *i, size_t *j, int *nbr_type)
+void	cheak_and_get_type(t_map *map, size_t *i, size_t *j, int *nbr_type)
 {
-	char *type;
+	char	*type;
 
-	while (map->all_map[*i] && (is_sapce(map->all_map[*i]) || map->all_map[*i] == '\n'))
+	while (map->all_map[*i] && (is_sapce(map->all_map[*i]) || \
+	map->all_map[*i] == '\n'))
 		(*i)++;
 	*j = 0;
-	while (map->all_map[*i + *j] && !is_sapce(map->all_map[*i + *j]) && map->all_map[*i + *j] != '\n')
+	while (map->all_map[*i + *j] && !is_sapce(map->all_map[*i + *j]) && \
+	map->all_map[*i + *j] != '\n')
 		(*j)++;
 	type = ft_copier(map->all_map + *i, *j);
 	*i += *j;
@@ -81,11 +82,11 @@ void cheak_and_get_type(t_map *map, size_t *i, size_t *j, int *nbr_type)
 		exit_erreur("incopmlete map");
 }
 
-void cheak_map(t_map *map)
+void	cheak_map(t_map *map)
 {
-	size_t i;
-	size_t j;
-	int nbr_type;
+	size_t	i;
+	size_t	j;
+	int		nbr_type;
 
 	i = 0;
 	nbr_type = 0;
@@ -96,7 +97,8 @@ void cheak_map(t_map *map)
 	map->map = get_content_of_map(map->all_map, &i);
 	while (map->all_map[i])
 	{
-		if (map->all_map[i] && !is_sapce(map->all_map[i]) && map->all_map[i] != '\n')
+		if (map->all_map[i] && !is_sapce(map->all_map[i]) && \
+		map->all_map[i] != '\n')
 			exit_erreur("in map after get content of map");
 		i++;
 	}

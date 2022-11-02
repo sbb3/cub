@@ -12,11 +12,11 @@
 
 #include "../../../incl/cub3d.h"
 
-char *get_contet(char *map, size_t *i)
+char	*get_contet(char *map, size_t *i)
 {
-	char *r;
-	size_t a;
-	size_t b;
+	char	*r;
+	size_t	a;
+	size_t	b;
 
 	a = 0;
 	while (is_sapce(map[*i]))
@@ -37,7 +37,7 @@ char *get_contet(char *map, size_t *i)
 	return (r);
 }
 
-void skip_space_virgile(char *map, size_t *i, size_t b, size_t *a)
+void	skip_space_virgile(char *map, size_t *i, size_t b, size_t *a)
 {
 	while (is_sapce(map[*i]))
 		(*i)++;
@@ -55,12 +55,12 @@ void skip_space_virgile(char *map, size_t *i, size_t b, size_t *a)
 		(*a)++;
 }
 
-t_color *get_content_color(char *map, size_t *i)
+t_color	*get_content_color(char *map, size_t *i)
 {
-	t_color *color;
-	char *nbr;
-	size_t a;
-	size_t b;
+	t_color	*color;
+	char	*nbr;
+	size_t	a;
+	size_t	b;
 
 	b = 0;
 	color = malloc(sizeof(t_color));
@@ -82,11 +82,11 @@ t_color *get_content_color(char *map, size_t *i)
 	return (color);
 }
 
-char **get_content_of_map(char *map, size_t *i)
+char	**get_content_of_map(char *map, size_t *i)
 {
-	char **res;
-	size_t nbr_line;
-	size_t a;
+	char	**res;
+	size_t	nbr_line;
+	size_t	a;
 
 	ignore_first(map, i);
 	nbr_line = get_nbr_line(map, *i);
@@ -101,11 +101,11 @@ char **get_content_of_map(char *map, size_t *i)
 	return (res);
 }
 
-char *get_map(size_t size, int fd)
+char	*get_map(size_t size, int fd)
 {
-	char *map_char;
-	char c;
-	size_t i;
+	char	*map_char;
+	char	c;
+	size_t	i;
 
 	map_char = malloc(sizeof(char) * (size + 1));
 	i = 0;
