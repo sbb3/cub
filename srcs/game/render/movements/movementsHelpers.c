@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 15:31:52 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/03 12:09:19 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/03 17:52:17 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 void	move_up(t_game *game)
 {
-	if (((!is_wall_on_up(game) && !is_wall_on_left(game, 45)) \
-		&& (!is_wall_on_up(game) && !is_wall_on_left(game, 90))) \
-		|| ((!is_wall_on_up(game) && !is_wall_on_right(game, 45)) \
-		&& (!is_wall_on_up(game) && !is_wall_on_right(game, 90))))
+	system("clear");
+	printf("%d\n", is_wall_on_up(game));
+	printf("%d\n", is_wall_on_left(game, 45));
+	printf("%d\n", is_wall_on_right(game, 45));
+	if ((!is_wall_on_up(game) && !is_wall_on_left(game, 45))
+		|| (!is_wall_on_up(game) && !is_wall_on_right(game, 45)))
 	{
 		game->pos_y -= game->pdir_y * SPEED;
 		game->pos_x += game->pdir_x * SPEED;
@@ -26,15 +28,8 @@ void	move_up(t_game *game)
 
 void	move_down(t_game *game)
 {
-	int	next_move_y;
-	int	next_move_x;
-
-	next_move_y = (game->pos_y + game->pdir_y * SPEED) / SQUARE_HEIGHT;
-	next_move_x = (game->pos_x - game->pdir_x * SPEED) / SQUARE_WIDTH;
 	if (((!is_wall_on_down(game) && !is_wall_on_left(game, 180 + 45)) \
-		&& (!is_wall_on_down(game) && !is_wall_on_left(game, 180 + 90))) \
-		|| ((!is_wall_on_down(game) && !is_wall_on_right(game,  180 + 45)) \
-		&& (!is_wall_on_down(game) && !is_wall_on_right(game, 180 + 90))))
+		|| (!is_wall_on_down(game) && !is_wall_on_right(game, 180 + 45))))
 	{
 		game->pos_y += game->pdir_y * SPEED;
 		game->pos_x -= game->pdir_x * SPEED;
