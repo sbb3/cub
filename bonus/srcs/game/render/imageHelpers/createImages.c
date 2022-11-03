@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   CreateImages.c                                     :+:      :+:    :+:   */
+/*   createImages.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 15:50:46 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/29 11:40:14 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/03 10:39:27 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_n_texture	*create_north_texture_image(t_game *game)
 	data->frame = mlx_xpm_file_to_image(game->mlx, texture_path, \
 		&data->w, &data->h);
 	if (!data->frame)
-		exit_if_null(data->frame, "Could not load the texture from the xpm");
+		exit_if_null(data->frame, "Could not load the north texture");
 	data->frame_addr = mlx_get_data_addr(data->frame, &data->bpp, \
 		&data->line_bytes, &data->endn);
 	if (!data->frame_addr)
@@ -63,7 +63,7 @@ t_s_texture	*create_south_texture_image(t_game *game)
 	data->frame = mlx_xpm_file_to_image(game->mlx, texture_path, \
 		&data->w, &data->h);
 	if (!data->frame)
-		exit_if_null(data->frame, "Could not load the texture from the xpm");
+		exit_if_null(data->frame, "Could not load the south texture");
 	data->frame_addr = mlx_get_data_addr(data->frame, &data->bpp, \
 		&data->line_bytes, &data->endn);
 	if (!data->frame_addr)
@@ -84,7 +84,7 @@ t_w_texture	*create_west_texture_image(t_game *game)
 	data->frame = mlx_xpm_file_to_image(game->mlx, texture_path, \
 		&data->w, &data->h);
 	if (!data->frame)
-		exit_if_null(data->frame, "Could not load the texture from the xpm");
+		exit_if_null(data->frame, "Could not load the west texture");
 	data->frame_addr = mlx_get_data_addr(data->frame, &data->bpp, \
 		&data->line_bytes, &data->endn);
 	if (!data->frame_addr)
@@ -105,7 +105,7 @@ t_e_texture	*create_east_texture_image(t_game *game)
 	data->frame = mlx_xpm_file_to_image(game->mlx, texture_path, \
 		&data->w, &data->h);
 	if (!data->frame)
-		exit_if_null(data->frame, "Could not load the texture from the xpm");
+		exit_if_null(data->frame, "Could not load the east texture");
 	data->frame_addr = mlx_get_data_addr(data->frame, &data->bpp, \
 		&data->line_bytes, &data->endn);
 	if (!data->frame_addr)

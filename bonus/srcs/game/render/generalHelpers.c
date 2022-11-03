@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   GeneralHelpers.c                                   :+:      :+:    :+:   */
+/*   generalHelpers.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 15:44:06 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/01 21:17:13 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/03 10:13:50 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,6 @@ void	*ft_calloc(size_t count, size_t size)
 	return (ptr);
 }
 
-/*
-	360%360=0; 0%360=0; 362%360=2 42%360=42; -1%360=359
-	return (angle % 360); // a<0 360-a < 360-360=0 <a-360
-*/
 void	correct_angle(float *angle)
 {
 	if (*angle < 0)
@@ -43,7 +39,6 @@ void	correct_angle(float *angle)
 	if (*angle > 360)
 		*angle = *angle - 360;
 }
-
 
 float	fix_angle(float angle)
 {

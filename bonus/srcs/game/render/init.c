@@ -6,12 +6,15 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:56 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/02 21:16:05 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/03 10:13:15 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/cub3d.h"
 
+// pdir_x : player starting rotation angle
+/* pdfir_y : player starting rotattion angle,
+	should match the sin in the movements function */
 void	init_player_starting_direction(t_game *game)
 {
 	if (game->parser->p_direction == 'N')
@@ -22,17 +25,18 @@ void	init_player_starting_direction(t_game *game)
 		game->player_angle = 270;
 	else if (game->parser->p_direction == 'E')
 		game->player_angle = 360;
-	game->pdir_x = cos(deg_2_rad(game->player_angle)); /*player starting rotation angle*/
-	game->pdir_y = sin(deg_2_rad(game->player_angle)); /*player starting rotattion angle, should match the sin in the movements function*/
+	game->pdir_x = cos(deg_2_rad(game->player_angle));
+	game->pdir_y = sin(deg_2_rad(game->player_angle));
 }
 
+// create the textures images
 void	init_textures(t_game *game)
 {
 	game->global_img = create_global_image(game);
-	game->n_t_data = create_north_texture_image(game); /*create the texture image*/
-	game->s_t_data = create_south_texture_image(game); /*create the texture image*/
-	game->w_t_data = create_west_texture_image(game);  /*create the texture image*/
-	game->e_t_data = create_east_texture_image(game);  /*create the texture image*/
+	game->n_t_data = create_north_texture_image(game);
+	game->s_t_data = create_south_texture_image(game);
+	game->w_t_data = create_west_texture_image(game);
+	game->e_t_data = create_east_texture_image(game);
 }
 
 void	init_minilibx(t_game *game)
@@ -46,6 +50,7 @@ void	init_minilibx(t_game *game)
 		quit(game, "New window initialization failed");
 }
 
+/* rays = window_width */
 void	init_variables(t_game *game, const char *av[])
 {
 	game->parser = parser(av);
@@ -60,7 +65,7 @@ void	init_variables(t_game *game, const char *av[])
 	game->rays = game->window_width;
 	game->pos_x = game->parser->yp * SQUARE_SIZE;
 	game->pos_y = game->parser->xp * SQUARE_SIZE;
-	game->ray_angle_increment = ((double)FOV / game->rays); /* fov / game->rays = game->window_width */
+	game->ray_angle_increment = ((double)FOV / game->rays);
 	game->h_hit = 0;
 	game->half_fov = FOV / 2;
 	game->ceiling_color = rgb_to_hex(game->parser->c->r, game->parser->c->g, \

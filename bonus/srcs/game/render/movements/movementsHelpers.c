@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   MovementsHelpers.c                                 :+:      :+:    :+:   */
+/*   movementsHelpers.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 15:31:52 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/01 22:19:20 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/03 10:36:31 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,9 @@ void	move_down(t_game *game)
 	}
 }
 
- /* new_angle : game->player_angle + 90 */
- /* !is_wall_on_left(game, 90) : should move left when 90 degree its way is free  */
+/* new_angle : game->player_angle + 90 */
+/* !is_wall_on_left(90) : should move left on 90 degree
+when its path is free  */
 void	move_left(t_game *game)
 {
 	if ((!is_wall_on_left(game, 90) && !is_wall_on_up(game)) \
@@ -55,7 +56,8 @@ void	move_left(t_game *game)
 	}
 }
 
-/* (!is_wall_on_right(game, 90)) without 45 degree, if there was 45 degree, player could not move when intersected with wall on  */
+/* (!is_wall_on_right(90))if there was 45 degree,
+player could not move when intersected with wall on  */
 void	move_right(t_game *game)
 {
 	if ((!is_wall_on_right(game, 90) && !is_wall_on_up(game)) \
@@ -67,7 +69,3 @@ void	move_right(t_game *game)
 			* SPEED;
 	}
 }
-
-/**
- *  max pdir_y : 1, min pdir_y : -1
-*/

@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 13:34:21 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/02 21:11:30 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/03 10:41:14 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,42 +96,3 @@ void	paint(t_game *game, int x)
 	paint_floor(game, x);
 	paint_walls(game, x);
 }
-
-/*
-paint_walls_helper_function:
-if (game->wall_height > game->window_height)
-	{
-		y = 0;
-		end = game->window_height;
-	}
-	else
-	{						// if there is only these 2 statements below, and the protection for resetting walltoppixel and wallbottompixel to 0 and game->window_height, it will start taking the color pixel from the texture at index 0, not dependng on the wallProjectedHeight
-		y = game->wall_top_pixel; // y should always start with;
-		end = game->wall_bottom_pixel;
-	}
-
-
-paint_walls:  // sizeX or width of the strip(column) will be 1, but since it is 1, there is no need to specify it here
-while (y < end) // start drawing from the wall_top_pixel till wall_bottom_pixel , this distance is equal to projectedWallHeight
-	{
-		// calculate the offsetY
-		// when projected_wall_height > game->window_height, wall_top_pixel will be negative and the sign -, then it will be positive
-		game->texture_offset_y = (y - wall_top_pixel) * scaling_factor; // what pixel color to pick from the texture
-		// is_north
-		if (game->is_north && game->h_hit)
-			color = get_the_color_from_north_texture(game); // hex color not rgb // the texture pixel color that will drawn on the globalImage
-		// is_west
-		else if (game->is_west && !game->h_hit)
-			color = get_the_color_from_west_texture(game); // hex color not rgb // the texture pixel color that will drawn on the globalImage
-		// is_south
-		else if (game->is_south && game->h_hit)
-			color = get_the_color_from_south_texture(game);
-		// is_east texture
-		else if (game->is_east && !game->h_hit)
-			color = get_the_color_from_east_texture(game);
-
-		set_the_texture_color_on_walls(game, startX, y, color);
-		y++;
-	}
-
-*/

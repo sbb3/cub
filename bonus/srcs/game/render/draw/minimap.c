@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Minimap.c                                          :+:      :+:    :+:   */
+/*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:51:55 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/01 21:18:44 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/03 11:10:31 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,15 @@ void	draw_minimap_walls(t_game *game)
 		while (game->map[y][x])
 		{
 			if (game->map[y][x] == '1')
-				edit_pixel(game, x * MINIMAP_SIZE, y * MINIMAP_SIZE, 0x554994);
+				edit_pixel(game, x * MINIMAP_SIZE, y * MINIMAP_SIZE, 0x000000);
 			else
-				edit_pixel(game, x * MINIMAP_SIZE, y * MINIMAP_SIZE, 0xF29393);
+				edit_pixel(game, x * MINIMAP_SIZE - 1, y * MINIMAP_SIZE - 1, 0xffffff);
 			x++;
 		}
 		y++;
 	}
 }
-// 0x554994
+
 void	minimap(t_game *game)
 {
 	draw_minimap_walls(game);
@@ -89,12 +89,3 @@ void	minimap(t_game *game)
 	mlx_put_image_to_window(game->mlx, game->win, game->global_img->frame, \
 		0, 0);
 }
-
-/*
-scaled_pos_x = player_pos_x_in_minimap;
-
-draw_arrow_line:
-	pixel_x += cos(deg_2_rad(new_angle)); // dirX = direction, default to 0, range  [ -1 < 0 < 1 ]
-	pixel_y -= sin(degree_to_radian(new_angle)); // dirY = direction, default to -1, range [ -1 < 0 < 1 ]
-
-*/

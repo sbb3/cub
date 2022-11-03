@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Movements.c                                        :+:      :+:    :+:   */
+/*   movements.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:29:49 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/29 15:43:25 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/03 10:36:50 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,34 +37,3 @@ int	movements(int keycode, t_game *game)
 	re_draw(game);
 	return (0);
 }
-
-/*
-
-{
-	A AND D KEYS
-
-	// printf("left %d\n", left);
-		// printf("right %d\n", right);
-		// printf("up %d\n", up);
-		// printf("down %d\n", down);
-		// printf("pa %d\n", game->player_angle);
-		// printf("na %d\n", new_angle_in_degrees);
-		// printf("cos(na) %lf\n", cos(degree_to_radian(new_angle_in_degrees)));
-		// printf("sin(na) %lf\n", sin(degree_to_radian(new_angle_in_degrees)));
-		// printf("new_pos_x %d\n", new_pos_x);
-		// printf("new_pos_y %d\n", new_pos_y);
-		// printf("pos_x %d\n", game->pos_x);
-		// printf("pos_y %d\n", game->pos_y);
-
-
-		// I should x--; cos new_angle is already -
-		// I should x++; cos new_angle is already +
-		// I should y--; cos new_angle is already +
-		// I should y++; cos new_angle is already -
-		// refer to the drawing for more explanation
-
-}
-
-*/
-// redraw
-// re_draw

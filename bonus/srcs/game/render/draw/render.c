@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Render.c                                           :+:      :+:    :+:   */
+/*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:19:59 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/01 21:17:13 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/03 10:50:45 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,5 @@ void	raycaster(t_game *game)
 		correct_angle(&game->ray_angle);
 	}
 	mlx_put_image_to_window(game->mlx, game->win, game->global_img->frame, \
-							0, 0);
+		0, 0);
 }
-
-/*
-raycasting:
-		// printf("%lf\n", game->ray_angle);
-	game->ray_angle -= game->ray_angle_increment; // needed for drawing next ray // if it goes over 360, will reset to 0 + rayAngle
-
-		// printf("%d\n", game->projected_wall_height);
-
-	coordinates 0 0
-
-deltaY  // deltaX | // first check if these coordinates are at wall, else increment them with ystep and xstep till u find a wall
-
-*/

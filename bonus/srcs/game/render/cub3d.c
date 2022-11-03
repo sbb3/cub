@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cub3d.c                                            :+:      :+:    :+:   */
+/*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:43 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/29 15:42:18 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/03 10:33:40 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/cub3d.h"
 
-/*create the global image, its height and width are the window scales,
-the main image which will draw on it the minimap and the raycasting stuff*/
 void	draw(t_game *game)
 {
-	// game->global_img = create_global_image(game);
 	raycaster(game);
 	minimap(game);
 }
@@ -34,13 +31,3 @@ int	main(int ac, const char *av[])
 	mlx_hook(game->win, 17, 0L, red_cross_quit, game);
 	mlx_loop(game->mlx);
 }
-
-/*
-debug
-*/
-// int	render(t_game *game)
-// {
-// 	draw(game);
-// 	usleep(33 * 1000);
-// 	return 0;
-// }

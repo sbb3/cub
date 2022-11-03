@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   GetSetColors.c                                     :+:      :+:    :+:   */
+/*   getSetColors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 16:40:25 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/29 11:40:41 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/03 10:37:57 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,3 @@ void	set_the_texture_color_on_walls(t_game *game, int x, int y, \
 	color_pixel = game->global_img->frame_addr + pixel_offset;
 	*(unsigned int *)color_pixel = color;
 }
-
-/*
-set_the_texture_color_on_walls
-
-* 4 (4 bytes) // convert from bits to bytes
-color_pixel points to the first byte in the pixel (4 bytes)
-main reason for doing the unsigned int, is there is no sign bit as in int and the guarantee size 4 bytes
-*(unsigned int *)color_pixel = color; write the texture_color on the main image
-
-*/
