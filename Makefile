@@ -10,7 +10,7 @@ $(VERBOSE).SILENT:
 
 COLOUR_BLUE=\033[0;35m
 
-BONUS_SRCS = ./srcs/game/render/cub3d.c \
+SRCS = ./srcs/game/render/cub3d.c \
 	./srcs/game/render/init.c \
 	./srcs/game/render/draw/render.c \
 	./srcs/game/render/draw/paint.c \
@@ -38,7 +38,7 @@ BONUS_SRCS = ./srcs/game/render/cub3d.c \
 	./srcs/game/parser/les_cas.c \
 	./srcs/game/parser/parcing_map.c \
 
-BONUS_OBJS = $(BONUS_SRCS:%.c=%.o)
+OBJS = $(SRCS:%.c=%.o)
 
 NAME = cub3D
 
@@ -46,15 +46,15 @@ all: $(NAME)
 
 bonus: $(NAME)
 
-$(NAME): $(BONUS_OBJS)
-	@$(CC) $(CFLAGS) $(BONUS_OBJS) $(MLXFLAGS) -o $(NAME)
+$(NAME): $(OBJS)
+	@$(CC) $(CFLAGS) $(OBJS) $(MLXFLAGS) -o $(NAME)
 	@echo "👉 $(COLOUR_BLUE)COMPILING DONE$(COLOUR_END) 👈"
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@$(RM) $(BONUS_OBJS)
+	@$(RM) $(OBJS)
 
 fclean: clean
 	@$(RM) $(NAME)

@@ -3,8 +3,8 @@ SO ./srcs/Assets/Textures/texture2.xpm
 WE ./srcs/Assets/Textures/texture3.xpm
 EA ./srcs/Assets/Textures/texture4.xpm
 
-C 194,196,195
-F 247,247,247
+C 247,247,247
+F 194,196,195
 
 111111111111111111
 100000000000000001
