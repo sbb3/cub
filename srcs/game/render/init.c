@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:56 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/03 10:13:15 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/05 19:09:56 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ void	init_variables(t_game *game, const char *av[])
 	game->map = game->parser->map;
 	game->map_width = game->parser->width;
 	game->map_height = game->parser->height;
-	game->window_width = SQUARE_WIDTH * game->map_width;
-	game->window_height = SQUARE_HEIGHT * game->map_height;
+	game->window_width = 1280;
+	game->window_height = 768;
 	game->minimap_width = MINIMAP_SIZE * game->map_width;
 	game->minimap_height = MINIMAP_SIZE * game->map_height;
 	game->half_win_height = game->window_height / 2;

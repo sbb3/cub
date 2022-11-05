@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:43 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/03 17:10:18 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/05 19:10:31 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	draw(t_game *game)
 {
 	raycaster(game);
-	minimap(game);
+	// minimap(game);
 }
 
 int	main(int ac, const char *av[])
