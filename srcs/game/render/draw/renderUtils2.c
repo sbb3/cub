@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:19:33 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/03 11:05:56 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/05 19:32:17 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	get_projected_wall_height(t_game *game)
 {
 	game->wall_height = (double)(SQUARE_HEIGHT * game->dist_to_wall) \
 		/ game->ray_distance;
-	game->wall_top_pixel = game->half_win_height \
+	game->wall_top_pixel = (WINDOW_HEIGHT / 2) \
 		- (double)(game->wall_height / 2);
-	game->wall_bottom_pixel = game->half_win_height \
+	game->wall_bottom_pixel = (WINDOW_HEIGHT / 2) \
 		+ (double)(game->wall_height / 2);
 }

@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 15:50:46 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/03 10:39:27 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/05 19:34:07 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ t_global_image	*create_global_image(t_game *game)
 	image = ft_calloc(1, sizeof(t_global_image));
 	if (!image)
 		exit_if_null(image, "Allocation failed");
-	image->frame = mlx_new_image(game->mlx, game->window_width, \
-		game->window_height);
+	image->frame = mlx_new_image(game->mlx, WINDOW_WIDTH, \
+		WINDOW_HEIGHT);
 	if (!image->frame)
 		exit_if_null(image->frame, "Could not create an global image");
 	image->frame_addr = mlx_get_data_addr(image->frame, &image->bpp, \

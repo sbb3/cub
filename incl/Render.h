@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:43 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/05 15:15:12 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/05 19:32:36 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@
 
 /* Window Measurement */
 
+# define WINDOW_WIDTH 1280
+# define WINDOW_HEIGHT 768
 # define SQUARE_SIZE 64
 # define SQUARE_WIDTH 64
 # define SQUARE_HEIGHT 64
@@ -124,7 +126,6 @@ typedef struct s_game
 	int				map_height;
 	int				window_width;
 	int				window_height;
-	int				half_win_height;
 	int				rays;
 	int				pos_x; // rename to like : player_pos_x
 	int				pos_y;

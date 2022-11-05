@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 13:34:21 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/03 10:41:14 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/05 19:33:28 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 and dont reset wall_bottom_pixel and wall_top_pixel */
 void	paint_walls_helper_function(t_game *game, int *y, int *end)
 {
-	if (game->wall_height > game->window_height)
+	if (game->wall_height > WINDOW_HEIGHT)
 	{
 		*y = 0;
-		*end = game->window_height;
+		*end = WINDOW_HEIGHT;
 	}
 	else
 	{
@@ -64,7 +64,7 @@ void	paint_floor(t_game *game, int x)
 
 	start_x = x;
 	start_y = game->wall_bottom_pixel;
-	end_y = game->window_height;
+	end_y = WINDOW_HEIGHT;
 	while (start_y < end_y)
 	{
 		coloring_pixel(game, start_x, start_y, game->floor_color);

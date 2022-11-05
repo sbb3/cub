@@ -1,10 +1,10 @@
-NO imgs/t2.xpm
-SO imgs/t8.xpm
-WE imgs/n3.xpm
-EA imgs/n2.xpm
+NO ./srcs/Assets/Textures/texture1.xpm
+SO ./srcs/Assets/Textures/texture2.xpm
+WE ./srcs/Assets/Textures/texture3.xpm
+EA ./srcs/Assets/Textures/texture4.xpm
 
 F 192,192,192
-C 0,0,255
+C 0,255,255
 
        111111111111111111111111
       1000000000000000000000111

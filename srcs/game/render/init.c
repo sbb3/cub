@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:56 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/05 19:09:56 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/05 19:34:11 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	init_minilibx(t_game *game)
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		quit(game, "Connection to the X-Window Server failed");
-	game->win = mlx_new_window(game->mlx, game->window_width, \
-		game->window_height, "cubF4KE3D");
+	game->win = mlx_new_window(game->mlx, WINDOW_WIDTH, \
+		WINDOW_HEIGHT, "cubF4KE3D");
 	if (!game->win)
 		quit(game, "New window initialization failed");
 }
@@ -57,12 +57,9 @@ void	init_variables(t_game *game, const char *av[])
 	game->map = game->parser->map;
 	game->map_width = game->parser->width;
 	game->map_height = game->parser->height;
-	game->window_width = 1280;
-	game->window_height = 768;
 	game->minimap_width = MINIMAP_SIZE * game->map_width;
 	game->minimap_height = MINIMAP_SIZE * game->map_height;
-	game->half_win_height = game->window_height / 2;
-	game->rays = game->window_width;
+	game->rays = WINDOW_WIDTH;
 	game->pos_x = game->parser->yp * SQUARE_SIZE;
 	game->pos_y = game->parser->xp * SQUARE_SIZE;
 	game->ray_angle_increment = ((double)FOV / game->rays);

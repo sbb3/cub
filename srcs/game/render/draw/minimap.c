@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:51:55 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/03 11:10:31 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/05 19:33:09 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ void	draw_minimap_arrow(t_game *game)
 	float	right_arrow_angle;
 	float	left_arrow_angle;
 
-	scaled_pos_x = scale_down(game->minimap_width, game->window_width, \
+	scaled_pos_x = scale_down(game->minimap_width, WINDOW_WIDTH, \
 		game->pos_x);
-	scaled_pos_y = scale_down(game->minimap_height, game->window_height, \
+	scaled_pos_y = scale_down(game->minimap_height, WINDOW_HEIGHT, \
 		game->pos_y);
 	right_arrow_angle = (game->player_angle - 140);
 	correct_angle(&right_arrow_angle);
