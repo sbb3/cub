@@ -6,13 +6,13 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 19:20:17 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/02 21:13:27 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/05 15:15:21 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../incl/cub3d.h"
 
-void	edit_pixel(t_game *game, int startX, int startY, int color)
+void	edit_pixel(t_game *game, int startX, int startY, unsigned int color)
 {
 	int	y;
 	int	x;
@@ -28,7 +28,7 @@ void	edit_pixel(t_game *game, int startX, int startY, int color)
 
 /*color the pixel on the x, y coordinates*/
 /*pixeloffset where the pixel laying down*/
-void	coloring_pixel(t_game *game, int x, int y, int color)
+void	coloring_pixel(t_game *game, int x, int y, unsigned int color)
 {
 	int		pixel_offset;
 	char	*color_pixel;

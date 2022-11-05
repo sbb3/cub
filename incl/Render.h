@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:43 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/02 21:06:55 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/05 15:15:12 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,7 +196,7 @@ unsigned int	get_the_color_from_west_texture(t_game *game);
 unsigned int	get_the_color_from_east_texture(t_game *game);
 void			set_the_texture_color_on_walls(t_game *game, int x, int y, \
 	unsigned int color);
-void			coloring_pixel(t_game *game, int x, int y, int color);
+void			coloring_pixel(t_game *game, int x, int y, unsigned int color);
 
 /* Movements */
 int				movements(int keycode, t_game *game);
@@ -251,6 +251,7 @@ void			draw_arrow_line(t_game *game, int start_x, int start_y, \
 	float new_angle);
 int				scale_down(int minimap_size, int window_size, \
 	int coordinate);
-void			edit_pixel(t_game *game, int startX, int startY, int color);
+void			edit_pixel(t_game *game, int startX, int startY, \
+	unsigned int color);
 
 #endif
