@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:19:33 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/03 10:51:23 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/06 00:17:12 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,12 @@ void	looking_for_wall_coordinates_horizontally(t_game *game)
 	game->wall_hit = 0;
 	while (!game->wall_hit)
 	{
-		coordinate_y = floor(game->yinter / SQUARE_SIZE);
-		coordinate_x = floor(game->xinter / SQUARE_SIZE);
-		if (out_of_container_width_and_height(game))
+		coordinate_y = game->yinter / SQUARE_SIZE;
+		coordinate_x = game->xinter / SQUARE_SIZE;
+		if (out_of_container_width_and_height(game, coordinate_x, coordinate_y))
 			break ;
-		if (game->map[coordinate_y] == NULL)
-			break ;
-		if (game->map[coordinate_y][coordinate_x] == '1')
+		if (game->map[coordinate_y][coordinate_x] == '1'
+		|| game->map[coordinate_y][coordinate_x] == '\0')
 			break ;
 		game->yinter += game->ystep;
 		game->xinter += game->xstep;
@@ -47,11 +46,10 @@ void	looking_for_wall_coordinates_vertically(t_game *game)
 	{
 		coordinate_y = floor(game->yinter / SQUARE_SIZE);
 		coordinate_x = floor(game->xinter / SQUARE_SIZE);
-		if (out_of_container_width_and_height(game))
+		if (out_of_container_width_and_height(game, coordinate_x, coordinate_y))
 			break ;
-		if (game->map[coordinate_y] == NULL)
-			break ;
-		if (game->map[coordinate_y][coordinate_x] == '1')
+		if (game->map[coordinate_y][coordinate_x] == '1'
+		|| game->map[coordinate_y][coordinate_x] == '\0')
 			break ;
 		game->xinter += game->xstep;
 		game->yinter += game->ystep;

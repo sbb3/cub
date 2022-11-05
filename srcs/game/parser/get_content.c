@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 10:23:05 by labenall          #+#    #+#             */
-/*   Updated: 2022/10/23 10:31:18 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/05 23:14:56 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,24 @@ t_color	*get_content_color(char *map, size_t *i)
 	return (color);
 }
 
+char	*get_map(size_t size, int fd)
+{
+	char	*map_char;
+	char	c;
+	size_t	i;
+
+	map_char = malloc(sizeof(char) * (size + 1));
+	i = 0;
+	while (i < size)
+	{
+		read(fd, &c, 1);
+		map_char[i] = c;
+		i++;
+	}
+	map_char[i] = 0;
+	return (map_char);
+}
+
 char	**get_content_of_map(char *map, size_t *i)
 {
 	char	**res;
@@ -101,20 +119,3 @@ char	**get_content_of_map(char *map, size_t *i)
 	return (res);
 }
 
-char	*get_map(size_t size, int fd)
-{
-	char	*map_char;
-	char	c;
-	size_t	i;
-
-	map_char = malloc(sizeof(char) * (size + 1));
-	i = 0;
-	while (i < size)
-	{
-		read(fd, &c, 1);
-		map_char[i] = c;
-		i++;
-	}
-	map_char[i] = 0;
-	return (map_char);
-}

@@ -1,6 +1,6 @@
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -I../incl/
+CFLAGS = -Wall -Wextra -Werror -I../incl/ -g3 -fsanitize=address
 #  -g3 -fsanitize=address
 MLXFLAGS = -lmlx -framework OpenGL -framework AppKit
 
@@ -17,7 +17,6 @@ SRCS = ./srcs/game/render/cub3d.c \
 	./srcs/game/render/draw/renderUtils.c \
 	./srcs/game/render/draw/renderUtils2.c \
 	./srcs/game/render/draw/renderUtils3.c \
-	./srcs/game/render/draw/minimap.c \
 	./srcs/game/render/movements/movements.c \
 	./srcs/game/render/movements/movementsHelpers.c \
 	./srcs/game/render/movements/movementsHelpers2.c \

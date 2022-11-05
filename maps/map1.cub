@@ -1,10 +1,11 @@
-NO ./srcs/Assets/Textures/texture1.xpm
-SO ./srcs/Assets/Textures/texture2.xpm
-WE ./srcs/Assets/Textures/texture3.xpm
-EA ./srcs/Assets/Textures/texture4.xpm
+NO ./srcs/assets/textures/north_texture.xpm
+WE ./srcs/assets/textures/west_texture.xpm
+SO ./srcs/assets/textures/south_texture.xpm
+EA ./srcs/assets/textures/east_texture.xpm
 
-C 247,247,247
+C 247,247,255
 F 194,196,195
+
 
   1
  1N1

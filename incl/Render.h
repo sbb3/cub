@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:43 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/05 19:32:36 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/06 00:10:37 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,9 @@ typedef struct s_game
 	int				rays_count;
 	int				minimap_width;
 	int				minimap_height;
+
+
+	int *cols;
 }	t_game;
 
 /* Init */
@@ -225,7 +228,7 @@ void			get_projected_wall_height(t_game *game);
 void			ray_wall_collision_horizontally(t_game *game);
 void			ray_wall_collision_vertically(t_game *game);
 float			distance(int startX, int startY, int endX, int endY);
-int				out_of_container_width_and_height(t_game *game);
+int				out_of_container_width_and_height(t_game *game, int coordinate_x, int coordinate_y);
 void			reset_vars_to_zero(t_game *game);
 
 /* other utils */
@@ -244,15 +247,11 @@ void			*ft_calloc(size_t count, size_t size);
 void			exit_if_null(void *p, char *message);
 unsigned int	rgb_to_hex(int red, int green, int blue);
 
-/* Minimap */
-void			minimap(t_game *game);
-void			draw_minimap_walls(t_game *game);
-void			draw_minimap_arrow(t_game *game);
-void			draw_arrow_line(t_game *game, int start_x, int start_y, \
-	float new_angle);
-int				scale_down(int minimap_size, int window_size, \
-	int coordinate);
-void			edit_pixel(t_game *game, int startX, int startY, \
-	unsigned int color);
+int	get_max(t_game *game, int rows);
+int	map_height(char *s[]);
+int	map_width(char *s);
+char	*get_token(char *map, int max_width);
+char**	copy(t_game *game);
+void	widths_arr(t_game *game);
 
 #endif
