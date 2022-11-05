@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   RenderUtils3.c                                     :+:      :+:    :+:   */
+/*   renderUtils3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:19:33 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/30 12:09:40 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/05 19:09:02 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,13 @@ float	distance(int startX, int startY, int endX, int endY)
 	return (sqrt(pow((abs(endX - startX)), 2) + pow((abs(endY - startY)), 2)));
 }
 
+/* doesnt stop or tied to/at window height and width,
+but attached to the map element size * width or height */
 int	out_of_container_width_and_height(t_game *game)
 {
-	if (game->yinter < 0 || game->yinter >= game->window_height)
+	if (game->yinter < 0 || game->yinter >= (SQUARE_HEIGHT * game->map_height))
 		return (1);
-	if (game->xinter < 0 || game->xinter > game->window_width)
+	if (game->xinter < 0 || game->xinter >= (SQUARE_WIDTH * game->map_width))
 		return (1);
 	return (0);
 }
