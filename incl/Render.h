@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:43 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/06 12:19:27 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/06 13:36:04 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include <math.h>
 # include <sys/time.h>
 
-/* textures path */
 # define TEXTURE_WIDTH 64
 # define TEXTURE_HEIGHT 64
 
@@ -48,9 +47,6 @@
 # define SQUARE_SIZE 64
 # define SQUARE_WIDTH 64
 # define SQUARE_HEIGHT 64
-
-/* Minimap Measurement */
-# define MINIMAP_SIZE 10
 
 typedef struct s_n_texture
 {
@@ -127,18 +123,18 @@ typedef struct s_game
 	int				window_width;
 	int				window_height;
 	int				rays;
-	float			ppos_x; // rename to like : player_pos_x
+	float			ppos_x;
 	float			ppos_y;
-	float			pdir_x;		// 1
-	float			pdir_y;		// 0
-	float			player_angle; // player angle
+	float			pdir_x;
+	float			pdir_y;
+	float			player_angle;
 	float			ray_angle;
 	float			ray_angle_increment;
 	int				ray_up;
 	int				ray_down;
 	int				ray_left;
 	int				ray_right;
-	int				half_fov;		// half of view of the player
+	int				half_fov;
 	int				is_north;
 	int				is_south;
 	int				is_west;
@@ -150,14 +146,14 @@ typedef struct s_game
 	float			h_wall_hit_y;
 	float			v_wall_hit_x;
 	float			v_wall_hit_y;
-	float			wall_height;	// projected_wall_height
-	float			dist_to_wall; // distance_to_projected_wall
+	float			wall_height;
+	float			dist_to_wall;
 	float			distorted_ray_distance_to_wall;
-	float			ray_distance; // correct_ray_distance
-	float			h_dist_to_wall; // horizontal_distance_to_wall
-	float			v_dist_to_wall; // vertical_distance_to_wall
-	int				wall_top_pixel;	   // projected wall top pixel
-	int				wall_bottom_pixel; // projected wall bottom pixel
+	float			ray_distance;
+	float			h_dist_to_wall;
+	float			v_dist_to_wall;
+	int				wall_top_pixel;
+	int				wall_bottom_pixel;
 	int				h_hit;
 	int				texture_offset_x;
 	int				texture_offset_y;
