@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:19:33 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/06 01:07:35 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/06 11:57:42 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,20 +52,23 @@ void	ray_direction(t_game *game)
 	}
 }
 
-float	distance(int startX, int startY, int endX, int endY)
+float	distance(float startX, float startY, float endX, float endY)
 {
-	return (sqrt(pow((abs(endX - startX)), 2) + pow((abs(endY - startY)), 2)));
+	return (sqrt(pow((fabs(endX - startX)), 2) + \
+		pow((fabs(endY - startY)), 2)));
 }
 
 /* doesnt stop or tied to/at window height and width,
 but attached to the map element size * width or height */
-int	out_of_container_width_and_height(t_game *game, int coordinate_x, int coordinate_y)
+int	out_of_container_width_and_height(t_game *game, int coordinate_x, \
+	int coordinate_y)
 {
 	if (game->yinter < 0 || game->yinter >= (SQUARE_HEIGHT * game->map_height))
 		return (1);
 	if (game->xinter < 0 || game->xinter >= (SQUARE_WIDTH * game->map_width))
 		return (1);
-	if (coordinate_y > game->map_height || coordinate_x > game->cols[coordinate_y])
+	if (coordinate_y > game->map_height \
+		|| coordinate_x > game->cols[coordinate_y])
 		return (1);
 	return (0);
 }

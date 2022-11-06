@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:19:33 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/06 00:17:12 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/06 11:56:34 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	looking_for_wall_coordinates_vertically(t_game *game)
 
 void	intersections_and_steps_horizontally(t_game *game)
 {
-	game->yinter = (game->pos_y / SQUARE_SIZE) * SQUARE_SIZE;
+	game->yinter = ((int)game->pos_y / SQUARE_SIZE) * SQUARE_SIZE;
 	if (game->ray_down)
 		game->yinter += SQUARE_SIZE;
 	if (tan(deg_2_rad(game->ray_angle) == 0))
@@ -81,7 +81,7 @@ void	intersections_and_steps_horizontally(t_game *game)
 
 void	intersections_and_steps_vertically(t_game *game)
 {
-	game->xinter = (game->pos_x / SQUARE_SIZE) * SQUARE_SIZE;
+	game->xinter = ((int)game->pos_x / SQUARE_SIZE) * SQUARE_SIZE;
 	if (game->ray_right)
 		game->xinter += SQUARE_SIZE;
 	game->yinter = (game->pos_y + ((game->pos_x - game->xinter) \

@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:43 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/06 02:05:25 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/06 11:56:57 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,8 @@ typedef struct s_game
 	int				window_width;
 	int				window_height;
 	int				rays;
-	int				pos_x; // rename to like : player_pos_x
-	int				pos_y;
+	float			pos_x; // rename to like : player_pos_x
+	float			pos_y;
 	float			pdir_x;		// 1
 	float			pdir_y;		// 0
 	float			player_angle; // player angle
@@ -223,7 +223,7 @@ void			get_the_short_distance(t_game *game);
 void			get_projected_wall_height(t_game *game);
 void			ray_wall_collision_horizontally(t_game *game);
 void			ray_wall_collision_vertically(t_game *game);
-float			distance(int startX, int startY, int endX, int endY);
+float			distance(float startX, float startY, float endX, float endY);
 int				out_of_container_width_and_height(t_game *game, \
 	int coordinate_x, int coordinate_y);
 void			reset_vars_to_zero(t_game *game);
