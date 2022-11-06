@@ -1,7 +1,7 @@
-NO srcs/assets/textures/north_texture.xpm
-WE ./srcs/assets/textures/west_texture.xpm
-SO ./srcs/assets/textures/south_texture.xpm
-EA ./srcs/assets/textures/east_texture.xpm
+NO srcs/assets/textures4/north_texture.xpm
+WE ./srcs/assets/textures4/west_texture.xpm
+SO ./srcs/assets/textures4/south_texture.xpm
+EA ./srcs/assets/textures4/east_texture.xpm
 
 C 247,247,255
 F 194,196,195
