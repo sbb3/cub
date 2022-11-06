@@ -6,11 +6,11 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 15:44:06 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/03 10:13:50 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/06 02:02:37 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../incl/cub3d.h"
+#include "../../../../incl/cub3d.h"
 
 static void	ft_bzero(void *s, size_t n)
 {

@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:43 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/06 01:23:13 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/06 02:05:25 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,7 +224,8 @@ void			get_projected_wall_height(t_game *game);
 void			ray_wall_collision_horizontally(t_game *game);
 void			ray_wall_collision_vertically(t_game *game);
 float			distance(int startX, int startY, int endX, int endY);
-int				out_of_container_width_and_height(t_game *game, int coordinate_x, int coordinate_y);
+int				out_of_container_width_and_height(t_game *game, \
+	int coordinate_x, int coordinate_y);
 void			reset_vars_to_zero(t_game *game);
 
 /* other utils */
@@ -242,7 +243,7 @@ char			**free_map(char **token);
 void			*ft_calloc(size_t count, size_t size);
 void			exit_if_null(void *p, char *message);
 unsigned int	rgb_to_hex(int red, int green, int blue);
-int			calc_each_row_columns(t_game *game);
+int				calc_each_row_columns_then_get_the_max_col(t_game *game);
 int				map_width(char *s);
 int				map_height(char *s[]);
 

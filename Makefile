@@ -21,10 +21,11 @@ SRCS = ./srcs/game/render/cub3d.c \
 	./srcs/game/render/movements/movementsHelpers.c \
 	./srcs/game/render/movements/movementsHelpers2.c \
 	./srcs/game/render/movements/movementsHelpers3.c \
-	./srcs/game/render/imageHelpers/imageHelpers.c \
-	./srcs/game/render/imageHelpers/createImages.c \
-	./srcs/game/render/imageHelpers/getSetColors.c \
-	./srcs/game/render/generalHelpers.c \
+	./srcs/game/render/helpers/imageHelpers.c \
+	./srcs/game/render/helpers/createImages.c \
+	./srcs/game/render/helpers/getSetColors.c \
+	./srcs/game/render/helpers/initHelpers.c \
+	./srcs/game/render/helpers/generalHelpers.c \
 	./srcs/game/render/quit.c \
 	./srcs/game/render/free.c \
 	./srcs/game/parser/autre_function.c \

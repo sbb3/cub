@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Free.c                                             :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 11:20:22 by adouib            #+#    #+#             */
-/*   Updated: 2022/10/30 11:46:18 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/06 02:01:04 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	destroy_parser_allocations(t_game *game)
 		free(game->parser->ea);
 	if (game->parser->we)
 		free(game->parser->we);
+	if (game->cols)
+		free(game->cols);
 }
 
 void	destroy_render_allocations(t_game *game)
