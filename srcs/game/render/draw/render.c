@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:19:59 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/06 01:07:00 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/06 13:38:59 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ray_wall_collision_horizontally(t_game *game)
 	looking_for_wall_coordinates_horizontally(game);
 }
 
-void	raycaster(t_game *game)
+void	raycasting_then_drawing(t_game *game)
 {
 	int	x;
 

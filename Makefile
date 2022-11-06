@@ -1,6 +1,6 @@
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -I../incl/ -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -I../incl/
 #  -g3 -fsanitize=address
 MLXFLAGS = -lmlx -framework OpenGL -framework AppKit
 

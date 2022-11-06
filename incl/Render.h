@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:43 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/06 13:36:04 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/06 13:40:32 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,11 +170,9 @@ t_game			*init_variables_and_mlx_and_textures(t_game *game, \
 	const char *av[]);
 void			init_variables(t_game *game, const char *av[]);
 void			init_player_starting_direction(t_game *game);
-void			re_draw(t_game *game);
 
 /* Draw utils */
-void			draw(t_game *game);
-void			redraw(t_game *game);
+void			re_draw(t_game *game);
 void			paint(t_game *game, int x);
 void			paint_ceiling(t_game *game, int x);
 void			draw_floor(t_game *game, int x);
@@ -209,7 +207,7 @@ int				is_wall_on_up(t_game *game);
 
 
 /* Raycaster */
-void			raycaster(t_game *game);
+void			raycasting_then_drawing(t_game *game);
 void			intersections_and_steps_vertically(t_game *game);
 void			intersections_and_steps_horizontally(t_game *game);
 void			looking_for_wall_coordinates_vertically(t_game *game);

@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:29:49 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/03 10:36:50 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/06 13:39:34 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	re_draw(t_game *game)
 {
 	mlx_clear_window(game->mlx, game->win);
-	draw(game);
+	raycasting_then_drawing(game);
 }
 
 int	movements(int keycode, t_game *game)
