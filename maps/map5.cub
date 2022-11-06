@@ -1,7 +1,7 @@
-NO srcs/assets/textures4/north_texture.xpm
-WE ./srcs/assets/textures4/west_texture.xpm
-SO ./srcs/assets/textures4/south_texture.xpm
-EA ./srcs/assets/textures4/east_texture.xpm
+NO srcs/assets/textures3/north_texture.xpm
+WE ./srcs/assets/textures3/west_texture.xpm
+SO ./srcs/assets/textures3/south_texture.xpm
+EA ./srcs/assets/textures3/east_texture.xpm
 
 C 247,247,255
 F 194,196,195
@@ -21,3 +21,7 @@ F 194,196,195
 11000001110101011111011110101
 11110111 1000001 111011 10111
 11111111 1111111 111111 11111
+
+111
+101
+111
