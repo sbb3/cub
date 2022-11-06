@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:43 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/06 11:56:57 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/06 12:19:27 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,8 @@ typedef struct s_game
 	int				window_width;
 	int				window_height;
 	int				rays;
-	float			pos_x; // rename to like : player_pos_x
-	float			pos_y;
+	float			ppos_x; // rename to like : player_pos_x
+	float			ppos_y;
 	float			pdir_x;		// 1
 	float			pdir_y;		// 0
 	float			player_angle; // player angle

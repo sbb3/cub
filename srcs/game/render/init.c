@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:56 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/06 12:10:18 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/06 12:19:27 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ void	init_variables(t_game *game, const char *av[])
 	game->map_height = map_height(game->map);
 	game->map_width = calc_each_row_columns_then_get_the_max_col(game);
 	game->rays = WINDOW_WIDTH;
-	game->pos_x = (game->parser->yp + 0.5) * SQUARE_SIZE;
-	game->pos_y = (game->parser->xp + 0.5) * SQUARE_SIZE;
+	game->ppos_x = (game->parser->yp + 0.5) * SQUARE_SIZE;
+	game->ppos_y = (game->parser->xp + 0.5) * SQUARE_SIZE;
 	game->ray_angle_increment = ((double)FOV / game->rays);
 	game->h_hit = 0;
 	game->half_fov = FOV / 2;

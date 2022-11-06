@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:19:33 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/05 19:32:17 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/06 12:19:27 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	get_the_short_distance(t_game *game)
 {
-	game->v_dist_to_wall = distance(game->pos_x, game->pos_y, \
+	game->v_dist_to_wall = distance(game->ppos_x, game->ppos_y, \
 		game->v_wall_hit_x, game->v_wall_hit_y);
-	game->h_dist_to_wall = distance(game->pos_x, game->pos_y, \
+	game->h_dist_to_wall = distance(game->ppos_x, game->ppos_y, \
 		game->h_wall_hit_x, game->h_wall_hit_y);
 	if (game->h_dist_to_wall <= game->v_dist_to_wall)
 	{

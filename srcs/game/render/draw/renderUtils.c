@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:19:33 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/06 11:56:34 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/06 12:24:02 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,12 @@ void	looking_for_wall_coordinates_vertically(t_game *game)
 
 void	intersections_and_steps_horizontally(t_game *game)
 {
-	game->yinter = ((int)game->pos_y / SQUARE_SIZE) * SQUARE_SIZE;
+	game->yinter = ((int)game->ppos_y / SQUARE_SIZE) * SQUARE_SIZE;
 	if (game->ray_down)
 		game->yinter += SQUARE_SIZE;
 	if (tan(deg_2_rad(game->ray_angle) == 0))
 		game->ray_angle -= deg_2_rad(1);
-	game->xinter = (game->pos_x + ((game->pos_y - game->yinter) \
+	game->xinter = (game->ppos_x + ((game->ppos_y - game->yinter) \
 		/ tan(deg_2_rad(game->ray_angle))));
 	game->ystep = SQUARE_SIZE;
 	if (game->ray_up)
@@ -81,10 +81,10 @@ void	intersections_and_steps_horizontally(t_game *game)
 
 void	intersections_and_steps_vertically(t_game *game)
 {
-	game->xinter = ((int)game->pos_x / SQUARE_SIZE) * SQUARE_SIZE;
+	game->xinter = ((int)game->ppos_x / SQUARE_SIZE) * SQUARE_SIZE;
 	if (game->ray_right)
 		game->xinter += SQUARE_SIZE;
-	game->yinter = (game->pos_y + ((game->pos_x - game->xinter) \
+	game->yinter = (game->ppos_y + ((game->ppos_x - game->xinter) \
 		* tan(deg_2_rad(game->ray_angle))));
 	game->xstep = SQUARE_SIZE;
 	if (game->ray_left)
