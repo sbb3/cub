@@ -6,38 +6,15 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:43 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/05 22:10:31 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/06 01:00:56 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/cub3d.h"
 
-void old(t_game *game)
- {
-
- 	double rayX = game->pos_x;
- 	double rayY = game->pos_y;
- 	int floorY;
- 	int floorX;
- 	int wallHit = 0;
- 	while (!wallHit)
- 	{
- 		rayX += game->pdir_x;
- 		rayY += game->pdir_y;
- 		floorY = floor(rayY);
- 		floorX = floor(rayX);
-
- 		if (game->map[floorY / SQUARE_SIZE][floorX / SQUARE_SIZE] == '1')
- 			break;
- 	}
- 	// game->wallHitX = floorX;
- 	// game->wallHitY = floorY;
- }
-
 void	draw(t_game *game)
 {
 	raycaster(game);
-	// minimap(game);
 }
 
 int	main(int ac, const char *av[])

@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:43 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/06 00:10:37 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/06 01:23:13 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,11 +166,7 @@ typedef struct s_game
 	float			xstep;
 	float			ystep;
 	int				rays_count;
-	int				minimap_width;
-	int				minimap_height;
-
-
-	int *cols;
+	int				*cols;
 }	t_game;
 
 /* Init */
@@ -246,12 +242,8 @@ char			**free_map(char **token);
 void			*ft_calloc(size_t count, size_t size);
 void			exit_if_null(void *p, char *message);
 unsigned int	rgb_to_hex(int red, int green, int blue);
-
-int	get_max(t_game *game, int rows);
-int	map_height(char *s[]);
-int	map_width(char *s);
-char	*get_token(char *map, int max_width);
-char**	copy(t_game *game);
-void	widths_arr(t_game *game);
+int			calc_each_row_columns(t_game *game);
+int				map_width(char *s);
+int				map_height(char *s[]);
 
 #endif

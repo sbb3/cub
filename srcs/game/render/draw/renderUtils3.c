@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:19:33 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/06 00:51:33 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/06 01:07:35 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,7 @@ int	out_of_container_width_and_height(t_game *game, int coordinate_x, int coordi
 		return (1);
 	if (game->xinter < 0 || game->xinter >= (SQUARE_WIDTH * game->map_width))
 		return (1);
-	// printf("x: %d\n", coordinate_x);
-	// printf("y : %d\n", coordinate_y);
 	if (coordinate_y > game->map_height || coordinate_x > game->cols[coordinate_y])
 		return (1);
-
-	// (void) coordinate_x;
-	// (void) coordinate_y;
 	return (0);
 }
