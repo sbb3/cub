@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:19:33 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/09 14:50:35 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/09 17:28:57 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	horizontal_wall_coordinates(t_game *game)
 		game->yinter += game->ystep;
 		game->xinter += game->xstep;
 	}
+	if (game->ray_up)
+		game->yinter++;
 	game->h_wall_hit_y = game->yinter;
 	game->h_wall_hit_x = game->xinter;
 }
@@ -54,6 +56,8 @@ void	vertical_wall_coordinates(t_game *game)
 		game->xinter += game->xstep;
 		game->yinter += game->ystep;
 	}
+	if (game->ray_left)
+		game->xinter++;
 	game->v_wall_hit_y = game->yinter;
 	game->v_wall_hit_x = game->xinter;
 }
@@ -70,7 +74,7 @@ void	horizontal_intersection_and_steps(t_game *game)
 	game->ystep = SQUARE_SIZE;
 	if (game->ray_up)
 		game->ystep *= -1;
-	game->xstep = SQUARE_SIZE / tan(deg_2_rad(game->ray_angle));
+	game->xstep = game->ystep / tan(deg_2_rad(game->ray_angle));
 	if (game->ray_left && game->xstep > 0)
 		game->xstep *= -1;
 	if (game->ray_right && game->xstep < 0)
@@ -89,7 +93,7 @@ void	vertical_intersection_and_steps(t_game *game)
 	game->xstep = SQUARE_SIZE;
 	if (game->ray_left)
 		game->xstep *= -1;
-	game->ystep = SQUARE_SIZE * tan(deg_2_rad(game->ray_angle));
+	game->ystep = game->xstep * tan(deg_2_rad(game->ray_angle));
 	if (game->ray_up && game->ystep > 0)
 		game->ystep *= -1;
 	if (game->ray_down && game->ystep < 0)
