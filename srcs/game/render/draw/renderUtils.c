@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:19:33 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/09 17:28:57 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/09 21:42:08 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,10 @@ void	vertical_wall_coordinates(t_game *game)
 	game->v_wall_hit_x = game->xinter;
 }
 
+/*
+	yinter and xinter coordinates of the first intersection point either
+	on the horizontal or the vertical
+*/
 void	horizontal_intersection_and_steps(t_game *game)
 {
 	game->yinter = ((int)game->ppos_y / SQUARE_SIZE) * SQUARE_SIZE;
@@ -74,7 +78,7 @@ void	horizontal_intersection_and_steps(t_game *game)
 	game->ystep = SQUARE_SIZE;
 	if (game->ray_up)
 		game->ystep *= -1;
-	game->xstep = game->ystep / tan(deg_2_rad(game->ray_angle));
+	game->xstep = SQUARE_SIZE / tan(deg_2_rad(game->ray_angle));
 	if (game->ray_left && game->xstep > 0)
 		game->xstep *= -1;
 	if (game->ray_right && game->xstep < 0)
@@ -93,7 +97,7 @@ void	vertical_intersection_and_steps(t_game *game)
 	game->xstep = SQUARE_SIZE;
 	if (game->ray_left)
 		game->xstep *= -1;
-	game->ystep = game->xstep * tan(deg_2_rad(game->ray_angle));
+	game->ystep = SQUARE_SIZE * tan(deg_2_rad(game->ray_angle));
 	if (game->ray_up && game->ystep > 0)
 		game->ystep *= -1;
 	if (game->ray_down && game->ystep < 0)
