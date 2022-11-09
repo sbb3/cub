@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:56 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/09 10:56:21 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/09 12:53:25 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,11 @@ void	init_minilibx(t_game *game)
 /* rays = window_width
 + 0.5 to make the player in the center of the square,
 ex: coords(2, 4) => (2.5, 4.5)*/
+/*
+	rgb_encoding : store the rgb decimals colors into a single decimal color,
+	if printed using %i will print the decimal version,
+	if printed uing %x will print print the hex version
+*/
 void	init_variables(t_game *game, const char *av[])
 {
 	game->parser = parser(av);

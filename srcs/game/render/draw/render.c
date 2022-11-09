@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:19:59 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/06 13:38:59 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/09 14:50:35 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,20 @@ void	calculations(t_game *game)
 		game->texture_offset_x = (int)game->wall_hit_y % SQUARE_SIZE;
 }
 
-void	ray_wall_collision_vertically(t_game *game)
+void	vertical_wall_collision(t_game *game)
 {
 	reset_vars_to_zero(game);
 	ray_direction(game);
-	intersections_and_steps_vertically(game);
-	looking_for_wall_coordinates_vertically(game);
+	vertical_intersection_and_steps(game);
+	vertical_wall_coordinates(game);
 }
 
-void	ray_wall_collision_horizontally(t_game *game)
+void	horizontal_wall_collision(t_game *game)
 {
 	reset_vars_to_zero(game);
 	ray_direction(game);
-	intersections_and_steps_horizontally(game);
-	looking_for_wall_coordinates_horizontally(game);
+	horizontal_intersection_and_steps(game);
+	horizontal_wall_coordinates(game);
 }
 
 void	raycasting_then_drawing(t_game *game)
@@ -49,8 +49,8 @@ void	raycasting_then_drawing(t_game *game)
 	x = -1;
 	while (++x < WINDOW_WIDTH)
 	{
-		ray_wall_collision_horizontally(game);
-		ray_wall_collision_vertically(game);
+		horizontal_wall_collision(game);
+		vertical_wall_collision(game);
 		calculations(game);
 		paint(game, x);
 		game->ray_angle -= game->ray_angle_increment;

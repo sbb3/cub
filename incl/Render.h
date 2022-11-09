@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:43 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/09 11:42:32 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/09 14:50:35 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 
 /* Measurement Variables */
 
-# define SPEED 15
+# define SPEED 15 /* move step */
 # define ROTATION_SPEED 7
 # define FOV 60 // field of view of the player
 
@@ -208,15 +208,15 @@ int				is_wall_on_up(t_game *game);
 
 /* Raycaster */
 void			raycasting_then_drawing(t_game *game);
-void			intersections_and_steps_vertically(t_game *game);
-void			intersections_and_steps_horizontally(t_game *game);
-void			looking_for_wall_coordinates_vertically(t_game *game);
-void			looking_for_wall_coordinates_horizontally(t_game *game);
+void			vertical_intersection_and_steps(t_game *game);
+void			horizontal_intersection_and_steps(t_game *game);
+void			vertical_wall_coordinates(t_game *game);
+void			horizontal_wall_coordinates(t_game *game);
 void			calculations(t_game *game);
 void			get_the_short_distance(t_game *game);
 void			get_projected_wall_height(t_game *game);
-void			ray_wall_collision_horizontally(t_game *game);
-void			ray_wall_collision_vertically(t_game *game);
+void			horizontal_wall_collision(t_game *game);
+void			vertical_wall_collision(t_game *game);
 float			distance(float startX, float startY, float endX, float endY);
 int				out_of_container_width_and_height(t_game *game, \
 	int coordinate_x, int coordinate_y);

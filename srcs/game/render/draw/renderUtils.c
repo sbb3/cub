@@ -6,14 +6,14 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:19:33 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/06 12:26:58 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/09 14:50:35 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../incl/cub3d.h"
 
 /*checking Horizontal intersection – the y-axis*/
-void	looking_for_wall_coordinates_horizontally(t_game *game)
+void	horizontal_wall_coordinates(t_game *game)
 {
 	int	coordinate_y;
 	int	coordinate_x;
@@ -36,7 +36,7 @@ void	looking_for_wall_coordinates_horizontally(t_game *game)
 }
 
 /*checking vertical intersection – the x-axis*/
-void	looking_for_wall_coordinates_vertically(t_game *game)
+void	vertical_wall_coordinates(t_game *game)
 {
 	int	coordinate_y;
 	int	coordinate_x;
@@ -58,7 +58,7 @@ void	looking_for_wall_coordinates_vertically(t_game *game)
 	game->v_wall_hit_x = game->xinter;
 }
 
-void	intersections_and_steps_horizontally(t_game *game)
+void	horizontal_intersection_and_steps(t_game *game)
 {
 	game->yinter = ((int)game->ppos_y / SQUARE_SIZE) * SQUARE_SIZE;
 	if (game->ray_down)
@@ -79,7 +79,7 @@ void	intersections_and_steps_horizontally(t_game *game)
 		game->yinter--;
 }
 
-void	intersections_and_steps_vertically(t_game *game)
+void	vertical_intersection_and_steps(t_game *game)
 {
 	game->xinter = ((int)game->ppos_x / SQUARE_SIZE) * SQUARE_SIZE;
 	if (game->ray_right)
