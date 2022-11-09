@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 13:34:21 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/05 19:33:28 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/09 10:55:30 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,6 @@ void	paint_ceiling(t_game *game, int x)
 void	paint(t_game *game, int x)
 {
 	paint_ceiling(game, x);
-	paint_floor(game, x);
 	paint_walls(game, x);
+	paint_floor(game, x);
 }

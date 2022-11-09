@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 19:20:17 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/06 01:20:11 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/09 10:56:48 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	coloring_pixel(t_game *game, int x, int y, unsigned int color)
 	*(unsigned int *)color_pixel = color;
 }
 
-unsigned int	rgb_to_hex(int red, int green, int blue)
+unsigned int	rgb_encoding(int red, int green, int blue)
 {
 	return (red << 16 | green << 8 | blue);
 }

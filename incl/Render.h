@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:43 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/06 13:40:32 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/09 10:54:55 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,7 +236,7 @@ int				red_cross_quit(t_game *game);
 char			**free_map(char **token);
 void			*ft_calloc(size_t count, size_t size);
 void			exit_if_null(void *p, char *message);
-unsigned int	rgb_to_hex(int red, int green, int blue);
+unsigned int	rgb_encoding(int red, int green, int blue);
 int				calc_each_row_columns_then_get_the_max_col(t_game *game);
 int				map_width(char *s);
 int				map_height(char *s[]);

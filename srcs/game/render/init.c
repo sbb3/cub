@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:56 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/06 12:19:27 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/09 10:56:21 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ void	init_variables(t_game *game, const char *av[])
 	game->ray_angle_increment = ((double)FOV / game->rays);
 	game->h_hit = 0;
 	game->half_fov = FOV / 2;
-	game->ceiling_color = rgb_to_hex(game->parser->c->r, game->parser->c->g, \
+	game->ceiling_color = rgb_encoding(game->parser->c->r, game->parser->c->g, \
 		game->parser->c->b);
-	game->floor_color = rgb_to_hex(game->parser->f->r, game->parser->f->g, \
+	game->floor_color = rgb_encoding(game->parser->f->r, game->parser->f->g, \
 		game->parser->f->b);
 	init_player_starting_direction(game);
 }
