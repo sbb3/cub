@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:43 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/09 10:54:55 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/09 11:42:32 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 /* Measurement Variables */
 
 # define SPEED 15
-# define ROTATION 6
+# define ROTATION_SPEED 7
 # define FOV 60 // field of view of the player
 
 /* Window Measurement */
