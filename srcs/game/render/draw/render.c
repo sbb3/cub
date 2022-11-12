@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:19:59 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/09 14:50:35 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/12 10:53:41 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	raycasting_then_drawing(t_game *game)
 
 	game->ray_angle = game->player_angle + game->half_fov;
 	correct_angle(&game->ray_angle);
-	game->dist_to_wall = (WINDOW_HEIGHT / 2) \
+	game->dist_to_projection_plane = (WINDOW_HEIGHT / 2) \
 		/ tan(deg_2_rad(game->half_fov));
 	x = -1;
 	while (++x < WINDOW_WIDTH)

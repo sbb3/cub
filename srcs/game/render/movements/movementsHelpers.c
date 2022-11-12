@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 15:31:52 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/06 12:19:27 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/12 10:47:08 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	move_up(t_game *game)
 void	move_down(t_game *game)
 {
 	if (((!is_wall_on_down(game) && !is_wall_on_left(game, 180 + 45)) \
-		|| (!is_wall_on_down(game) && !is_wall_on_right(game, 180 + 45))))
+		|| (!is_wall_on_down(game) && !is_wall_on_right(game, 180 - 45))))
 	{
 		game->ppos_y += game->pdir_y * SPEED;
 		game->ppos_x -= game->pdir_x * SPEED;

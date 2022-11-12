@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:19:33 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/06 12:19:27 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/12 10:53:41 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	get_the_short_distance(t_game *game)
 we calc the top and bottom pixel of the wall */
 void	get_projected_wall_height(t_game *game)
 {
-	game->wall_height = (double)(SQUARE_HEIGHT * game->dist_to_wall) \
+	game->wall_height = (double)(SQUARE_HEIGHT * game->dist_to_projection_plane) \
 		/ game->ray_distance;
 	game->wall_top_pixel = (WINDOW_HEIGHT / 2) \
 		- (double)(game->wall_height / 2);

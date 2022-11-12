@@ -6,7 +6,7 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:07:43 by adouib            #+#    #+#             */
-/*   Updated: 2022/11/09 14:50:35 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/12 10:53:56 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ typedef struct s_game
 	float			v_wall_hit_x;
 	float			v_wall_hit_y;
 	float			wall_height;
-	float			dist_to_wall;
+	float			dist_to_projection_plane;
 	float			distorted_ray_distance_to_wall;
 	float			ray_distance;
 	float			h_dist_to_wall;
@@ -204,7 +204,6 @@ int				is_wall_on_left(t_game *game, int angle);
 int				is_wall_on_right(t_game *game, int angle);
 int				is_wall_on_down(t_game *game);
 int				is_wall_on_up(t_game *game);
-
 
 /* Raycaster */
 void			raycasting_then_drawing(t_game *game);
