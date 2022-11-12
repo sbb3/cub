@@ -6,14 +6,14 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 16:43:47 by labenall          #+#    #+#             */
-/*   Updated: 2022/10/25 12:01:08 by adouib           ###   ########.fr       */
+/*   Updated: 2022/11/02 21:41:21 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/cub3d.h"
 
 // function kanpranti biha map man ba3d ma7waltha l array dyal string
-void	print_array_string(char **array_str)
+/*void	print_array_string(char **array_str)
 {
 	int	i;
 
@@ -23,7 +23,7 @@ void	print_array_string(char **array_str)
 		printf("%s\n", array_str[i]);
 		i++;
 	}
-}
+}*/
 
 // function kanchiki fiha samya wach katsali b .cub
 /*void	print_strct_map(t_map *map)
@@ -74,7 +74,7 @@ void	print_array_string(char **array_str)
 		printf("map est NULL");
 }*/
 
-// function kat9ra liya map man file
+// function kaninitailzi fiha struct dyal map 
 t_map	*initial_map_struct(size_t size, int fd)
 {
 	t_map	*map_struct;
@@ -97,6 +97,7 @@ t_map	*initial_map_struct(size_t size, int fd)
 	return (map_struct);
 }
 
+//hna kanparsi okantchiki wach kayan chi erreur 
 t_map	*parser(const char *av[])
 {
 	t_map	*map_struct;

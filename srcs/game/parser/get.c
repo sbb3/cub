@@ -6,12 +6,13 @@
 /*   By: adouib <adouib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 10:22:58 by labenall          #+#    #+#             */
-/*   Updated: 2022/11/05 23:09:08 by adouib           ###   ########.fr       */
+/*   Updated: 2022/10/23 11:39:50 by adouib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/cub3d.h"
 
+//hana kanjib number
 char	*get_number(char *map, size_t *i, size_t a)
 {
 	char	*r;
@@ -47,6 +48,8 @@ size_t	get_size_map(const char *name_map)
 	return (size);
 }
 
+//hana kan9ra cha7al man star kayan f map 
+//ila kan chi star fih ghi new line o space kan7bas
 size_t	get_nbr_line(char *map, size_t i)
 {
 	size_t	r;
@@ -73,6 +76,7 @@ size_t	get_nbr_line(char *map, size_t i)
 	return (cas_is_space_or_new_line(map, i, r, k));
 }
 
+//hna kanraja3 cha7al man caractere f star
 int	get_nbr_char(char *map, int i)
 {
 	int	r;
@@ -86,6 +90,7 @@ int	get_nbr_char(char *map, int i)
 	return (r);
 }
 
+//hana kanraja3 line kamal
 char	*get_line(char *map, size_t *i)
 {
 	char	*res;

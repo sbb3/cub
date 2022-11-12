@@ -12,6 +12,7 @@
 
 #include "../../../incl/cub3d.h"
 
+//hna kaydkhal liha f 7alat ghayjib texture 
 void	cas_stel2(t_map *map, char *type, int *nbr_type, size_t *i)
 {
 	if (ft_strcmp(type, "NO") == 0)
@@ -35,6 +36,7 @@ void	cas_stel2(t_map *map, char *type, int *nbr_type, size_t *i)
 	(*nbr_type)++;
 }
 
+//hna kaydkhal liha f7alat ghayjib color 
 void	cas_strlen1(t_map *map, char *type, int *nbr_type, size_t *i)
 {
 	if (ft_strcmp(type, "F") == 0)
@@ -46,6 +48,7 @@ void	cas_strlen1(t_map *map, char *type, int *nbr_type, size_t *i)
 	(*nbr_type)++;
 }
 
+//ila kan chi player ola 0 fo9o ola ta7to ola janbo lkhwa
 void	cheak_incorecte_space(t_map *map_struct, size_t a, int b)
 {
 	if (b == 0)
@@ -63,6 +66,8 @@ void	cheak_incorecte_space(t_map *map_struct, size_t a, int b)
 		exit_erreur("down 0 or player is space");
 }
 
+//ila kan chi caractere makhsoch ikon ola ila 
+//kan ktar man player ila kan player 
 void	cheak_caractere(t_map *map_struct, size_t a, size_t b, int *p)
 {
 	if (!is_char_map(map_struct->map[a][b]))
@@ -85,10 +90,14 @@ void	cheak_caractere(t_map *map_struct, size_t a, size_t b, int *p)
 	if (!map_struct->map[a + 1] && (map_struct->map[a][b] == '0' || \
 	is_player(map_struct->map[a][b])))
 		exit_erreur("Wall not complete in end");
+	if (!map_struct->map[a][b + 1] && (map_struct->map[a][b] == '0' || \
+	is_player(map_struct->map[a][b])))
+		exit_erreur("Wall not complete in end");
 	if (map_struct->map[a][b] == '0' || is_player(map_struct->map[a][b]))
 		cheak_incorecte_space(map_struct, a, b);
 }
 
+//hna kanchof wach texture kaynin o kanchiki map o wach kayan player
 void	cheak_content_map(t_map *map_struct)
 {
 	size_t	a;

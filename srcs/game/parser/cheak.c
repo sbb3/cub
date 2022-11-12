@@ -12,6 +12,7 @@
 
 #include "../../../incl/cub3d.h"
 
+//cheak smaya wach katsali b .cub
 int	cheak_name(const char *name)
 {
 	size_t	size;
@@ -23,6 +24,7 @@ int	cheak_name(const char *name)
 		return (0);
 }
 
+//cheak wach smya dyal texture katsali b .xpm
 int	cheak_name_texure(char *name)
 {
 	size_t	size;
@@ -34,6 +36,7 @@ int	cheak_name_texure(char *name)
 		return (0);
 }
 
+//kanchof wach texture o color kamlin kaynin 
 void	cheak_type(t_map *map_struct)
 {
 	if (map_struct->c == NULL)
@@ -54,6 +57,9 @@ void	cheak_type(t_map *map_struct)
 	map_struct->f->g, map_struct->f->b);
 }
 
+//skip space o new line 
+//kaninitializi j b 0 bach n7asab cha7a ghancopie man map wach 2 ola 1
+//man ba3daha kanskipi space 
 void	cheak_and_get_type(t_map *map, size_t *i, size_t *j, int *nbr_type)
 {
 	char	*type;
@@ -80,6 +86,8 @@ void	cheak_and_get_type(t_map *map, size_t *i, size_t *j, int *nbr_type)
 		exit_erreur("incopmlete map");
 }
 
+//hanya kanjib 6 dyal type 3AD kandoz njib map
+//ila kant chi 7aja man wara map rah erreur 
 void	cheak_map(t_map *map)
 {
 	size_t	i;
@@ -91,6 +99,8 @@ void	cheak_map(t_map *map)
 	while (map->all_map[i] && nbr_type < 6)
 	{
 		cheak_and_get_type(map, &i, &j, &nbr_type);
+		if (map->all_map[i] != 10)
+			exit_erreur("must new line after content");
 	}
 	map->map = get_content_of_map(map->all_map, &i);
 	while (map->all_map[i])

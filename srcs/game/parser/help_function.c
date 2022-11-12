@@ -12,6 +12,7 @@
 
 #include "../../../incl/cub3d.h"
 
+//hana ekanpranti ach man erreur lga o exit moraha
 void	exit_erreur(char *s)
 {
 	printf("Error\n%s\n", s);
@@ -46,6 +47,7 @@ int	is_sapce(char c)
 		return (0);
 }
 
+//ghan7ayad + man atoi
 int	ft_atoi(char *s)
 {
 	size_t	i;
@@ -54,8 +56,6 @@ int	ft_atoi(char *s)
 	if (ft_strlen(s) == 0)
 		exit_erreur("nbr not good");
 	i = 0;
-	if (s[i] == '+')
-		i++;
 	res = 0;
 	while (s[i])
 	{

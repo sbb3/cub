@@ -12,6 +12,7 @@
 
 #include "../../../incl/cub3d.h"
 
+//kancopie content se ola b7alha
 char	*ft_copier(char *s, size_t size)
 {
 	char	*r;
@@ -28,6 +29,7 @@ char	*ft_copier(char *s, size_t size)
 	return (r);
 }
 
+//ila kan chi space ola new line kanskipihom f lawal
 void	ignore_first(char *map, size_t *i)
 {
 	size_t	a;

@@ -36,6 +36,7 @@ int	is_char_map(char c)
 		return (0);
 }
 
+//hna kanchof les texture wach kaysaliw b xpm
 void	cheak_texure(t_map *map_struct)
 {
 	if (cheak_name_texure(map_struct->ea->path) == 1)
@@ -48,6 +49,7 @@ void	cheak_texure(t_map *map_struct)
 		exit_erreur("texure so must finish by .xpm");
 }
 
+//han kanjib height o width dyal map kan7thom f struct 
 void	initial_h_w(t_map *map_struct)
 {
 	int	width;
